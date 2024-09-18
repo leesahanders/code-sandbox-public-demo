@@ -1,0 +1,13 @@
+name: shiny-geyser
+title: shiny-geyser
+username: lisa.anders
+account: lisa.anders
+server: colorado.posit.co
+hostUrl: https://colorado.posit.co/rsc/__api__
+appId: 15685
+bundleId: 71283
+url: https://colorado.posit.co/rsc/content/fdb736ec-6546-45a1-b51c-2a55b577e614/
+when: 1678804131.57225
+lastSyncTime: 1678804131.57226
+asMultiple: FALSE
+asStatic: FALSE

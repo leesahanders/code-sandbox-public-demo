@@ -1,0 +1,53 @@
+---
+title: "API Bundle Deployment"
+author: "LA"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Example from: <https://rstudioide.zendesk.com/agent/tickets/56545> 
+
+## Create Content Item
+
+```bash 
+export CONNECT_API_KEY="<your api key>"​
+export CONNECT_SERVER='<your_connect_server_url>'
+DATA='{
+  "name": "proxy_test_pin", 
+  "title": "Proxy Test Pin"
+}' 
+curl --silent --show-error -L --max-redirs 0 --fail -X POST -H "Authorization: Key ${CONNECT_API_KEY}" --data-raw "${DATA}" "${CONNECT_SERVER}/__api__/v1/experimental/content"
+```
+
+## Upload Bundle
+
+```bash
+export GUID='<guid>'
+export BUNDLE='<path-to-bundle>'
+curl --silent --show-error -L --max-redirs 0 --fail -X POST -H "Authorization: Key ${CONNECT_API_KEY}" --data-binary @"${BUNDLE}" "${CONNECT_SERVER}/__api__/v1/experimental/content/${GUID}/upload"
+```
+
+## Deploy Bundle
+
+```bash
+export BUNDLE_ID='<bundle_id>'
+export DATA='{"bundle_id":"'"${BUNDLE_ID}"'"}'
+curl --silent --show-error -L --max-redirs 0 --fail -X POST -H "Authorization: Key ${CONNECT_API_KEY}" --data "${DATA}" "${CONNECT_SERVER}/__api__/v1/experimental/content/${GUID}/deploy"
+```
+
+
+## Get Bundle
+
+```bash
+curl GET --silent -H "Authorization: Key ${CONNECT_API_KEY}" "${CONNECT_SERVER}/__api__/applications/?filter=content_type:pin&search=proxy_test_pin"
+export ID='<id>'
+curl GET --silent -H "Authorization: Key ${CONNECT_API_KEY}" "${CONNECT_SERVER}/content/${ID}/data.txt"
+```
+
+
+
+
+

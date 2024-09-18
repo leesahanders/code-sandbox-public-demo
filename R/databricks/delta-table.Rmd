@@ -1,0 +1,131 @@
+---
+title: "delta-table"
+output: html_document
+date: "2024-01-18"
+---
+
+# Using sparklyr to read delta tables
+
+```{r}
+library(renv)
+renv::activate()
+```
+
+## Check for prior installations of spark 
+
+```{r}
+library(sparklyr)
+library(utils)
+
+# Check available versions and if any spark versions have already been installed
+spark_available_versions()
+spark_installed_versions()
+
+version = "3.4.2"
+hadoop_version = "3"
+
+installInfo <- spark_install_find(version, hadoop_version, installed_only = FALSE, latest = TRUE)
+installInfo
+```
+
+
+## Install spark 
+
+```{r}
+library(sparklyr)
+
+version = "3.4.2"
+hadoop_version = "3"
+
+#Install a local version of Spark
+spark_install(version, hadoop_version, verbose = TRUE)
+
+#If needed can uninstall
+spark_uninstall(version, hadoop_version) 
+```
+
+## Optional: Install spark manually 
+
+Check if you can access broad internet or if not if you need to download the tar manually with something like: 
+
+Following the code for how it is installed in the sparklyr package: <https://github.com/sparklyr/sparklyr/blob/a387026ca30ec357d6fc53a05622e96151f3f825/R/install_spark.R#L134>
+
+```{bash}
+curl https://www.gnu.org/gnu/gnu.html
+curl -I https://google.com
+```
+
+When I installed a spark cluster this is the relevant path info: 
+
+```
+Installing Spark 3.4.2 for Hadoop 3 or later.
+Downloading from:
+- 'https://dlcdn.apache.org/spark/spark-3.4.2/spark-3.4.2-bin-hadoop3.tgz'
+Installing to:
+- '~/spark/spark-3.4.2-bin-hadoop3'
+trying URL 'https://dlcdn.apache.org/spark/spark-3.4.2/spark-3.4.2-bin-hadoop3.tgz'
+```
+
+We can download the tar file by vising the URL above and then upload it to the server so we can install from tarball. 
+
+```{r}
+spark_install_tar("spark-3.4.2-bin-hadoop3.tgz") 
+```
+
+
+## Read delta tables using sparklyr
+
+Now we can run our code to read delta tables: 
+
+```{r}
+library(sparklyr)
+
+# Set Spark configuration to be able to read delta tables
+conf <- spark_config()
+conf$`spark.sql.extensions` <- "io.delta.sql.DeltaSparkSessionExtension"
+conf$`spark.sql.catalog.spark_catalog` <- "org.apache.spark.sql.delta.catalog.DeltaCatalog"
+
+# For spark 3.4 
+conf$sparklyr.defaultPackages <- "io.delta:delta-core_2.12:2.4.0"
+
+# Open a connection
+sc <- spark_connect("local", version = 3.4, packages = "delta", conf = conf)
+
+# For this example we will use a built-in dataframe to save example data files, including one for delta tables
+tbl_mtcars <- copy_to(sc, mtcars, "spark_mtcars")
+
+# Write spark dataframe to disk
+spark_write_csv(tbl_mtcars,  path = "test_file_csv", mode = "overwrite")
+spark_write_parquet(tbl_mtcars,  path = "test_file_parquet", mode = "overwrite")
+spark_write_delta(tbl_mtcars,  path = "test_file_delta", mode = "overwrite")
+
+# Read dataframes into normal memory
+spark_tbl_handle <- spark_read_csv(sc, path = "test_file_csv")
+regular_df_csv <- collect(spark_tbl_handle)
+spark_tbl_handle <- spark_read_parquet(sc, path = "test_file_parquet")
+regular_df_parquet <- collect(spark_tbl_handle)
+spark_tbl_handle <- spark_read_delta(sc, path = "test_file_delta")
+regular_df_delta <- collect(spark_tbl_handle)
+
+# Disconnect
+spark_disconnect(sc)
+```
+
+
+
+Troubleshooting
+
+```{r}
+# See spark details (troubleshooting)
+spark_config()
+spark_get_java()
+spark_available_versions()
+spark_installed_versions()
+
+# See session details
+utils::sessionInfo()
+```
+
+From bash: 
+`namei -l /usr/lib/spark`
+

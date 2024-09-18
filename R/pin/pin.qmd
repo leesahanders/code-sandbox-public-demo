@@ -1,0 +1,72 @@
+---
+title: "Pin mtcars"
+format: html
+editor: source
+---
+
+## Purpose
+
+This script pulls demo information from mtcars and pins it so the data set is usable by others. 
+
+- Access the script, and schedule it, at: <https://pub.palm.ptd.posit.it/connect/#/apps/91e46673-6f99-41c7-a197-97305517103a/access/62> 
+
+- Pins to: <https://pub.palm.ptd.posit.it/connect/#/apps/a01d00ca-e59f-4feb-9f89-a66c52bf9cd8/access> 
+
+- The pinned data is being consumed in an app: <https://pub.palm.ptd.posit.it/connect/#/apps/2a2944e3-75ed-4673-a6cb-08c26f40978e/access> 
+
+## Setup
+
+Env variables that need to be set are: 
+
+```
+CONNECT_SERVER=<server, eg https://pub.palm.ptd.posit.it>
+CONNECT_API_KEY=<API key from Connect server>
+```
+
+## Code 
+
+```{r}
+library(dplyr)
+library(tidyverse)
+library(stringr)
+library(readr)
+library(pins)
+library(rsconnect)
+library(usethis)
+
+#Check our environment variables
+# usethis::edit_r_environ()
+
+#Pull data
+summary(cars)
+cars_data <- cars
+
+#Pin data to board
+#board <- board_connect() # defaults to auto, which will select envvar if CONNECT_SERVER and CONNECT_API_KEY are present
+
+board <- board_connect(auth = "envvar")
+
+# board %>% pin_write(cars_data, "cars_dataset", type = "rds")
+
+board %>% pin_write(cars_data, "lisa.anders/cars_dataset", type = "rds", force_identical_write = TRUE)
+```
+
+## Conclusion
+
+If you're reading this, it worked!
+
+This document will be run on a schedule in the Connect environment, to provide updated data.  
+
+## How to use this code 
+
+Read it back with: 
+
+```r
+board <- board_connect(auth = "envvar")
+
+cars_data_back <-board %>% pin_read("lisa.anders/cars_dataset")
+```
+
+When deployed to Connect, an API key will be automatically added into the environment. 
+
+

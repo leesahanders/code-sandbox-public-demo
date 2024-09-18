@@ -1,0 +1,68 @@
+---
+title: "Quarto: Package Manager"
+format: html
+editor: source
+---
+
+Check our current repos with:
+
+```{r}
+options('repos')
+```
+
+Pointing at multiple repos is also supported, where a package is looked for in the first repo in the list and if not found then later repos will be searched:
+
+```{r}
+options(repos = c(
+  CRAN_RSPM = "https://colorado.rstudio.com/rspm/cran/__linux__/focal/2022-06-29",
+  Internal = "https://colorado.rstudio.com/rspm/internal/__linux__/focal/latest",
+  binary = "https://packagemanager.rstudio.com/all/__linux__/focal/latest",
+  source = "https://packagemanager.rstudio.com/all/latest",
+  CRAN = "https://cloud.r-project.org"
+))
+```
+
+A particular repo can be set by the administrator in Workbench/Connect to be used by default:
+
+-   [Workbench](https://docs.rstudio.com/rspm/admin/rstudio-server/)
+-   [Connect](https://docs.rstudio.com/rsc/integration/rspm/)
+
+Change the repo with:
+
+```{r}
+options(repos = c(REPO_NAME = "https://colorado.posit.co/rspm/all/latest"))
+```
+
+Install an internal package:
+
+```{r}
+install.packages("archer")
+```
+
+Remove a package:
+
+```{r}
+remove.packages("archer")
+```
+
+Internal packages can be uploaded by an administrator or through the CLI (requires admin access), or through [CI/CD](https://github.com/rstudio/package-manager-demo/blob/main/.github/workflows/package-manager-demo.yml) with the [remote cli](https://docs.rstudio.com/rspm/admin/admin-cli/#cli-remote-use).
+
+## Finding system dependencies
+
+Detect system dependencies programmatically using package manager: <https://docs.posit.co/rspm/admin/appendix/system-dependency-detection/> 
+
+```{r}
+library(pak)
+pak::pkg_system_requirements("arrow", "ubuntu", "20.04")
+
+pak::pkg_system_requirements(c("config", "git2r", "curl"), "ubuntu", "20.04")
+```
+
+## Troubleshooting
+
+Find where your library is:
+
+```{r}
+.libPaths()
+```
+

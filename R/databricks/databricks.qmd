@@ -1,0 +1,307 @@
+---
+title: "Databricks integration on Workbench"
+format: html
+editor: source
+---
+
+# Set up
+
+This example works on <demo.posit.team> after selecting a session with the credentials enabled. In this particular example, the Azure databricks credentials (not AWS). 
+
+In advance I'll need to spin up a cluster, or get access to someone's cluster if I plan on remote executing code.
+
+# Resources 
+
+- [Workbench user guide on databricks](https://docs.posit.co/ide/server-pro/user/posit-workbench/guide/databricks.html)
+- [RStudio Pro section on Databricks](https://docs.posit.co/ide/server-pro/user/rstudio-pro/guide/databricks.html)
+- [Azure guide on databricks connect](https://learn.microsoft.com/en-us/azure/databricks/dev-tools/databricks-connect/r/) 
+
+# Connections
+
+## Load Packages and Connect to Databricks
+
+### sql
+
+```{r}
+library(tidyverse)
+library(DBI)
+library(dbplyr)
+library(scales)
+
+con <- dbConnect(
+  odbc::databricks(),
+  HTTPPath = Sys.getenv("DATABRICKS_PATH"),
+  )
+
+con
+```
+
+### Spark
+
+```r
+library(tidyverse)
+library(sparklyr)
+library(dbplyr)
+library(scales)
+
+sc <- spark_connect(
+    cluster_id = "<>",
+    version = "14.3",
+    method = "databricks_connect"
+)
+
+# Error in `spark_connect()`:
+# ! Please install {pysparklyr} for method = 'databricks_connect'
+# Backtrace:
+#  1. sparklyr::spark_connect(cluster_id = "<>", version = "14.3", method = "databricks_connect")
+
+# install.packages("pysparklyr")
+```
+
+
+## Manipulating data 
+
+```{r}
+base_query <- tbl(con, in_catalog("sol_eng_demo_nickp", "default", "lending_club")) |>
+      filter(!is.na(addr_state)) |>
+      mutate(region = case_when(stringr::str_sub(zip_code, 1, 1) %in% c("8","9") ~ "West",
+                                stringr::str_sub(zip_code, 1, 1) %in% c("6","5","4") ~ "Midwest",
+                                stringr::str_sub(zip_code, 1, 1) %in% c("7","3","2") ~ "South",
+                                stringr::str_sub(zip_code, 1, 1) %in% c("1","0") ~ "East",
+                                TRUE ~ "NA")) |>
+      select(member_id, region, grade, sub_grade, loan_amnt, funded_amnt,
+             term, int_rate, emp_title, emp_length, annual_inc, loan_status,
+             purpose, title, zip_code, addr_state, dti, out_prncp) |>
+      mutate(office_no = stringr::str_sub(zip_code, 1, 3))
+base_query
+```
+
+View the SQL generated
+
+```{r}
+show_query(base_query)
+```
+
+Build on the existing query and collect the results
+
+```{r}
+summary_stats <- base_query |>
+  group_by(region, grade) |>
+  summarise(out_prncp = sum(as.numeric(out_prncp), na.rm = TRUE)) |>
+  collect()
+
+summary_stats
+```
+
+### Graph the results
+
+```{r}
+summary_stats |>
+ ggplot(aes(x = grade, y = out_prncp, fill = grade)) +
+      geom_col() +
+      guides(fill = "none") +
+      theme(
+        axis.text = element_text(size = 14, face = "bold"),
+        axis.title = element_text(size = 14, face = "bold"),
+        strip.text.x = element_text(
+          size = 14, face = "bold"
+        ),
+        strip.text.y = element_text(
+          size = 14, face = "bold"
+        )
+      ) +
+      facet_wrap(~region) +
+      scale_y_continuous(labels = unit_format(unit = "M", scale = 1e-6)) +
+      ylab("Loan Principal") +
+      xlab("Loan Grade")
+```
+
+### Examine individual loans from the West region in grade A
+
+```{r}
+base_query |>
+  filter(region == "West", grade == "A") |>
+  select(member_id, loan_amnt, term, int_rate, emp_title, emp_length, annual_inc, loan_status, purpose) |>
+  collect()
+```
+
+## Exploration 
+
+Where does the data come from? 
+
+`lending_club` data is a public dataset that's available on Databricks 
+
+Connect to the databricks environment and start a cluster. For this environment (demo), choose runtime/DBR 14.3 LTS ML (Scala 2.12, Spark 3.5.0). This will take around 15 min to start up. 
+
+![alt text](./img/databricks1.png)
+
+Connect to the cluster: 
+
+```{r}
+library(sparklyr)
+
+sc <- spark_connect(
+  cluster_id = Sys.getenv("CLUSTER_ID"),
+  method = "databricks_connect",
+  dbr_version = "14.3"
+)
+```
+
+Show database list: 
+
+```{r}
+# Doesn't work? 
+src_databases(sc)
+```
+
+
+See table names in spark cluster: 
+
+```{r}
+# Doesn't work? 
+dplyr::src_tbls(sc)
+```
+
+The demo data seems to be omniprescent: 
+
+```{r}
+library(DBI)
+
+trips <- dplyr::tbl(
+  sc,
+  dbplyr::in_catalog("samples", "nyctaxi", "trips")
+)
+
+print(trips, n = 5)
+```
+
+We can upload a json data file to our workspace so we have pre-loaded data. 
+
+Pre-req: 
+
+- As a table: Need a databricks admin (IE Nick) to create a catalog that I have CREATE_TABLE permissions on. 
+- As a file: Same as above, however upload file permissions. 
+
+
+In this case, we can use `sol_eng_databricks_hack`. 
+
+Through the interface: 
+
+1. In your Databricks workspace sidebar, click Catalog.
+
+2. Click Create Table. (Plus -> Add Data -> Create Table)
+
+3. On the Upload File tab, drop the books.json file from your local machine to the Drop files to upload box. Or select click to browse, and browse to the books.json file from your local machine.
+
+We should now be able to read the dataframe as volume we added: 
+
+```{r}
+jsonDF <- spark_read_json(
+  sc      = sc,
+  name    = "jsonTable",
+  path    = "/Volumes/sol_eng_databricks_hack/default/lisa/books.json",
+  options = list("multiLine" = TRUE),
+  columns = c(
+    author    = "character",
+    country   = "character",
+    imageLink = "character",
+    language  = "character",
+    link      = "character",
+    pages     = "integer",
+    title     = "character",
+    year      = "integer"
+  )
+)
+
+print(jsonDF)
+```
+
+We could also read the table: 
+
+```{r}
+base_query <- tbl(sc, in_catalog("sol_eng_databricks_hack", "default", "books")) 
+base_query
+```
+
+We can now treat it like a sql query
+
+```{r}
+group_by(jsonDF, author) %>%
+  count() %>%
+  arrange(desc(n))
+```
+
+We can then rewrite the table back to Databricks: 
+
+```{r}
+# This will rewrite it to the default catalog
+group_by(jsonDF, author) %>%
+  count() %>%
+  arrange(desc(n)) %>%
+  spark_write_table(
+    name = "json_books_agg",
+    mode = "overwrite"
+  )
+
+# Separating out the steps
+object <- group_by(jsonDF, author) %>%
+  count() %>%
+  arrange(desc(n))
+
+spark_write_table(object,
+    name = "json_books_agg",
+    mode = "overwrite"
+  )
+
+# This writes the default mtcars table as a table to the default catalog
+spark_tbl_mtcars <- copy_to(sc, mtcars, "spark_mtcars")
+
+spark_tbl_mtcars  %>%
+  spark_write_table(
+    name = "mtcars",
+    mode = "overwrite"
+  )
+
+# This will rewrite to a specific catalog
+spark_tbl_mtcars <- copy_to(sc, mtcars, "spark_mtcars")
+
+spark_tbl_mtcars  %>%
+  spark_write_table(
+    name = "sol_eng_databricks_hack.default.mtcars",
+    mode = "overwrite"
+  )
+
+#base_query <- tbl(sc, in_catalog("sol_eng_databricks_hack", "default", "books")) 
+```
+
+We can verify that we created the table with: 
+
+```{r}
+# Method1
+return <- collect(sdf_sql(sc, "SELECT * FROM json_books_agg"))
+
+# Method2
+fromTable <- spark_read_table(
+  sc   = sc,
+  name = "json_books_agg"
+)
+
+return2 <- collect(fromTable)
+```
+
+## Resources:
+
+-   [Next-generation access to Databricks clusters in RStudio with sparklyr and pysparklyr](https://posit.co/blog/databricks-clusters-in-rstudio-with-sparklyr/)
+-   [From Databricks to Posit Connect: Building and Deploying a Shiny for R Application](https://posit.co/blog/databricks-shiny-r-app/)
+-   [Pysparklyr for interacting with Spark & Databricks Connect](https://posit.co/blog/pysparklyr-for-interacting-with-spark-databricks-connect/)
+-   [databricks demo repo](https://github.com/sol-eng/databricks_demo/blob/main/modeling/fit_model.ipynb)
+-   [Crossing Bridges: Reporting on NYC taxi data with RStudio and Databricks](https://www.databricks.com/blog/crossing-bridges-reporting-nyc-taxi-data-rstudio-and-databricks)
+-   [https://posit.co/blog/reporting-on-nyc-taxi-data-with-rstudio-and-databricks/](Crossing%20Bridges:%20Reporting%20on%20NYC%20taxi%20data%20with%20RStudio%20and%20Databricks)
+-   [Log, load, register, and deploy MLflow models](https://docs.databricks.com/en/mlflow/models.html)
+-   [Databricks managed credentials](https://docs.posit.co/ide/server-pro/user/2024.09.0/posit-workbench/managed-credentials/databricks.html)
+- [Databricks Quick Start on AWS](https://docs.databricks.com/en/mlflow/quick-start-r.html)
+- [Workbench user guide on databricks](https://docs.posit.co/ide/server-pro/user/posit-workbench/guide/databricks.html)
+- [RStudio Pro section on Databricks](https://docs.posit.co/ide/server-pro/user/rstudio-pro/guide/databricks.html)
+- [Azure guide on databricks connect](https://learn.microsoft.com/en-us/azure/databricks/dev-tools/databricks-connect/r/) 
+- [using dataframes in datbaricks, with an example uploading data](https://docs.databricks.com/en/sparkr/dataframes-tables.html)
+- [Demo of "browse" functionality for debugging](https://www.databricks.com/blog/bringing-lakehouse-r-developers-databricks-connect-now-available-sparklyr)

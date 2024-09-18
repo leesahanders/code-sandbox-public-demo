@@ -1,0 +1,247 @@
+---
+title: "Blastula email for Connect Content"
+author: "LA"
+date: "`r lubridate::today()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(blastula)
+library(lubridate)
+library(glue)
+library(lubridate)
+library(connectapi)
+library(ggplot2)
+library(dplyr)
+library(janitor)
+library(stringr)
+library(scales)
+library(forcats)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+## Suppressing emails 
+
+Reference: <https://docs.posit.co/connect/user/rmarkdown/#r-markdown-email-attachments> 
+
+For example, using blastula:
+
+```
+render_connect_email(input = "connect-example-email.Rmd") %>%
+  attach_connect_email(
+    subject = "Posit Connect HTML Email",
+    attach_output = TRUE,
+    attachments = c("dallas_home_sales.csv", "austin_home_sales.csv")
+  )
+```
+
+For example, using output metadata:
+
+```
+attachments <- list("attachment_1.csv", "attachment_2.csv")
+rmarkdown::output_metadata$set(rsc_email_attachments = attachments)
+```
+
+For nested files, include the relative path:
+
+```
+rmarkdown::output_metadata$set(
+  rsc_email_attachments = list(
+    "data1.csv",
+    "./moreData/data2.csv",
+    "./moreData/EvenMoreData/data3.csv"
+  )
+)
+```
+
+Conditionally send email: <https://docs.posit.co/connect/user/rmarkdown/#r-markdown-email-suppress-scheduled> 
+
+```
+library(blastula)
+if (demand_forecast > 1000) {
+  render_connect_email(input = "alert-supply-team-email.Rmd") %>%
+  attach_connect_email(
+    subject = sprintf("We need to prepare %d units!", demand_forecast),
+    attach_output = TRUE,
+    attachments = c("demand_forecast_data.csv")
+  )
+} else {
+  suppress_scheduled_email() 
+}
+```
+
+An email attachment will be accessible via HTTP just like an output file, and you can make a link to it in your report in the same way.
+
+Some mail systems have limitations on attachments in email messages. Attachments from your report need to follow the restrictions enforced by your organization. Connect is not aware of those limitations. Please work with your systems administrators / IT organization if you have trouble delivering file attachments.
+
+## Report
+
+```{r}
+library(glue)
+library(lubridate)
+library(connectapi)
+library(ggplot2)
+library(dplyr)
+library(janitor)
+library(stringr)
+library(scales)
+library(forcats)
+
+colour_mapping_lang <- c(
+  "Python" = "#FFD43B",
+  "R" = "#276BBE",
+  "Quarto" = "#75AADB",
+  "Unknown" = "#C4C7C9"
+)
+colour_mapping_type <- c(
+  "Document" = "#447099",
+  "Web App" = "#72994E",
+  "API" = "#EE6331",
+  "Unknown" = "#C4C7C9"
+)
+
+client <- connect()
+content <- get_content(client)
+```
+
+```{r}
+content <- content |>
+  # Classify content
+  mutate(
+    language = case_when(
+      !is.na(r_version) ~ "R",
+      !is.na(py_version) ~ "Python",
+      !is.na(quarto_version) ~ "Quarto",
+      TRUE ~ "Unknown"
+    ),
+    app_type = case_when(
+      str_ends(app_mode, "static") ~ "Document",
+      str_ends(app_mode, "api") ~ "API",
+      str_ends(app_mode, "shiny") ~ "Web App",
+      str_ends(app_mode, "streamlit") ~ "Web App",
+      str_ends(app_mode, "bokeh") ~ "Web App",
+      str_ends(app_mode, "dash") ~ "Web App",
+      TRUE ~ "Unknown"
+    )
+  ) |> 
+  # Orgnize factors
+  mutate(
+    language = factor(language, levels = c("Unknown", "QUarto", "Python", "R")),
+    app_type = factor(app_type, levels = c("Unknown", "API", "Web App", "Document"))
+  )
+```
+
+## Deployed by language
+
+
+```{r}
+content |> 
+  group_by(language, app_type) |>
+  summarise(n = n(), .groups = "drop") |> 
+  ggplot(aes(x = app_type, y = n)) +
+  geom_col(aes(fill = language)) +
+  scale_fill_manual(values = colour_mapping_lang) +
+  scale_y_continuous(label=comma) +
+  labs(
+    title = "Distribution of Content Deployed on Colorado",
+    subtitle = "By Langauge and Type",
+    x = "Type",
+    y = "Count",
+    fill = "Language"
+  ) +
+  coord_flip()
+```
+
+## App Mode 
+
+```{r}
+content |> 
+  tabyl(app_mode) |> 
+  arrange(desc(n)) |> 
+  mutate(app_mode = fct_reorder(factor(app_mode), n)) |> 
+  ggplot(aes(x = app_mode, y = n)) +
+  geom_col() +
+  geom_label(aes(label = percent(percent, accuracy = 1)), nudge_y = 100) +
+  scale_y_continuous(label=comma) +
+  labs(
+    title = "Distribution of Content Deployed on Colorado",
+    subtitle = "By App Mode",
+    x = "App Mode",
+    y = "Count"
+  ) +
+  coord_flip()
+```
+
+## Language
+
+```{r}
+content |> 
+  mutate(create_year_month = floor_date(created_time, unit = "month")) |> 
+  group_by(language, create_year_month) |> 
+  summarise(count = n(), .groups = "drop") |> 
+  ggplot(aes(x = create_year_month, y = count)) +
+  geom_col(aes(fill = language)) + 
+  scale_fill_manual(values = colour_mapping_lang) + 
+  scale_y_continuous(label=comma) +
+  labs(
+    title = "Content Creation Over Time",
+    subtitle = "By langauge",
+    x = "Month",
+    y = "Count",
+    fill = "Language"
+  )
+```
+
+
+## Type
+
+```{r}
+content |> 
+  mutate(create_year_month = floor_date(created_time, unit = "month")) |> 
+  group_by(app_type, create_year_month) |> 
+  summarise(count = n(), .groups = "drop") |> 
+  ggplot(aes(x = create_year_month, y = count)) +
+  geom_col(aes(fill = app_type)) + 
+  scale_fill_manual(values = colour_mapping_type) +
+  scale_y_continuous(label=comma) +
+  labs(
+    title = "Content Creation Over Time",
+    subtitle = "By app type",
+    x = "Month",
+    y = "Count",
+    fill = "App Type"
+  )
+```
+
+
+Send email
+
+```{r}
+blastula::render_connect_email(input = "./email.Rmd") |> 
+  blastula::attach_connect_email(subject = glue("Connect Content Report - {today()}"))
+```
+
+Defining Connect with server: https://colorado.posit.co/rsc/
+

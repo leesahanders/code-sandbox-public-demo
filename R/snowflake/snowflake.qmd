@@ -1,0 +1,137 @@
+---
+title: "Snowflake Integration on Workbench"
+format: html
+editor: source
+---
+
+# Set up
+
+This example works in the demo environment after selecting a session with the credentials enabled. 
+
+# Connections 
+
+## Load Packages and Connect to Databricks
+
+### sql
+
+```{r}
+library(tidyverse)
+library(DBI)
+library(dbplyr)
+library(gt)
+library(gtExtras)
+library(odbc)
+
+# Connect to the database
+conn <-
+  DBI::dbConnect(
+    odbc::snowflake(),
+    warehouse = "DEFAULT_WH",
+    database = "WEB_TRAFFIC_FOUNDATION_EXPERIMENTAL",
+    schema = "CYBERSYN"
+  )
+
+```
+
+
+## Manipulating data 
+
+```{r}
+# connect to tables/views
+timeseries <- tbl(conn, "WEBTRAFFIC_SYNDICATE_TIMESERIES")
+attributes <- tbl(conn, "WEBTRAFFIC_SYNDICATE_ATTRIBUTES")
+
+# Standardize column names
+timeseries <- timeseries |> rename_with(str_to_lower)
+attributes <- attributes |> rename_with(str_to_lower)
+
+# Join to make complete table
+timeseries <-
+  timeseries |>
+  left_join(
+    attributes,
+    by = join_by(variable, variable_name)
+  )
+```
+
+
+```{r}
+top_domains <-
+  c(
+    "youtube.com",
+    "google.com",
+    "facebook.com",
+    "tiktok.com",
+    "instagram.com",
+    "airbnb.com",
+    "vrbo.com",
+    "lyft.com",
+    "uber.com"
+  )
+
+timeseries <-
+  timeseries |>
+  filter(domain_id %in% top_domains) |>
+  select(domain_id, date, measure, value)
+```
+
+```{r}
+timeseries <-
+  timeseries |>
+  pivot_wider(names_from = measure, values_from = value) |>
+  rename_with(str_to_lower)
+```
+
+The resulting `timeseries` data will look like this:
+
+```{r}
+timeseries
+```
+
+## Visualize Page Views with `{ggplot2}`
+
+Here we will compare the page views between `airbnb.com` and `vrbo.com`.
+
+```{r}
+domains <- c("airbnb.com", "vrbo.com")
+
+timeseries |>
+  filter(domain_id %in% domains) |>
+  ggplot(aes(date, pageviews, color = domain_id)) +
+  geom_line() +
+  scale_y_log10() +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  labs(
+    x = "",
+    y = "",
+    color = "",
+    title = "Pageviews"
+  )
+```
+
+### Write data back
+
+```r
+dbWriteTable(conn, SQL("database.schema.tablename"), df)
+```
+
+## Exploration 
+
+The `cybersyn` data in snowflake is a public access sample dataset
+
+
+```{r}
+db_list_tables(conn)
+```
+
+## Resources 
+
+- [Snowflake demo repo](https://github.com/sol-eng/snowflake_demo)
+- [Posit Workbench > Admin Guide > Integrations > Snowflake Native App (preview docs)](https://docs.posit.co/ide/server-pro/2024.09.0/integration/snowflake/native-app/)
+- [From Snowflake: analyze Data with R using Posit Workbench and Snowflake](https://quickstarts.snowflake.com/guide/analyze_data_with_r_using_posit_workbench_and_snowflake/index.html#0)
+- [This from the user guide (since running as a Native app you will use the managed credentials as well)](https://docs.posit.co/ide/server-pro/user/2024.09.0/posit-workbench/managed-credentials/snowflake.html)
+- [Posit Snowflake Documentation](https://connect.posit.it/connect/#/apps/b78993de-8e5d-4b3e-bb2d-1c691dc43661)
+- [Snowflake managed credentials](https://docs.posit.co/ide/server-pro/user/2024.09.0/posit-workbench/managed-credentials/snowflake.html)
+- [Snowflake Solutions Center]( https://developers.snowflake.com/solution/data-analysis-with-r-using-posit-workbench-and-snowflake/) 
+- [Snowflake quick start](https://quickstarts.snowflake.com/guide/analyze_data_with_r_using_posit_workbench_and_snowflake/index.html#0)

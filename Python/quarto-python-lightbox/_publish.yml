@@ -1,0 +1,8 @@
+- source: quarto-python-jupyter.qmd
+  connect:
+    - id: 55bec3d5-87d5-4e58-aefc-1c7dc32d6998
+      url: 'https://colorado.rstudio.com/rsc/content/55bec3d5-87d5-4e58-aefc-1c7dc32d6998/'
+- source: quarto-python-lightbox.qmd
+  connect:
+    - id: 0936bfc5-d967-4aa4-aa7e-f9d097a0268e
+      url: 'https://colorado.rstudio.com/rsc/content/0936bfc5-d967-4aa4-aa7e-f9d097a0268e/'

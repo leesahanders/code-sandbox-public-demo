@@ -1,0 +1,128 @@
+---
+title: "Untitled"
+author: "LA"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Check our current repos with:
+
+```{r}
+options('repos')
+```
+
+Check your OS with:
+
+``` bash
+cat /etc/os-release
+```
+
+Set it to point at a single repository:
+
+```{r}
+# Set it to package manager
+options(repos = c(RSPM = "https://packagemanager.posit.co/cran/__linux__/jammy/latest"))
+
+# Set it back to Cloud CRAN
+options(repos = c(RSPM = "https://cloud.r-project.org"))
+```
+
+Pointing at multiple repos is also supported, where a package is looked for in the first repo in the list and if not found then later repos will be searched:
+
+```{r}
+options(repos = c(
+  CRAN_RSPM = "https://colorado.rstudio.com/rspm/cran/__linux__/focal/2022-06-29",
+  Internal = "https://colorado.rstudio.com/rspm/internal/__linux__/focal/latest",
+  binary = "https://packagemanager.rstudio.com/all/__linux__/focal/latest",
+  source = "https://packagemanager.rstudio.com/all/latest",
+  CRAN = "https://cloud.r-project.org"
+))
+```
+
+A particular repo can be set by the administrator in Workbench/Connect to be used by default:
+
+-   [Workbench](https://docs.rstudio.com/rspm/admin/rstudio-server/)
+-   [Connect](https://docs.rstudio.com/rsc/integration/rspm/)
+
+Install an internal package:
+
+```{r}
+install.packages("archer")
+```
+
+Remove a package:
+
+```{r}
+remove.packages("archer")
+```
+
+Internal packages can be uploaded by an administrator or through the CLI (requires admin access), or through [CI/CD](https://github.com/rstudio/package-manager-demo/blob/main/.github/workflows/package-manager-demo.yml) with the [remote cli](https://docs.rstudio.com/rspm/admin/admin-cli/#cli-remote-use).
+
+## Using the CLI to upload a package
+
+Resources: - <https://positpbc.atlassian.net/wiki/spaces/PRO/pages/207880379/Remote+Publish+Pvt.+R+Package+from+Workbench+to+Package+Manager> - <https://github.com/rstudio/package-manager-demo/tree/main/r-package-manager-demo> - Changing the package name is hard: <https://community.rstudio.com/t/how-to-rename-an-r-package/85633/12>
+
+The below is executed from the `PackageManagerDemo` project.
+
+``` bash
+env | grep PACKAGEMANAGER_SOURCE
+```
+
+Change name of tar file outputs so it doesn't match something on the server - this will be done in the DESCRIPTION file. Change the name and the version.
+
+``` bash
+R CMD build .
+
+R CMD INSTALL --build .
+```
+
+Optional: `R CMD check .`
+
+``` bash
+rspm add --source=internally_published --path=lisaPackageManagerDemo_0.0.1.tar.gz
+
+rspm add binary --source=internally_published --distribution=bionic --path=lisaPackageManagerDemo_0.0.1_R_x86_64-pc-linux-gnu.tar.gz
+```
+
+You should now see lisaPackageManagerDemo in `published` in Package Manager.
+
+From Colorado the `internally_published` source is publishing to `published`. We can connect to it to download our package with:
+
+```{r}
+#Connect only to the internally_published repo
+options(repos = c(internally_published = "https://colorado.posit.co/rspm/published/__linux__/jammy/latest"))
+
+install.packages("lisaPackageManagerDemo")
+```
+
+View the published package with: Published -\> Activity
+
+Remove a package:
+
+```{r}
+remove.packages("lisaPackageManagerDemo")
+```
+
+Packages can be completely removed from package manager using the admin cli: <https://colorado.posit.co/rspm/__docs__/admin/appendix/cli/#rspm-remove>
+
+Set it up to access multiple repositories (so we don't have to jump back and forth) with something like this:
+
+```{r}
+options(repos = c(
+  RSPM = "https://packagemanager.posit.co/cran/__linux__/jammy/latest",
+  internally_published = "https://colorado.posit.co/rspm/published/__linux__/jammy/latest",
+  snapshot_= "https://colorado.posit.co/rspm/published/__linux__/jammy/2022-11-17+rgbEPWyr",
+  CRAN = "https://cloud.r-project.org"
+))
+```
+
+## Reproduceable Environments
+
+<https://solutions.posit.co/envs-pkgs/environments/>
+
+![Image](https://solutions.posit.co/envs-pkgs/environments/spectrum-1.png)
+
+![Image](https://solutions.posit.co/envs-pkgs/environments/reproduce/reproducibility-strategies-and-danger-zones.png)

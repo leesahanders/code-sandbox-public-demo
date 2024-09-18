@@ -1,0 +1,71 @@
+---
+title: "Pin mtcars"
+output: html_document
+---
+
+## Purpose
+
+This script pulls demo information from mtcars and pins it so the data set is usable by others. 
+
+- Pins to: <https://colorado.posit.co/rsc/connect/#/apps/1d002e9f-1922-4fa7-bfbd-b3262dcde0ad/access> 
+
+- Access the script, and schedule it, at: <https://colorado.posit.co/rsc/connect/#/apps/3dae5785-607d-451f-8551-820d5a07ae1d/access> 
+
+- The pinned data is being consumed in an app: <https://colorado.posit.co/rsc/connect/#/apps/a0aa6140-686c-4bc1-bb51-5596e5e99436/access> 
+
+```{r global, echo=FALSE, message=FALSE, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(tidyverse)
+library(stringr)
+library(readr)
+library(pins)
+library(rsconnect)
+library(usethis)
+
+#Check our environment variables
+# usethis::edit_r_environ()
+
+```
+
+```{r main, echo=FALSE, message=FALSE}
+library(dplyr)
+library(tidyverse)
+library(stringr)
+library(readr)
+library(pins)
+library(rsconnect)
+library(usethis)
+
+#Pull data
+summary(cars)
+cars_data <- cars
+
+#Pin data to board
+board <- board_connect(auth = "envvar")
+board %>% pin_write(cars_data, "cars_dataset", type = "rds")
+
+
+```
+## Conclusion
+
+If you're reading this, it worked!
+
+This document will be run on a schedule in the Connect environment, to provide updated data.  
+
+## Source
+
+The code for this page lives [in github](https://github.com/leesahanders/Shiny_Geyser_App)
+
+## How to use this code 
+
+Read it back with: 
+
+```{r}
+
+board <- board_connect(auth = "envvar")
+
+cars_data_back <-board %>% pin_read("lisa.anders/cars_dataset")
+
+```
+

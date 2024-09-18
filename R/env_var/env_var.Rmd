@@ -1,0 +1,81 @@
+---
+title: "Environment Variables"
+author: "LA"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Environment Variables 
+
+```{r}
+print(Sys.getenv("ENV_VAR"))
+```
+
+
+### How does this work? 
+
+Variables are being saved to the user level .Renviron config file when working on the file in Workbench
+
+For this project the following variables are being saved in the .Renviron file (credentials are stripped for security), as well as added to Connect as environment variables for pins content: 
+
+ - CONNECT_API_KEY=**REDACTED**
+ - CONNECT_SERVER=**REDACTED**
+ - OWNER_GUID=**REDACTED**
+
+<details>
+  <summary>Relevant reading:</summary>
+
+When working in a more complex environment structure where separate project, site, and user environments are being used [this support article has useful information](https://support.rstudio.com/hc/en-us/articles/360047157094-Managing-R-with-Rprofile-Renviron-Rprofile-site-Renviron-site-rsession-conf-and-repos-conf) with a [deeper dive into R's startup here](https://rviews.rstudio.com/2017/04/19/r-for-enterprise-understanding-r-s-startup/).
+
+</details>
+
+#### One-off
+
+Set an environment variable: 
+
+```{r}
+Sys.setenv(CONNECT_API_KEY = "<redacted>")
+```
+
+
+Recall an environment variable: 
+
+```{r}
+Sys.getenv("CONNECT_API_KEY")
+```
+
+#### Persistence 
+
+[`usethis`](https://usethis.r-lib.org/) has a function for creating and editing the .Renviron file: 
+
+```r
+library(usethis)
+usethis::edit_r_environ()
+```
+
+Add the variables to that file in the format `variable_name = "variable_value"` and save it. Restart the session so the new environment variables will be loaded with `ctrl shift f10` or through the RStudio IDE through the **Session** dropdown and selecting **Restart R**. 
+
+It should look like this: 
+
+```
+CONNECT_API_KEY=<redacted>
+```
+
+#### Adding environment variables to deployed content
+
+See the Connect User Guide for adding the variables using the UI to deployed content: <https://docs.posit.co/connect/user/content-settings/index.html#content-vars>
+
+
+Write the manifest: 
+
+```r
+library(rsconnect) 
+rsconnect::writeManifest(appDir="R/env_var")
+```
+
+Now you should be good to go! 
+
+

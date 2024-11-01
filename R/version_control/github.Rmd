@@ -25,7 +25,7 @@ library(gh)
 ```
 
 
-## At a clance 
+## At a glance 
 
 Check for previous credentials and set username if needed: 
 

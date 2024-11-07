@@ -1,5 +1,7 @@
 ## Testing over rides
 
+## When in doubt we can remove directories with: rm -rf /home/*/R 
+
 library(usethis)
 
 usethis::edir_r_environ()

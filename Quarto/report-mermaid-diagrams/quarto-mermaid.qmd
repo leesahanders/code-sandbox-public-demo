@@ -1,0 +1,159 @@
+---
+title: "Mermaid diagrams in Quarto"
+author: "Lisa Anders" 
+date: last-modified
+format: 
+  html:
+    anchor-sections: true
+    toc: true
+    toc-location: right
+    toc-title: "Contents"
+    link-external-icon: true
+    link-external-newwindow: true
+    other-links:
+      - text: Check out the documentation
+        href: https://quarto.org/docs/authoring/diagrams.html
+    theme: 
+      light: quartz
+    mermaid:
+      theme: dark
+    code-links:
+      - text: Source Code
+        icon: github
+        href: https://github.com/leesahanders/quarto-for-reproducible-reporting-demo/tree/main/content-examples/report-mermaid-diagrams
+execute:
+  echo: true
+editor: source
+resource_files: 
+- "mermaid.mmd"
+- "linux-kernel-diagram.dot"
+- "img/neutral.png"
+- "img/forest.png"
+- "img/default.png"
+- "img/dark.png"
+- "img/mermaid-logo.svg"
+- "img/mermaid-logo.svg"
+---
+
+![](img/mermaid-logo.svg){fig-align="center" width=150}
+
+# Mermaid
+
+`Mermaid diagrams` are a programmatic way to create diagrams and visualizations using code. These can be a great way to add diagrams into reports, regardless of preferred language. 
+
+Check out how to implement this for yourself here: <https://quarto.org/docs/authoring/diagrams.html> 
+
+# Different themes 
+
+The available themes from mermaid are: `default`, `dark`, `forest`, and `neutral`.
+
+:::: {.columns}
+
+::: {.column width="25%"}
+`default`
+
+![](img/default.png){fig-align="center" height=200 fig-alt="A screenshot of a Mermaid flowchart using the Mermaid's default theme."}
+
+:::
+
+::: {.column width="25%"}
+`dark`
+
+![](img/dark.png){fig-align="center" height=200 fig-alt="A screenshot of a Mermaid flowchart using the Mermaid's dark theme."}
+:::
+
+::: {.column width="25%"}
+`forest`
+
+![](img/forest.png){fig-align="center" height=200 fig-alt="A screenshot of a Mermaid flowchart using the Mermaid's forest theme."}
+:::
+
+::: {.column width="25%"}
+`neutral`
+
+![](img/neutral.png){fig-align="center" height=200 fig-alt="A screenshot of a Mermaid flowchart using the Mermaid's neutral theme."}
+:::
+
+::::
+
+# Simple mermaid diagram
+
+```{mermaid}
+flowchart LR
+  A[Hard edge] --> B(Round edge)
+  B --> C{Decision}
+  C --> D[Result one]
+  C --> E[Result two]
+```
+
+# Complex mermaid diagram
+
+```{mermaid}
+%%| fig-width: 6.5
+graph TD
+  A[Start] --> B[Step 1: Define a library reference libref named 'vitra']
+  B --> C[Step 2: Connect to an Oracle database using the libref]
+  C --> D{Connection Details}
+  D --> E[User: admin]
+  D --> F[Password: fancy51$]
+  D --> G[Path: //245.23.45.22:1521/dbservice]
+  G --> H
+  H[End]
+```
+
+# From a file
+
+```{mermaid}
+%%| label: fig-mermaid
+%%| fig-cap: "A diagram."
+%%| file: mermaid.mmd
+```
+
+# FYI on tabset error
+
+There is currently an error where the later tabsets don't display, hopefully to be fixed soon. 
+
+::: panel-tabset
+## first mermaid
+
+```{mermaid}
+flowchart TD
+one---two
+```
+
+## second mermaid
+
+```{mermaid}
+flowchart TD
+three---four
+```
+
+## third mermaid
+
+```{mermaid}
+flowchart TD
+five---six
+```
+:::
+
+# Not just mermaid - Succesful dot diagram from file
+
+```{dot}
+//| label: fig-linux-kernel
+//| fig-cap: "A diagram of the Linux kernel."
+//| file: linux-kernel-diagram.dot
+```
+
+References:
+
+-   <https://github.com/quarto-dev/quarto-cli/issues/5145>
+-   <https://github.com/quarto-dev/quarto-cli/issues/9031>
+-   <https://quarto.org/docs/authoring/diagrams.html>
+-   <https://quarto.org/docs/authoring/diagrams.html#file-include>
+-   <https://stackoverflow.com/questions/50762662/how-to-install-mermaid-to-render-flowcharts-in-markdown>
+-   <https://mermaid.js.org/intro/getting-started.html?#%E2%80%A2-loading-from-gists>
+-   <https://github.com/quarto-dev/quarto-cli/issues/3665>
+-   <https://github.com/quarto-dev/quarto-cli/discussions/5219>
+-   <https://github.com/quarto-dev/quarto-cli/discussions/1054>
+
+The theme used on this page is `quartz` 

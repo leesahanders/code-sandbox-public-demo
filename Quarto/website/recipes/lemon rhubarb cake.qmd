@@ -1,0 +1,51 @@
+---
+title: "Lemon Rhubarb Cake"
+description: "Decadent"
+author: "EMMA GALLOWAY | MY DARLING LEMON THYME"
+date: "2024-05-01"
+format: html
+editor: source
+categories:
+  - good-cold
+  - dessert
+  - breakfast
+  - vegetarian
+  - potluck
+  - Jesse
+image: "img/lemon-rhubarb-cake.jpg"
+draft: false
+filters:
+   - lightbox
+lightbox: auto
+about:
+  template: trestles
+  links:
+    - icon: bowl
+      text: Source
+      href: https://food52.com/recipes/12553-gluten-free-rhubarb-lemon-and-almond-cake
+---
+
+## Ingredients
+
+4 eggs
+2/3 cup caster sugar
+125g extra soft butter, or dairy-free margarine
+2 3/4 cups (300g) ground almonds
+1/3 cup (50g) brown rice flour
+1 teaspoon baking powder
+the zest of 1 lemon
+4 stalks of rhubarb (approx 150g)
+2 teaspoons caster sugar, extra
+powdered sugar for dusting
+
+## Instructions
+
+Pre-heat the oven to 180 C/356 F. Grease a 25 cm/9 inch cake tin and line the bottom with a round of baking paper. Wash the rhubarb stalks, cut into 1 inch lengths and while still slightly damp from washing combine in a small bowl with the 2tsp of extra caster sugar to coat and set aside.
+
+Beat the eggs and sugar using either a hand-held electric beater or a stand-up mixer for 5 minutes until very thick and pale in colour. Slowly beat in the soft butter, then beat for a further few minutes. A few small lumps of butter will remain, this is okay. Gently fold in the almond meal, rice flour, baking powder and lemon zest. Spoon the mixture into the cake tin. Dot the rhubarb pieces on top, gently pushing them down into the batter a little. Bake for 35-40 minutes until a skewer pushed into the centre of the cake comes out clean and the rhubarb is tender.
+
+Cool in the tin before serving dusted with icing sugar and softly whipped cream on the side.
+
+## Lisa's notes
+
+Decadent

@@ -1,0 +1,29 @@
+project:
+  type: website
+
+website:
+  title: "Reproduceable Reporting With Quarto"
+  navbar:
+      logo: /img/quarto-logo.png
+      left:
+      - href: landing.qmd
+        text: Slides
+      - href: index.qmd
+        text: Examples
+      - href: help.qmd
+        text: About Posit Team
+      right:
+      - href: https://github.com/leesahanders/
+        text: Lisa Anders
+      - icon: github
+        href: https://github.com/leesahanders/quarto-for-reproducible-reporting-demo
+
+format:
+  html:
+    theme: spacelab
+    css: styles.css
+    toc: true
+    toc-location: left
+    toc-depth: 2
+
+editor: source

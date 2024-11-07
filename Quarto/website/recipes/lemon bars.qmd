@@ -1,0 +1,75 @@
+---
+title: "Lemon Bars"
+description: "Melt in your mouth lemon bars!"
+author: "Laurie"
+date: "2023-03-24"
+format: html
+editor: source
+categories:
+  - dessert
+  - vegetarian
+  - good-cold
+  - potluck
+  - Laurie
+image: "img/lemon bars.png"
+filters:
+   - lightbox
+lightbox: auto
+about:
+  template: trestles
+  links:
+    - icon: bowl
+      text: Source
+      href: https://www.google.com/maps
+---
+
+## At a Glance
+
+Makes 9 Servings
+
+## Ingredients
+
+### Crust
+
+1 ½ Cups Gluten Free Flour
+
+½ Cup Powdered Sugar	
+
+½ Tsp Salt
+
+¾ Cup Unsalted Butter, 1 ½ sticks, cubed, room temperature
+
+
+### Lemon Filling
+
+3 Large Eggs
+
+1 Egg Yolk
+
+1 Cup Granulated Sugar
+
+½ Cup Lemon Juice
+
+1 Tbs Lemon Zest
+
+¼ Cup Gluten Free Flour
+
+## Instructions
+
+1.  Preheat oven to 325F.  Grease and line a 9-inch square baking sheet with parchment paper and place on a baking sheet.
+
+2. Make the crust; combine the flour, powdered sugar, salt and butter in a medium bowl and use your hand to mix until a crumbly dough forms
+
+3. Transfer the dough to the prepared pan, and use your hands to press it against the bottom and about 1 inch up the sides.  Poke the bottom all over with a fork.
+
+4. Bake for 20 minutes, until light golden brown.
+
+5. While the crust is baking, make the lemon filling.  In a large blown, whisk together the eggs and egg yolk.  Add the granulated sugar, lemon juice, zest and a pinch of salt, and whisk to combine.  Whisk in the flour until just combined.  
+
+6. When the crust is done baking, remove it from the oven.  Pour in the lemon filling over the crust and carefully return it to the oven for 25 minutes, until the filling no longer jiggles and the center is mostly set.  
+
+7. Let cool completely, then refrigerate for 1-2 hours.   Slice into 9 bars.
+
+## Lisa's notes
+
+Consistently delicious!

@@ -1,0 +1,43 @@
+---
+title: "Quarto Document with Comments (using utterances)"
+author: "Lisa Anders" 
+format:
+  html:
+    theme: sketchy
+    code-links:
+      - text: Source Code
+        icon: github
+        href: https://github.com/leesahanders/quarto-for-reproducible-reporting-demo/tree/main/content-examples/report-commentable
+editor: source
+comments:
+  utterances:
+    repo: leesahanders/quarto_with_comments
+
+---
+
+## Add comments 
+
+You can add commenting to your website using either Hypothesis, Utterances, or Giscus. For this page, Utterances was set up. Learn more: <https://quarto.org/docs/reference/projects/websites.html#comments> 
+
+### Utterances
+
+Adjust your yaml, for example: 
+
+```
+comments:
+  utterances:
+    repo: leesahanders/quarto-for-reproducible-reporting-demo
+```
+
+The utterances app needs to be installed for the target github repo: <https://github.com/apps/utterances/installations/new>  
+Double check it was installed through your account git options under applications: <https://github.com/settings/installations/> 
+
+A bunch of different themes are supported: github-light, github-dark, github-dark-orange, icy-dark, dark-blue, photon-dark, body-light, or gruvbox-dark
+
+## Add a comment 
+
+What's your favorite animal? 
+
+
+
+

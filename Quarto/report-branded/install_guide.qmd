@@ -1,0 +1,304 @@
+---
+title: "Installation Guide for Sample Customer"
+format:
+  html:
+    embed-resources: true
+    anchor-sections: true
+    toc: true
+    toc-location: left
+    toc-title: "Contents"
+    link-external-icon: true
+    link-external-newwindow: true
+    other-links:
+      - text: Need help?
+        href: https://docs.posit.co/support/
+    code-links:
+      - text: Source Code
+        icon: github
+        href: https://github.com/leesahanders/quarto-for-reproducible-reporting-demo/tree/main/content-examples/report-branded
+    theme:
+      light: [cosmo, theme-light.scss]
+      dark: [darkly, theme-dark.scss]
+title-block-banner: true
+title-block-style: plain
+date: today
+css: styles.css
+---
+
+Posit professional products are provided as system packages that can be manually installed to servers or virtual machines in your on-premises or cloud-based environment. This generated document will walk an admin through the process of configuring the selected Posit products, based on the choices unique to their environment.
+
+## Before installation
+
+### Infrastructure
+
+- [ ] Provision Linux servers with the appropriate sizing: [Posit Sizing Recommendations](https://support.posit.co/hc/en-us/articles/115002344588-Configuration-and-sizing-recommendations)
+- [ ] Ensure you have sudo permissions on each server
+- [ ] Ensure you have TLS certificates and keys (without passphrases) for each server in order to support SSL/TLS access
+- [ ] Verify that the products are able to run as root as needed: [Posit Professional Product Root & Privileged Requirements](https://support.posit.co/hc/en-us/articles/1500005369282-RStudio-Professional-Product-Root-Privileged-Requirements)
+
+### Authentication information
+
+Gather required information about your authentication system. Depending on your desired protocol this may include:
+
+- Workbench: OIDC: Client ID, client secrets, and Issuer URL
+- Connect: OIDC: Client ID, client secrets, and Issuer URL
+- Connect: SMTP: Server host, port, username and password for [email on Connect](https://docs.posit.co/connect/admin/email/index.html#configuring-an-email-provider)
+
+### Verify connectivity
+
+- [ ] `ping` each server from other servers to make sure network connectivity is enabled
+- [ ] Verify `nslookup` returns the correct IP address for each server
+- [ ] Ensure the default ports for each service in the tables below are open
+
+#### Ports
+
+| Service         | Default Ports | Notes                               |
+| --------------- | ------------- | ----------------------------------- |
+| Workbench       | 8787, 5559    | 443 when TLS/SSL is enabled         |
+| Connect         | 3939          | 443 when TLS/SSL is enabled         |
+| Package Manager | 4242          | 443 when TLS/SSL is enabled         |
+
+### Outbound access
+
+- Licensing
+  - For license file activations, outbound access is not required.
+  - For license key activations, allow outbound access to [https://wyday.com](https://wyday.com)
+- Workbench
+    - For online deployments of Workbench using VS Code, allow outbound access to the Open VSX Registry at [https://open-vsx.org](https://open-vsx.org)
+    - For CRAN, allow outbound access to [https://cran.rstudio.com](https://cran.rstudio.com) or the CRAN mirror of your choice
+- Connect
+    - Connect has no outbound access requirements
+- Package Manager
+    - For online deployments of Posit Package Manager, allow outbound access to the Posit Package Service at [https://rspm-sync.rstudio.com](https://rspm-sync.rstudio.com)
+
+## Installation and configuration
+
+### Posit Package Manager
+
+#### Package Manager Configuration
+
+<details>
+
+<summary>Expand to see your specific Package Manager configuration selection:</summary>
+
+    architecture: Server/Virtual Machine
+    custom_rules_blocking: false
+    database: SQLite
+    filesystem: Local
+    infra_provider:
+      onprem:
+        database: PostgreSQL (self-managed)
+        filesystem: NFS (self-managed)
+    languages:
+    - R
+    - Python
+    license: Basic
+    load_balanced: false
+    monitoring: Graphite
+    network: Public Outbound
+    network_storage: NFS
+    offline: false
+    os: Ubuntu-22.04 jammy
+    python_repositories:
+    - PyPI Mirror
+    r_repositories:
+    - CRAN Mirror
+    security_vulnerability_blocking: false
+
+
+</details>
+
+#### Package Manager Installation
+
+- Install one or more R versions from Posit using the [provided precompiled binaries](https://docs.posit.co/resources/install-r/)
+- Install one or more Python versions from Posit using the [provided precompiled binaries](https://docs.posit.co/resources/install-python/)
+- [Install Posit Package Manager](https://docs.posit.co/rspm/admin/getting-started/installation/installing-ppm/)
+- [Activate license](https://docs.posit.co/rspm/admin/licensing/#local-activation)
+
+Now that the product is installed, follow the remaining steps to configure the product.
+
+Refer to the documentation links below and in each configuration file.
+
+- [Configure HTTPS](https://docs.posit.co/rspm/admin/networking/#configuring-ssl-certificates)
+- R repositories:
+    - [Setup a CRAN mirror repository](https://docs.posit.co/rspm/admin/getting-started/configuration/#quickstart-cran)
+- Python repositories:
+    - [Setup a PyPI mirror repository](https://docs.posit.co/rspm/admin/getting-started/configuration/#quickstart-pypi-packages)
+
+### Posit Connect
+
+#### Connect Configuration
+
+<details>
+
+<summary>Expand to see your specific Connect configuration selection:</summary>
+
+    architecture: Server/Virtual Machine
+    authentication: OpenID Connect (OIDC)
+    bioconductor_package_management: Posit Package Manager
+    cloud_services_access:
+    - Microsoft 365
+    cloud_storage_access:
+    - Amazon S3
+    custom_branding: false
+    database: SQLite
+    database_access:
+    - Athena
+    filesystem: Local
+    identity_provider: Okta
+    infra_provider:
+      onprem:
+        database: PostgreSQL (self-managed)
+        filesystem: NFS (self-managed)
+    languages:
+    - R
+    - Python
+    license: Basic
+    load_balanced: false
+    monitoring: Graphite
+    network: Public Outbound
+    network_storage: NFS
+    os: Ubuntu-22.04 jammy
+    python_package_management: Posit Package Manager
+    r_package_management: CRAN
+    run_as: rstudio-connect (default)
+    run_as_current_user: false
+
+
+</details>
+
+#### Connect Installation
+
+- Install one or more R versions from Posit using the [provided precompiled binaries](https://docs.posit.co/resources/install-r/)
+- Install one or more Python versions from Posit using the [provided precompiled binaries](https://docs.posit.co/resources/install-python/)
+- [Install Posit Connect](https://docs.posit.co/connect/admin/getting-started/local-install/manual-install/)
+- [Activate license](https://docs.posit.co/connect/admin/licensing/#activation-options)
+
+Now that the product is installed, follow the remaining steps to configure the product.
+
+Refer to the documentation links below and in each configuration file.
+
+- [Configure HTTPS](https://docs.posit.co/connect/admin/getting-started/local-install/initial-configuration/ssl-certificates/index.html)
+- [Enable Python functionality](https://docs.posit.co/connect/admin/python/#enabling-python-support)
+- [Configure authentication with Okta using OIDC](https://docs.posit.co/connect/admin/authentication/oauth2-openid-based/okta-openid-connect/)
+- [Configure R package management (optional, default will use the recorded origin of packages)](https://docs.posit.co/connect/admin/r/package-management/)
+- [Configure Python package management (optional, default will use the recorded origin of packages)](https://docs.posit.co/connect/admin/python/package-management/)
+- Data access:
+    - [Install and configure Posit Pro Drivers (ODBC)](https://docs.posit.co/pro-drivers/workbench-connect/)
+- Cloud storage access:
+    - Open-source R packages for AWS S3:
+        - [Paws, an AWS SDK for R](https://www.paws-r-sdk.com/)
+        - [aws.s3, an AWS S3 R package](https://cloud.r-project.org/web/packages/aws.s3/index.html)
+    - [Boto3, the official Python SDK for AWS](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
+- Cloud services access:
+    - [Microsoft365R, an open-source R package for Microsoft 365](https://github.com/Azure/Microsoft365R)
+    - [O365, an open-source Python package for Microsoft 365](https://github.com/O365/python-o365)
+- [Enable the Graphite endpoint](https://docs.posit.co/connect/admin/appendix/configuration/#Metrics)
+
+### Posit Workbench
+
+#### Workbench Configuration
+
+<details>
+
+<summary>Expand to see your specific Workbench configuration selection:</summary>
+
+    architecture: Server/Virtual Machine
+    authentication: OpenID Connect (OIDC)
+    bioconductor_package_management: Posit Package Manager
+    cloud_services_access:
+    - Microsoft 365
+    cloud_storage_access:
+    - Amazon S3
+    database: SQLite
+    database_access:
+    - Athena
+    filesystem: Local
+    identity_provider: Okta
+    infra_provider:
+      onprem:
+        database: PostgreSQL (self-managed)
+        filesystem: NFS (self-managed)
+    languages:
+    - R
+    - Python
+    license: Basic
+    load_balanced: false
+    managed_credentials:
+    - AWS
+    monitoring: Graphite
+    network: Public Outbound
+    network_storage: NFS
+    os: Ubuntu-22.04 jammy
+    python_package_management: Posit Package Manager
+    r_package_management: CRAN
+    user_provision: Manual
+
+
+</details>
+
+#### Workbench Installation
+
+- Install one or more R versions from Posit using the [provided precompiled binaries](https://docs.posit.co/resources/install-r/)
+- Install one or more Python versions from Posit using the [provided precompiled binaries](https://docs.posit.co/resources/install-python/)
+- [Install Posit Workbench](https://docs.posit.co/ide/server-pro/getting_started/installation/installation.html#download-and-install)
+- [Activate license](https://docs.posit.co/ide/server-pro/license_management/license_activation_and_details.html)
+
+Now that the product is installed, follow the remaining steps to configure the product.
+
+Refer to the documentation links below and in each configuration file.
+
+- Configure [HTTPS](https://docs.posit.co/ide/server-pro/hardening/set_up_ssl.html)
+- Setup [JupyterLab and Jupyter Notebook](https://docs.posit.co/ide/server-pro/integration/jupyter-standalone.html)
+
+Posit Workbench requires that each user of the web IDE has a corresponding account on the local Linux Server. This necessitates configuring your local Linux server to enable all users of Workbench to authenticate to the server. This does not mean that you need to open SSH to all of your users and it does not mean that you have to manually create all users, PAM can and should handle that for you.
+
+- [Manually add Linux users (username must match authentication)](https://docs.posit.co/ide/server-pro/authenticating_users/authenticating_users.html)
+- [Configure authentication using OIDC](https://docs.posit.co/ide/server-pro/authenticating_users/openid_connect_authentication.html)
+- [Configure default R repository](https://docs.posit.co/ide/server-pro/rstudio_pro_sessions/package_installation.html#cran-repositories)
+- [Configure default Python repository](https://docs.posit.co/ide/server-pro/jupyter_sessions/package_installation.html)
+- [Configure AWS managed credentials](https://docs.posit.co/ide/server-pro/authenticating_users/aws_credentials.html)
+- Data access:
+    - [Install and configure Posit Pro Drivers (ODBC)](https://docs.posit.co/pro-drivers/workbench-connect/)
+- Cloud storage access:
+    - Open-source R packages for AWS S3:
+        - [Paws, an AWS SDK for R](https://www.paws-r-sdk.com/)
+        - [aws.s3, an AWS S3 R package](https://cloud.r-project.org/web/packages/aws.s3/index.html)
+    - [Boto3, the official Python SDK for AWS](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
+- Cloud services access:
+    - [Microsoft365R, an open-source R package for Microsoft 365](https://github.com/Azure/Microsoft365R)
+    - [O365, an open-source Python package for Microsoft 365](https://github.com/O365/python-o365)
+- [Enable the Graphite endpoint](https://docs.posit.co/ide/server-pro/auditing_and_monitoring/monitoring_configuration.html#using-graphite)
+
+## After installation
+
+### Testing
+
+Confirm the installation and configuration for all installed products. You may wish to invite key users and/or publishers to participate in testing, particularly if you are not familiar with how to use the products. You can also chose to supplement the verification steps below with additional testing that is relevant to your organization:
+
+- RStudio Pro, JupyterLab, Jupyter Notebook, and VS Code sessions can be started from Posit Workbench.
+- Test that Shiny content can be rendered in Workbench (verifies Websockets).
+- Test that a Streamlit or Dash app can be rendered in a VS Code session on Workbench (verifies web proxying).
+- Publish R content to Connect. Verify deployment.
+- Publish Python content to Connect using the [`rsconnect-python` CLI](https://docs.posit.co/rsconnect-python/). Verify deployment.
+- Install an R package in a RStudio Pro session on Workbench. Verify package is installed using binaries from Posit Package Manager.
+- Install a Python package in a VS Code or Jupyter session on Workbench. Verify package is installed using binaries from Package Manager.
+
+### Maintenance and upgrades
+
+Each Software Edition is eligible for Support Services for 18 months following release, but we recommend upgrading to the latest version more often in order to take advantage of new features and improvements.
+
+- Subscribe for notifications of new releases: [https://posit.co/about/subscription-management/](https://posit.co/about/subscription-management/)
+- Workbench:
+    - Review the Workbench release notes:[https://docs.posit.co/ide/news/](https://docs.posit.co/ide/news/)
+    - Upgrade Workbench: [https://docs.posit.co/ide/server-pro/upgrade/upgrade.html](https://docs.posit.co/ide/server-pro/upgrade/upgrade.html)
+- Connect:
+    - Review the Connect release notes: [https://docs.posit.co/connect/news/](https://docs.posit.co/connect/news/)
+    - Upgrade Connect: [https://docs.posit.co/connect/admin/upgrade/](https://docs.posit.co/connect/admin/upgrade/)
+- Package Manager:
+    - Review the Package Manager release notes: [https://docs.posit.co/rspm/news/package-manager/](https://docs.posit.co/rspm/news/package-manager/)
+    - Upgrade Package Manager: [https://docs.posit.co/rspm/admin/upgrading/](https://docs.posit.co/rspm/admin/upgrading/)
+
+When submitting a support ticket please include, where possible, the diagnostic file and details about the expected behavior, actual behavior, and steps taken that reproduce the issue: [https://docs.posit.co/support/](https://docs.posit.co/support/)
+
+Copyright © 2024 Posit Software, PBC. All Rights Reserved.

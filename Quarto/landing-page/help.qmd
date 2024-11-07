@@ -1,0 +1,46 @@
+---
+knitr:
+  opts_chunk: 
+    collapse: true
+execute: 
+  echo: false
+page-layout: full
+css: styles.css
+---
+
+<img src="img/logo-team-full-color.svg" class="w-75" width="100"/>
+
+<h1>About</h1>
+
+::: increased-font-size
+Posit Team is made up of three products:
+
+- **Posit Workbench** is your development environment for creating R and Python code and running large computationally intensive jobs in a secure and scaleable environment.
+- **Posit Connect** is a publishing platform for hosting the work your team creates in R and Python.
+- **Posit Package Manager** is a repository management server to organize and centralize R and Python packages across your organization.
+
+Posit Test Drive is a limited demo environment hosted by Posit to help you learn more and try out the various features of the professional products. 
+
+<center>
+
+<img src="img/concept_map.jpg" class="w-75"/>
+
+</center>
+
+:::
+
+<center>
+
+<a href="https://www.youtube.com/watch?v=L6lh2u5pFhc&list=PL9HYL-VRX0oRsUB5AgNMQuKuHPpNDLBVt&pp=iAQB" class="btn btn-primary btn-lg" role="button">Do you prefer videos? Watch the end-to-end data science workflows video series!</a>
+
+</center>
+
+<br>
+
+
+
+
+
+
+
+

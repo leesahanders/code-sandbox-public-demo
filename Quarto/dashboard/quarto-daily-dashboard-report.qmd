@@ -1,0 +1,609 @@
+---
+title: "Lisa's Daily Quarto Dashboard Report"
+date: "last-modified"
+date-format: "YYYY-MM-DD HH:mm"
+format:
+  dashboard:
+    logo: images/Leafey.PNG
+    nav-buttons:
+    - icon: github
+      href: "https://github.com/leesahanders/quarto-for-reproducible-reporting-demo/tree/main/content-examples/dashboard"
+editor: source
+expandable: true
+theme:
+  light:
+  - minty
+  - custom.scss
+  dark:
+  - vapor
+  - custom.scss
+resource_files:
+- custom.scss
+- images/Leafey.PNG
+---
+
+# DATE `r Sys.Date()`
+
+## Row {height=25%}
+
+<!-- ## US Company Holidays -->
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| content: valuebox
+#| title: "Today's Holiday Status"
+
+library(lubridate)
+library(httr)
+library(httr2)
+library(png)
+library(xml2)
+library(rvest)
+library(tibble)
+library(knitr)
+library(kableExtra)
+library(stringr)
+library(tidyverse)
+
+# Function to check if a date is a holiday
+is_us_holiday <- function(date) {
+  # Extract month and day
+  month_day <- month(date) * 100 + day(date)
+  
+  # Check if it's a holiday
+  if (month_day == 101) {
+    return("New Year's Day")
+  } else if (month_day == 115) {
+    return("Martin Luther King, Jr. Day")    
+  } else if (month_day == 219) {
+    return("Presidents' Day")
+  } else if (month_day == 415) {
+    return("Patriots' Day ")    
+  } else if (month_day == 527) {
+    return("Memorial Day")    
+  } else if (month_day == 619) {
+    return("Juneteenth")    
+  } else if (month_day == 704) {
+    return("Independence Day")
+  } else if (month_day == 902) {
+    return("Labor Day")    
+  } else if (month_day == 1014) {
+    return("Indigenous Peoples' Day")
+  } else if (month_day == 1105) {
+    return("Citizenship Day")    
+  } else if (month_day == 1111) {
+    return("Veterans' Day")    
+  } else if (month_day == 1128) {
+    return("Thanksgiving Day")
+  } else if (month_day == 1129) {
+    return("Day After Thanksgiving")    
+  } else if (month_day == 1225) {
+    return("Christmas Day")
+  } else if (month_day == 1226) {
+    return("Day After Christmas")    
+  } else if (month_day == 1231) {
+    return("New Year's Eve")
+  } else {
+    return("Not a holiday")
+  }
+}
+
+#input_date <- ymd("2024-07-04")  # Input date for known holiday
+input_date <- Sys.Date()
+holiday_status <- is_us_holiday(input_date)
+# print(paste("Date:", input_date, "- Holiday:", holiday_status))
+
+list(
+  icon = "balloon",
+  color = "primary",
+  value = holiday_status
+)
+
+# Resources: 
+# Posit holidays: https://positpbc.atlassian.net/wiki/spaces/PEO/pages/36048149/US+Company+Holidays
+# https://stackoverflow.com/questions/7451354/how-to-define-holidays-for-is-holiday-chron-package-in-r
+# https://rdocumentation.org/packages/tis/versions/1.39/topics/holidays https://github.com/cran/chron
+# https://rdocumentation.org/packages/RQuantLib/versions/0.3.2/topics/isHoliday
+# https://nrennie.rbind.io/blog/combining-r-and-python-with-reticulate-and-quarto/
+# https://python.land/virtual-environments/virtualenv
+# https://stackoverflow.com/questions/59715101/how-to-get-reticulate-to-access-virtual-environment
+# https://quarto.org/docs/projects/virtual-environments.html#using-renv
+# https://quarto.org/docs/dashboards/data-display.html#icon-and-color
+```
+
+<!-- ## Next holiday -->
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| content: valuebox
+#| title: "Next Holiday"
+
+# Function to check if a date is a holiday
+next_us_holiday <- function(date) {
+  # Extract month and day
+  month_day <- month(date) * 100 + day(date)
+  
+  holidays <- data.frame("holiday" = c("New Year's Day", "Martin Luther King, Jr. Day", "Presidents' Day", "Patriots' Day ", "Memorial Day", "Juneteenth", "Independence Day", "Labor Day", "Indigenous Peoples' Day", "Citizenship Day",  "Veterans' Day", "Thanksgiving Day", "Day After Thanksgiving", "Christmas Day", "Day After Christmas", "New Year's Eve"), 
+    "month_day_num" = c(101,115,219,415,527,619,704,902,1014,1105,1111,1128,1129,1225,1226,1231))
+
+  # Check time to each holiday
+  holiday_check <- holidays %>%
+    mutate(holiday_check = month_day_num - month_day) %>%
+    filter(holiday_check >= 0) %>%
+    slice_head(n=1)
+    
+  return(paste0(holiday_check$holiday, " is in ", holiday_check$holiday_check, " days."))
+}
+
+#input_date <- ymd("2024-07-04")  # Input date for known holiday
+input_date <- Sys.Date()
+holiday_status <- next_us_holiday(input_date)
+
+list(
+  icon = "cake",
+  color = "primary",
+  value = holiday_status
+)
+```
+
+
+<!-- ## UV Index -->
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| content: valuebox
+#| title: "UV Index"
+
+library(httr)
+library(httr2)
+library(png)
+library(xml2)
+library(rvest)
+library(tibble)
+library(knitr)
+library(kableExtra)
+library(dplyr)
+
+## As XML 
+zipcode <- "80304"
+output_format <- c("XML", "JSON", "EXCEL", "CSV")[1]
+url <- paste0("https://data.epa.gov/efservice/getEnvirofactsUVDAILY/ZIP/",zipcode,"/",output_format)
+# Test from terminal with: curl "https://data.epa.gov/efservice/getEnvirofactsUVDAILY/ZIP/80304/XML"
+
+time_start <- Sys.time()
+
+uv <- request(url) |> 
+  req_perform() |> 
+  resp_body_xml()
+
+# resp_l <- resp |> 
+#   as_list() |> 
+#   unlist(recursive = FALSE)
+
+# uv_str <- xml_structure(uv)
+
+time_end <- Sys.time()
+time_diff <- difftime(time_end, time_start)
+
+state <- xml_text(xml_find_all(uv, xpath = "//STATE"))
+uv_index <- xml_text(xml_find_all(uv, xpath = "//UV_INDEX"))
+uv_alert <- xml_text(xml_find_all(uv, xpath = "//UV_ALERT"))
+date <- xml_text(xml_find_all(uv, xpath = "//DATE"))
+
+uv_today <- tibble(state = state, uv_index = uv_index) %>%
+  mutate(
+    uv_index = cell_spec(uv_index, color = ifelse(uv_index < 3, "green","red"))) #%>%
+  #mutate(uv_alert = cell_spec(uv_alert, color = ifelse(uv_alert == 0, "green","red")))
+
+# kable(uv_today, align = 'c', booktabs = TRUE, caption = "UV Index") 
+
+list(
+  icon = "sun",
+  color = "secondary",
+  value = uv_index
+)
+
+# Resources: 
+# https://www.reddit.com/r/scacjdiscussion/comments/12qpj80/how_do_you_find_an_accurate_uv_index_forecast/
+# https://pyowm.readthedocs.io/en/latest/v3/uv-api-usage-examples.html (deprecated 2021) 
+# https://openweathermap.org/api/uvi (deprecated 2021)
+# https://openweathermap.org/api/one-call-3 (requires pricing)
+# https://www.epa.gov/enviro/web-services#uvindex
+# https://github.com/r-lib/httr2/issues/344
+# https://stackoverflow.com/questions/73555055/converting-a-xml-page-to-a-data-frame/73556402#73556402
+# https://stackoverflow.com/questions/69940271/embed-xml-from-file-into-rmd
+# https://www.robwiederstein.org/2021/03/05/xml-to-dataframe/
+# https://www.epa.gov/enviro/envirofacts-data-service-api
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| output: asis
+
+# Alternatively using the below we can print the xml directly, formatting fixed with asis
+
+# cat('```xml\n')
+# cat(paste0(uv, sep = "\n"))
+# cat('\n```\n')
+```
+
+
+
+<!-- ## Today's weather -->
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+library(httr)
+library(httr2)
+library(png)
+library(xml2)
+library(rvest)
+library(tibble)
+library(knitr)
+library(kableExtra)
+library(dplyr)
+
+# Find the grid forecast endpoint with this url: https://api.weather.gov/points/{latitude},{longitude}
+# https://api.weather.gov/points/40.04,-105.23
+
+url <- paste0("https://api.weather.gov/gridpoints/BOU/57,76/forecast")
+
+# "forecast": "https://api.weather.gov/gridpoints/BOU/57,76/forecast",
+# "forecastHourly": "https://api.weather.gov/gridpoints/BOU/57,76/forecast/hourly",
+# "forecastGridData": "https://api.weather.gov/gridpoints/BOU/57,76",
+# "observationStations": "https://api.weather.gov/gridpoints/BOU/57,76/stations",
+
+weather <- request(url) |> 
+  req_perform() |> 
+  resp_body_json()
+
+weather_periods <- weather$properties$periods
+
+# period_1_name <- weather_periods[[1]]$name
+# period_1_temperature <- weather_periods[[1]]$temperature
+# period_1_temperatureUnit <- weather_periods[[1]]$temperatureUnit
+# period_1_windspeed <- weather_periods[[1]]$windSpeed
+# period_1_shortForecast <- weather_periods[[1]]$shortForecast
+period_1_detailedForecast <- weather_periods[[1]]$detailedForecast
+
+# print(period_1_detailedForecast)
+
+# list(
+#   icon = "umbrella",
+#   color = "primary",
+#   value = period_1_detailedForecast
+# )
+
+# https://www.weather.gov/documentation/services-web-api
+# Test from terminal with: curl "https://data.epa.gov/efservice/getEnvirofactsUVDAILY/ZIP/80304/XML"
+# https://quarto.org/docs/dashboards/data-display.html#text-content
+```
+
+::: {.card}
+Weather: `r period_1_detailedForecast`
+:::
+
+
+
+
+## Row {height=75%}
+
+<!-- ## Car Recalls -->
+
+::: {#tbl-car-recalls}
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+library(httr)
+library(httr2)
+library(png)
+library(xml2)
+library(rvest)
+library(tibble)
+library(knitr)
+library(kableExtra)
+library(lubridate)
+
+make = "ford"
+model = "maverick"
+model_yr = "2022"
+
+# api.nhtsa.gov/recalls/recallsByVehicle?make={MAKE}&model={MODEL}&modelYear={MODEL_YR}
+url <- paste0("api.nhtsa.gov/recalls/recallsByVehicle?make=",make,"&model=",model,"&modelYear=",model_yr)
+
+car_recalls <- request(url) |> 
+  req_perform() |> 
+  resp_body_json()
+
+# 	16/12/2021
+car_recalls_results <- do.call(rbind.data.frame, car_recalls$results) %>% select(ModelYear, Make, Model, ReportReceivedDate, Consequence) %>%
+  mutate(ReportReceivedDate = dmy(ReportReceivedDate)) %>%
+  arrange(desc(ReportReceivedDate))
+
+car_tbl_cap <- paste(car_recalls_results$ModelYear[1], car_recalls_results$Make[1], car_recalls_results$Model[1], "RECALLS")
+
+car_recalls_results %>%
+  select(ReportReceivedDate, Consequence) %>%
+  kbl(booktabs = T, align = "c") %>%
+      #caption = paste(car_recalls_results$ModelYear[1], car_recalls_results$Make[1], car_recalls_results$Model[1])) %>%
+  kable_styling() %>%
+  kable_paper(full_width = T) 
+
+# Resources 
+# https://www.nhtsa.gov/nhtsa-datasets-and-apis 
+# ModelYear, Make, Model, ReportReceivedDate, Component, Summary, Consequence, Remedy
+# https://stackoverflow.com/questions/76747571/kable-caption-as-tbl-cap-in-quarto
+```
+
+`r paste(car_recalls_results$ModelYear[1], car_recalls_results$Make[1], car_recalls_results$Model[1], "RECALLS")` 
+
+:::
+
+<!-- ## Weather forecast -->
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| label: tbl-weather2
+#| tbl-cap: "Weather forecast"
+
+library(httr)
+library(httr2)
+library(png)
+library(xml2)
+library(rvest)
+library(tibble)
+library(knitr)
+library(kableExtra)
+library(dplyr)
+library(data.table)
+
+# Find the grid forecast endpoint with this url: https://api.weather.gov/points/{latitude},{longitude}
+# https://api.weather.gov/points/40.04,-105.23
+
+url <- paste0("https://api.weather.gov/gridpoints/BOU/57,76/forecast")
+
+# "forecast": "https://api.weather.gov/gridpoints/BOU/57,76/forecast",
+# "forecastHourly": "https://api.weather.gov/gridpoints/BOU/57,76/forecast/hourly",
+# "forecastGridData": "https://api.weather.gov/gridpoints/BOU/57,76",
+# "observationStations": "https://api.weather.gov/gridpoints/BOU/57,76/stations",
+
+weather <- request(url) |> 
+  req_perform() |> 
+  resp_body_json()
+
+weather_periods <- data.table::rbindlist(weather$properties$periods, fill = TRUE) %>% 
+  select(-probabilityOfPrecipitation, -dewpoint, -relativeHumidity, -temperatureTrend) %>% 
+  unique() %>%
+  mutate(forecast = "", temperature = paste(temperature, temperatureUnit), windSpeed = paste(windSpeed, windDirection)) %>% 
+  select(name, forecast, temperature, windSpeed, shortForecast, icon) %>% 
+  slice_head(n=5)
+weather_periods_url_image <- weather_periods %>% select(icon)
+#   select(name, forecast, temperature, temperatureUnit, windSpeed, windDirection, shortForecast, icon) 
+# weather_periods_url_image <- weather_periods %>% select(icon)
+
+weather_periods %>% 
+  select(-icon) %>% 
+  kbl(booktabs = T, align = "c") %>% #, caption = "Weather forecast") %>%
+  kable_styling() %>%
+  kable_paper(full_width = T) %>%
+  column_spec(2, image = spec_image(weather_periods_url_image$icon, 280, 200))
+
+
+# https://www.weather.gov/documentation/services-web-api
+# Test from terminal with: curl "https://data.epa.gov/efservice/getEnvirofactsUVDAILY/ZIP/80304/XML"
+# https://www.robwiederstein.org/2021/04/04/convert-list-of-unequal-length-to-dataframe/
+# https://r-graph-gallery.com/363-add-images-and-links-in-kableExtra.html
+```
+
+# Work
+
+## Row {height=20%}
+
+<!-- ## Current product releases  -->
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+library(httr)
+library(httr2)
+library(png)
+library(xml2)
+library(rvest)
+library(tibble)
+library(knitr)
+library(kableExtra)
+library(stringr)
+
+url <- "https://www.rstudio.com/wp-content/downloads.json"
+
+posit_products <- request(url) |> 
+  req_perform() |> 
+  resp_body_json()
+
+# resp_l <- resp |> 
+#   as_list() |> 
+#   unlist(recursive = FALSE)
+
+posit_products_workbench <- posit_products$rstudio$pro$stable$version
+posit_products_connect <- posit_products$connect$installer$jammy$version
+posit_products_rspm <- posit_products$rspm$installer$jammy$version
+
+# Test output
+# cat(paste0("Workbench: ", posit_products_workbench, "\nConnect: ", posit_products_connect, " \nPackage Manager: ", posit_products_rspm))
+
+posit_products_rn <- data.frame("Product" = c("Workbench", "Connect", "Package Manager"), "Version" = c(posit_products_workbench, posit_products_connect, posit_products_rspm), "Release notes" = c("Release notes", "Release notes", "Release notes"))
+posit_products_rn_url <- c("https://docs.posit.co/ide/news/", "https://docs.posit.co/connect/news/", "https://docs.posit.co/rspm/news/package-manager/")
+
+# posit_products_rn %>%
+#   kbl(booktabs = T, align = "c", caption = "Current Posit product releases") %>%
+#   kable_styling() %>%
+#   kable_paper(full_width = T) %>%
+#   column_spec(3, link = posit_products_rn_url)
+
+# Themeing: https://quarto.org/docs/dashboards/theming.html 
+# Bootstrap themes: https://github.com/quarto-dev/quarto-cli/tree/main/src/resources/formats/html/bootstrap/themes 
+# I like minty and vapor
+```
+
+```{r}
+#| content: valuebox
+#| title: "Workbench"
+list(
+  icon = "cart-check",
+  color = "success",
+  value = posit_products_workbench
+)
+```
+
+```{r}
+#| content: valuebox
+#| title: "Connect"
+list(
+  icon = "cart-check",
+  color = "success",
+  value = posit_products_connect
+)
+```
+
+```{r}
+#| content: valuebox
+#| title: "Package Manager"
+list(
+  icon = "cart-check",
+  color = "success",
+  value = posit_products_rspm
+)
+```
+
+## Row {height=20%}
+
+<!-- ## Quick links  -->
+
+<!-- Workbench -->
+
+::: {.card}
+<center> 
+
+Release Notes: [link](https://docs.posit.co/ide/news/)
+
+Admin Guide: [link](https://docs.posit.co/ide/server-pro/)
+
+User Guide: [link](https://docs.posit.co/ide/server-pro/user/)
+
+</center>
+:::
+
+<!-- Connect -->
+
+::: {.card}
+<center> 
+
+Release Notes: [link](https://docs.posit.co/connect/news/)
+
+Admin Guide: [link](https://docs.posit.co/connect/admin/)
+
+User Guide: [link](https://docs.posit.co/connect/user)
+
+</center>
+:::
+
+<!-- Package Manager -->
+
+::: {.card}
+<center> 
+
+Release Notes: [link](https://docs.posit.co/rspm/news/package-manager/)
+
+Admin Guide: [link](https://docs.posit.co/rspm/admin/)
+
+User Guide: [link](https://docs.posit.co/rspm/admin/getting-started/user-guide/)
+
+</center>
+:::
+
+
+
+
+## Row {height=60%}
+
+<!-- ## RSS Feed for Posit Blog posts  -->
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| tbl-cap-location: top
+#| label: tbl-rss-posit
+#| tbl-cap: "RSS Feed for Posit Blog posts"
+
+library(tidyRSS)
+library(dplyr)
+library(lubridate)
+
+rss_url <- "https://posit.co/feed/"
+
+rss_posit_blog <- tidyfeed(rss_url) %>% slice_head(n=5) %>% select(item_title, item_pub_date) %>% mutate(item_pub_date = as.Date(item_pub_date))
+rss_posit_blog_url <- tidyfeed(rss_url) %>% slice_head(n=5) %>% select(item_link)
+
+rss_posit_blog %>%
+  kbl(booktabs = T, align = "lc") %>% #, caption = "RSS Feed for Posit Blog posts") %>%
+  kable_styling() %>%
+  kable_paper(full_width = T) %>%
+  column_spec(1, link = rss_posit_blog_url$item_link)
+
+# item_title, item_pub_date, item_link
+```
+
+
+<!-- ## RSS Feed for R-weekly -->
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| tbl-cap-location: top
+#| label: tbl-rss-r-weekly
+#| tbl-cap: "RSS Feed for R-weekly"
+
+library(tidyRSS)
+library(dplyr)
+library(lubridate)
+library(kableExtra)
+
+rss_url <- "https://rweekly.org/atom.xml"
+
+rss_r_weekly <- tidyfeed(rss_url) %>% slice_head(n=5) %>% select(entry_title, entry_last_updated)
+rss_r_weekly_url <- tidyfeed(rss_url) %>% slice_head(n=5) %>% select(entry_link)
+
+# Workaround, handling if a invalid character, &, is in the xml making it invalid
+rss_r_weekly <- rss_r_weekly %>% 
+  mutate(entry_title = str_replace_all(entry_title, "&", "and"))
+
+rss_r_weekly %>%
+  kbl(booktabs = T, align = "lc") %>% #, caption = "RSS Feed for R-weekly") %>%
+  kable_styling() %>%
+  kable_paper(full_width = T) %>%
+  column_spec(1, link = rss_r_weekly_url$entry_link)
+```
+
+
+
+
+

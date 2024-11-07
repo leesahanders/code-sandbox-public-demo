@@ -1,0 +1,9 @@
+default:
+  content:
+    - name: "Interacting with Images"
+      path: "."
+      description: "Using lightbox to make images fun to interact with."
+      tag:
+        - "Examples|Python|R|Quarto"
+      url: "/content-examples/report-lightbox"
+      image: "quarto-lightbox.png"

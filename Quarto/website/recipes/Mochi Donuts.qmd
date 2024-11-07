@@ -1,0 +1,82 @@
+---
+title: "Baked Mochi Donuts"
+description: "Delicious gooey gluten free donuts using mochi flour"
+author: "Teak and thyme"
+date: "2024-02-28"
+format: html
+editor: source
+categories:
+  - dessert
+  - vegetarian
+  - vegan
+  - Jesse
+image: "img/donuts.jpg"
+draft: false
+filters:
+   - lightbox
+lightbox: auto
+about:
+  template: trestles
+  links:
+    - icon: bowl
+      text: Source
+      href: https://teakandthyme.com/baked-mochi-donuts/
+---
+
+## Ingredients
+
+MOCHI DONUTS
+
+- 150 g glutinous rice flour or mochiko
+- 1 teaspoon baking powder
+- 1/4 teaspoon salt
+- 50 g unsalted butter, melted
+- 50 g brown sugar
+- 1 large egg, room temperature
+- 200 g dairy or non-dairy milk
+- 1 teaspoon vanilla extract
+
+MATCHA WHITE CHOCOLATE GLAZE
+
+- 100 g white chocolate, roughly chopped
+- 1 teaspoon oil
+- 1 teaspoon matcha powder, ceremonial grade recommended
+
+WHITE CHOCOLATE BISCOFF GLAZE
+
+- 100 g white chocolate, roughly chopped
+- 1 teaspoon oil
+- 1 Lotus biscuit, crushed
+
+## Instructions
+
+MOCHI DONUTS
+
+Preheat oven to 350°F and lightly grease a donut pan with cooking spray or softened butter. Set aside.
+In a small bowl, stir together glutinous rice flour, baking powder, and salt. Set aside.
+In another small mixing bowl, stir together melted butter and brown sugar. Add in the egg and stir until the yolk has broken up and combined. Stir in the milk and vanilla extract.
+Add the dry mixture into the wet mixture and stir to combine until smooth.
+Spoon the batter (or use a piping bag) into the donut pan until almost full.
+Bake for 25-30 minutes until slightly browned on the edges. Stop at 25 minutes for softer donuts or 30 minutes for crisper donuts but be careful not to overbake otherwise they will be more hard than chewy.
+Let donuts cool in the pan for 5-10 minutes before lifting them out. Let cool completely on a wire rack before glazing.
+
+MATCHA WHITE CHOCOLATE GLAZE
+
+In a small pot, bring about 1” of water to a boil.
+In a heat-safe bowl that fits perfectly on top of the pot without touching the water, add the chopped white chocolate, oil, and matcha powder.
+Turn off the heat and place the bowl on top of pot to create a double boiler. Let the chocolate sit undisturbed for about 2-3 minutes until it has mostly melted. Stir with a spatula to mix the matcha and chocolate together and ensure there are no unmelted chunks.
+Transfer the melted chocolate to a small bowl. Dip the donuts into the chocolate and shake off the excess. Place on a wire rack to set. Drizzle with any remaining white chocolate if desired.
+
+WHITE CHOCOLATE BISCOFF GLAZE
+
+Use the same directions as the matcha glaze above but without the matcha powder.
+Sprinkle the glazed donuts with crushed biscuits while they’re still wet.
+
+NOTES
+
+Melting white chocolate in microwave: Microwave in 10 second intervals, stirring in between each zap. Stop when it's mostly melted. Be careful not to overheat it otherwise the chocolate will seize.
+If you’re making both glazes, save time by melting all of the white chocolate (200g) together and divide into two bowls. Stir matcha powder into one half.
+
+## Lisa's notes
+
+I used Matcha Green Tea icing instead, and it was delicious! Mix together 1 tsp of matcha powder, 1 tbls milk / oat milk, and powdered sugar until it reaches a thick consistency. 

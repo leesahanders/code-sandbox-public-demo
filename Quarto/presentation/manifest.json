@@ -1,0 +1,485 @@
+{
+  "version": 1,
+  "locale": "en_US",
+  "platform": "4.3.1",
+  "metadata": {
+    "appmode": "quarto-static",
+    "primary_rmd": ".Rprofile",
+    "primary_html": null,
+    "content_category": null,
+    "has_parameters": false
+  },
+  "quarto": {
+    "version": "1.4.550",
+    "engines": ["markdown"]
+  },
+  "packages": null,
+  "files": {
+    ".Rprofile": {
+      "checksum": "c5e0d98f3dc303f1a5f7e769c19d6b31"
+    },
+    "_extensions/ArthurData/confetti/_extension.yml": {
+      "checksum": "7ec0030a5453120e3e095929f57e0469"
+    },
+    "_extensions/ArthurData/confetti/confetti.js": {
+      "checksum": "0c0d2171a52938629e42cb1b68f70a35"
+    },
+    "_extensions/mcanouil/coeos/_extension.yml": {
+      "checksum": "9db24e1fce30b1fc2132d5ecfb05d64d"
+    },
+    "_extensions/mcanouil/coeos/_extensions/mcanouil/iconify/_extension.yml": {
+      "checksum": "5dca11b302d4542672418b599e77f0e0"
+    },
+    "_extensions/mcanouil/coeos/_extensions/mcanouil/iconify/iconify-icon.min.js": {
+      "checksum": "d2a1b52bac6920b231cb75beae26c3bf"
+    },
+    "_extensions/mcanouil/coeos/_extensions/mcanouil/iconify/iconify.lua": {
+      "checksum": "ea2bbd6b27f8a43492e936472d4900e7"
+    },
+    "_extensions/mcanouil/coeos/_extensions/mcanouil/iconify/LICENSE": {
+      "checksum": "bc37ccb74b2864741b669d73bc769ef3"
+    },
+    "_extensions/mcanouil/coeos/about.qmd": {
+      "checksum": "99d4e1e106d3355ed63a35dbeb893be1"
+    },
+    "_extensions/mcanouil/coeos/coeos.scss": {
+      "checksum": "7d8c964ce9f2eb9b0b1ba453b9b71ff2"
+    },
+    "_extensions/mcanouil/coeos/coeos.svg": {
+      "checksum": "3ef57c6a745909daabf0962fb17e2a25"
+    },
+    "_extensions/mcanouil/coeos/LICENSE": {
+      "checksum": "3af21d8aa3082dd4445f6bb41f644322"
+    },
+    "_extensions/mcanouil/coeos/setup-ggplot2-coeos.R": {
+      "checksum": "4b5a822766580164116a972167249a81"
+    },
+    "_extensions/positslides/_extension.yml": {
+      "checksum": "16d2179feb0d86054b7dc1891ae9d857"
+    },
+    "_extensions/positslides/assets/backgrounds/30-70-dark.png": {
+      "checksum": "ac4ceff0505cd41762a367c124e1975f"
+    },
+    "_extensions/positslides/assets/backgrounds/30-70-light.png": {
+      "checksum": "ecd181ca83b9f955a280ee9f164c55d0"
+    },
+    "_extensions/positslides/assets/backgrounds/content-dark.png": {
+      "checksum": "539518aa18c640d82562c4ff191663f9"
+    },
+    "_extensions/positslides/assets/backgrounds/content-lhs.png": {
+      "checksum": "f4efa05149ab36899e90cc3a934ec307"
+    },
+    "_extensions/positslides/assets/backgrounds/content-rhs.png": {
+      "checksum": "0b51dbd241e01f9584ea57d51f0bcfc2"
+    },
+    "_extensions/positslides/assets/backgrounds/full-brackets-dark.png": {
+      "checksum": "ada20b549b6b7b61ab8ad0421e5fff9b"
+    },
+    "_extensions/positslides/assets/backgrounds/full-brackets-light.png": {
+      "checksum": "9f2a386f642864e830b72d9c905e9509"
+    },
+    "_extensions/positslides/assets/backgrounds/three-box.png": {
+      "checksum": "d7427144d6eebd608fd8eba14bd4b8a8"
+    },
+    "_extensions/positslides/assets/backgrounds/title-slide-option-1.png": {
+      "checksum": "420c17eabd9e101d0b1d49beabab85d1"
+    },
+    "_extensions/positslides/assets/backgrounds/title-slide-option-2.png": {
+      "checksum": "e2f69fa84d8545c967f43822088b3df1"
+    },
+    "_extensions/positslides/assets/backgrounds/title-slide-option-3.png": {
+      "checksum": "f2156a35d7679c5580e8617a596a7d6b"
+    },
+    "_extensions/positslides/assets/backgrounds/title-slide-option-4.png": {
+      "checksum": "8301e684abcb995c6ff0355e5dbec46c"
+    },
+    "_extensions/positslides/assets/posit-slides.js": {
+      "checksum": "bf2bb43bdb3c0e348c3068d10b913cc0"
+    },
+    "_extensions/positslides/custom.scss": {
+      "checksum": "3c963c9f17fd12ba3860580073aedb59"
+    },
+    "_extensions/positslides/logo.svg": {
+      "checksum": "f1d25d1201fae034318d89885d4b57ae"
+    },
+    "_extensions/positslides/positslides.lua": {
+      "checksum": "e21fef56903dbc2fa28eec63fea06c10"
+    },
+    "_quarto.yml": {
+      "checksum": "b77bfdef52769732ca30d978a0deb51c"
+    },
+    "img/Leafey.PNG": {
+      "checksum": "8f97483155532e33621d134b4dd2a761"
+    },
+    "presentation.html": {
+      "checksum": "b19ab0ba85a478367093c22dd1ca99c0"
+    },
+    "presentation.qmd": {
+      "checksum": "2a1a4bd02697a63e524ba76db260b186"
+    },
+    "presentation_files/libs/clipboard/clipboard.min.js": {
+      "checksum": "15f52a1ee547f2bdd46e56747332ca2d"
+    },
+    "presentation_files/libs/quarto-contrib/posit_slides/posit-slides.js": {
+      "checksum": "bf2bb43bdb3c0e348c3068d10b913cc0"
+    },
+    "presentation_files/libs/quarto-html/light-border.css": {
+      "checksum": "0b646459f2ef479b718a65b2157c44e4"
+    },
+    "presentation_files/libs/quarto-html/popper.min.js": {
+      "checksum": "3a4a291ccf3f1ea0f82b641542fd3827"
+    },
+    "presentation_files/libs/quarto-html/quarto-html.min.css": {
+      "checksum": "68b329da9893e34099c7d8ad5cb9c940"
+    },
+    "presentation_files/libs/quarto-html/quarto-syntax-highlighting-dark.css": {
+      "checksum": "5945b91004fe1a0eaf0d18c4d3e8b612"
+    },
+    "presentation_files/libs/quarto-html/quarto-syntax-highlighting.css": {
+      "checksum": "49bff82b9355f257417faaaa77dd1607"
+    },
+    "presentation_files/libs/quarto-html/tabby.min.js": {
+      "checksum": "c4219bb6375131a945d7e4bfc49c5f35"
+    },
+    "presentation_files/libs/quarto-html/tippy.css": {
+      "checksum": "ebd6f8ce46a677e1a4f5f8a8317109a9"
+    },
+    "presentation_files/libs/quarto-html/tippy.umd.min.js": {
+      "checksum": "d828775275749701b48bd9d958814111"
+    },
+    "presentation_files/libs/revealjs/dist/reset.css": {
+      "checksum": "4042c1a43777d540673cabc97cec67b2"
+    },
+    "presentation_files/libs/revealjs/dist/reveal.css": {
+      "checksum": "b8181fffa0a3e6754be1fa355f7532b3"
+    },
+    "presentation_files/libs/revealjs/dist/reveal.esm.js": {
+      "checksum": "820aa60cc9bfdee16a52b87fa56f782c"
+    },
+    "presentation_files/libs/revealjs/dist/reveal.esm.js.map": {
+      "checksum": "e34e6f40268baa4bbaf5381322b0dc35"
+    },
+    "presentation_files/libs/revealjs/dist/reveal.js": {
+      "checksum": "48b5fa2ff068f5e48b1be50a0fa166e9"
+    },
+    "presentation_files/libs/revealjs/dist/reveal.js.map": {
+      "checksum": "b898d2d44f77fb1492a9be733a5d3c5b"
+    },
+    "presentation_files/libs/revealjs/dist/theme/fonts/league-gothic/league-gothic.css": {
+      "checksum": "488966d15e97f072801d7e348f4b5141"
+    },
+    "presentation_files/libs/revealjs/dist/theme/fonts/league-gothic/league-gothic.eot": {
+      "checksum": "9900a4643cc63c5d8f969d2196f72572"
+    },
+    "presentation_files/libs/revealjs/dist/theme/fonts/league-gothic/league-gothic.ttf": {
+      "checksum": "91295fa87df918411b49b7531da5d558"
+    },
+    "presentation_files/libs/revealjs/dist/theme/fonts/league-gothic/league-gothic.woff": {
+      "checksum": "cd382dc8a9d6317864b5810a320effc5"
+    },
+    "presentation_files/libs/revealjs/dist/theme/fonts/league-gothic/LICENSE": {
+      "checksum": "8fac5842e2f5a2e6bc067f5beb5035c9"
+    },
+    "presentation_files/libs/revealjs/dist/theme/fonts/source-sans-pro/LICENSE": {
+      "checksum": "8ea3e41b02e9f465515dad7c89459c5b"
+    },
+    "presentation_files/libs/revealjs/dist/theme/fonts/source-sans-pro/source-sans-pro-italic.eot": {
+      "checksum": "72217712eb8d28872e7069322f3fda23"
+    },
+    "presentation_files/libs/revealjs/dist/theme/fonts/source-sans-pro/source-sans-pro-italic.ttf": {
+      "checksum": "8256cfd7e4017a7690814879409212cd"
+    },
+    "presentation_files/libs/revealjs/dist/theme/fonts/source-sans-pro/source-sans-pro-italic.woff": {
+      "checksum": "e74f0128884561828ce8c9cf5c284ab8"
+    },
+    "presentation_files/libs/revealjs/dist/theme/fonts/source-sans-pro/source-sans-pro-regular.eot": {
+      "checksum": "1d71438462d532b62b05cdd7e6d7197d"
+    },
+    "presentation_files/libs/revealjs/dist/theme/fonts/source-sans-pro/source-sans-pro-regular.ttf": {
+      "checksum": "2da39ecf9246383937da11b44b7bd9b4"
+    },
+    "presentation_files/libs/revealjs/dist/theme/fonts/source-sans-pro/source-sans-pro-regular.woff": {
+      "checksum": "e7acc589bb558fe58936a853f570193c"
+    },
+    "presentation_files/libs/revealjs/dist/theme/fonts/source-sans-pro/source-sans-pro-semibold.eot": {
+      "checksum": "0f3da1edf1b5c6a94a6ad948a7664451"
+    },
+    "presentation_files/libs/revealjs/dist/theme/fonts/source-sans-pro/source-sans-pro-semibold.ttf": {
+      "checksum": "f3565095e6c9158140444970f5a2c5ed"
+    },
+    "presentation_files/libs/revealjs/dist/theme/fonts/source-sans-pro/source-sans-pro-semibold.woff": {
+      "checksum": "1cb8e94f1185f1131a0c895165998f2b"
+    },
+    "presentation_files/libs/revealjs/dist/theme/fonts/source-sans-pro/source-sans-pro-semibolditalic.eot": {
+      "checksum": "58153ac7194e141d1e73ea88c6b63861"
+    },
+    "presentation_files/libs/revealjs/dist/theme/fonts/source-sans-pro/source-sans-pro-semibolditalic.ttf": {
+      "checksum": "c7e698a4d0956f4a939f42a05685bbf5"
+    },
+    "presentation_files/libs/revealjs/dist/theme/fonts/source-sans-pro/source-sans-pro-semibolditalic.woff": {
+      "checksum": "6b058fc2634b01d837c3432316c3141f"
+    },
+    "presentation_files/libs/revealjs/dist/theme/fonts/source-sans-pro/source-sans-pro.css": {
+      "checksum": "b4b58710f05264a4011912211d0a9eed"
+    },
+    "presentation_files/libs/revealjs/dist/theme/quarto.css": {
+      "checksum": "f4e4cb8fd7f762e30e8256bfe71fe3af"
+    },
+    "presentation_files/libs/revealjs/plugin/highlight/highlight.esm.js": {
+      "checksum": "5abbd1f8ee249ae0d6c80408d2081dbb"
+    },
+    "presentation_files/libs/revealjs/plugin/highlight/highlight.js": {
+      "checksum": "e42092622b9ca4e1de619e58c9aa5335"
+    },
+    "presentation_files/libs/revealjs/plugin/highlight/monokai.css": {
+      "checksum": "8c43a819e1268fc57605f500adff816b"
+    },
+    "presentation_files/libs/revealjs/plugin/highlight/plugin.js": {
+      "checksum": "e50d6f6f20e1469edffd935d2cce0288"
+    },
+    "presentation_files/libs/revealjs/plugin/highlight/zenburn.css": {
+      "checksum": "28d5b9497037a12cb5a15644fea2f1c3"
+    },
+    "presentation_files/libs/revealjs/plugin/markdown/markdown.esm.js": {
+      "checksum": "680040ad1bdd81925b8540ee31f8f00b"
+    },
+    "presentation_files/libs/revealjs/plugin/markdown/markdown.js": {
+      "checksum": "1c65f0419784a4f6efb66077b73f6171"
+    },
+    "presentation_files/libs/revealjs/plugin/markdown/plugin.js": {
+      "checksum": "472e5a4bf0e0ddf7e03616675ceaccf0"
+    },
+    "presentation_files/libs/revealjs/plugin/math/katex.js": {
+      "checksum": "2a22abd1eb5a1c923f2d41178427715a"
+    },
+    "presentation_files/libs/revealjs/plugin/math/math.esm.js": {
+      "checksum": "2362e49689e5b8b1ad56421519f04b9f"
+    },
+    "presentation_files/libs/revealjs/plugin/math/math.js": {
+      "checksum": "d505146667f3a21cad572818229d7578"
+    },
+    "presentation_files/libs/revealjs/plugin/math/mathjax2.js": {
+      "checksum": "c1ea64afa05c3677d2c404755193b2be"
+    },
+    "presentation_files/libs/revealjs/plugin/math/mathjax3.js": {
+      "checksum": "faf5422ce0f2c9be5eec33164bed8031"
+    },
+    "presentation_files/libs/revealjs/plugin/math/plugin.js": {
+      "checksum": "ec9cb99b85a8026d24b26526f6effe0d"
+    },
+    "presentation_files/libs/revealjs/plugin/notes/notes.esm.js": {
+      "checksum": "5521f88f0a2793da2523a93342cc5881"
+    },
+    "presentation_files/libs/revealjs/plugin/notes/notes.js": {
+      "checksum": "1843550642852655b8dc0f639b2d7b2f"
+    },
+    "presentation_files/libs/revealjs/plugin/notes/plugin.js": {
+      "checksum": "701c19b5c0bec23297d19d9fec682c29"
+    },
+    "presentation_files/libs/revealjs/plugin/notes/speaker-view.html": {
+      "checksum": "fd6bbea4e158ee48ec77bbc44a162078"
+    },
+    "presentation_files/libs/revealjs/plugin/pdf-export/pdfexport.js": {
+      "checksum": "ffd4d01d9d43febdafbb8e23415940fd"
+    },
+    "presentation_files/libs/revealjs/plugin/pdf-export/plugin.yml": {
+      "checksum": "76add7202812cd14a48ca57b96777de4"
+    },
+    "presentation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css": {
+      "checksum": "4ba6b644b711bc2fc89389d78209da6d"
+    },
+    "presentation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js": {
+      "checksum": "2a5d4d07fe940a2a0d78aced7b94ab36"
+    },
+    "presentation_files/libs/revealjs/plugin/quarto-line-highlight/plugin.yml": {
+      "checksum": "4af9468c1cc516c6b54c12e686ba708f"
+    },
+    "presentation_files/libs/revealjs/plugin/quarto-support/footer.css": {
+      "checksum": "b756f7eedcfd9b82421dd144f0ef7578"
+    },
+    "presentation_files/libs/revealjs/plugin/quarto-support/plugin.yml": {
+      "checksum": "4f79b4a104bed30cd5b7b49d598bed88"
+    },
+    "presentation_files/libs/revealjs/plugin/quarto-support/support.js": {
+      "checksum": "f96812c757563961073840bad853766a"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css": {
+      "checksum": "826c57385f3d35cfed5478ba7b1f5c03"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/brands.css": {
+      "checksum": "a3ceb4f1b808969cd8f1bb0aac1510c2"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/fontawesome.css": {
+      "checksum": "dbcb133434de9fcab3b59ade7ec21498"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/regular.css": {
+      "checksum": "fee1728359ce4620fd348a3e54507aa2"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/solid.css": {
+      "checksum": "29836be7445cd9786959237ea8e13405"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/svg-with-js.css": {
+      "checksum": "bd066123cdf3337103b21713df9bfd01"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/v4-shims.css": {
+      "checksum": "6dd334cc89ff203f10b026482960997d"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/v4-shims.min.css": {
+      "checksum": "7254c92168d4717ed7b36234b2bba3b8"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/LICENSE.txt": {
+      "checksum": "626db860f543d02f2f8d8599aac4fbc0"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/webfonts/fa-brands-400.eot": {
+      "checksum": "e2a76403183eff8967cf6318c6e51509"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/webfonts/fa-brands-400.svg": {
+      "checksum": "a999c7b8823b901248833dc7fe07a52f"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/webfonts/fa-brands-400.ttf": {
+      "checksum": "e0fc4e5c719b4dc10c97fc111d7374e1"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/webfonts/fa-brands-400.woff": {
+      "checksum": "d034c1b2ee84dd981ef2e637754a0b4f"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/webfonts/fa-brands-400.woff2": {
+      "checksum": "f319eac1c755f9929fd856720ce1695e"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/webfonts/fa-regular-400.eot": {
+      "checksum": "5a4618f029618cc2795c05fe53d57028"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/webfonts/fa-regular-400.svg": {
+      "checksum": "e9d8dbb0c3e9b97ffc59c50ff5d01422"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/webfonts/fa-regular-400.ttf": {
+      "checksum": "6534c603e0892488132ad57248ec69e2"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/webfonts/fa-regular-400.woff": {
+      "checksum": "e99569d3d10c94c60d9a68523c1c0e71"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/webfonts/fa-regular-400.woff2": {
+      "checksum": "a3715c6fe264a51f1d9260b447ff46bc"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/webfonts/fa-solid-900.eot": {
+      "checksum": "d9824d00712532d7697df68df16ae0d3"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/webfonts/fa-solid-900.svg": {
+      "checksum": "666a82cb3e9f8591bef4049aea26c4c6"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/webfonts/fa-solid-900.ttf": {
+      "checksum": "00ddaede094b83270cadbfc1a907e8ca"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/webfonts/fa-solid-900.woff": {
+      "checksum": "128d2b0be23925e5cf36717ddc6f093b"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/webfonts/fa-solid-900.woff2": {
+      "checksum": "18d2347ab2a9f40ca2247cdb03303d84"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/img/blackboard.png": {
+      "checksum": "6fb19d93b5ab5f0b7aca4b1e130b8e36"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/img/boardmarker-black.png": {
+      "checksum": "ffdd43056d3b6aeb79b5ab2c9fdffbb5"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/img/boardmarker-blue.png": {
+      "checksum": "9c51726f1aba58b3ea58c7e6f3a1eb69"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/img/boardmarker-green.png": {
+      "checksum": "b2174dfab385d64b82d472fe6bf8732c"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/img/boardmarker-orange.png": {
+      "checksum": "5bd94666605a7c19b66e821dcfcd6e81"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/img/boardmarker-purple.png": {
+      "checksum": "d82f80fb45a6c2796fed58d794b1dbcc"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/img/boardmarker-red.png": {
+      "checksum": "4e003969a8898bda1034fdc83c6775a8"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/img/boardmarker-yellow.png": {
+      "checksum": "c51cd745582a05d5a4a274396f9e1f64"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/img/chalk-blue.png": {
+      "checksum": "20fcdd8b7a051b6d2bcbe5223ca8f93a"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/img/chalk-green.png": {
+      "checksum": "6a99931b528659ae783fdba973ebee2d"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/img/chalk-orange.png": {
+      "checksum": "1e673a9b3ba41c3817a7791537e687cb"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/img/chalk-purple.png": {
+      "checksum": "b3a6bbfd32d883879f6f52348c71d997"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/img/chalk-red.png": {
+      "checksum": "5be9fc1fca1db55857f70f1bdb92477a"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/img/chalk-white.png": {
+      "checksum": "e6911337608cb3b270cf2faba186dfca"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/img/chalk-yellow.png": {
+      "checksum": "d5ce34338bd385c8baa40920eab65e18"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/img/sponge.png": {
+      "checksum": "6877bfebc4e000eb7f429ca7cca24969"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/img/whiteboard.png": {
+      "checksum": "f92eafcef815acaed323435b65469684"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js": {
+      "checksum": "bd8665b9f31e8bdb4b6ab896c12eb5c7"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/plugin.yml": {
+      "checksum": "a42805b0271e44d994c2c7a1dbb33646"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/README.md": {
+      "checksum": "bcb6f0f209ce0b0f4c464fc1e45fadce"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-chalkboard/style.css": {
+      "checksum": "6bdeacb96f8b18c0046039c8de10c51b"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-confetti/confetti.js": {
+      "checksum": "0c0d2171a52938629e42cb1b68f70a35"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-menu/menu.css": {
+      "checksum": "1b9988f08dfe354c44e134304b3df8af"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-menu/menu.js": {
+      "checksum": "8db4f7eb4ad5670e6be4bdf83c389ca2"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-menu/plugin.yml": {
+      "checksum": "b949d3d3d5bdf5b5f508e6bfb328798e"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css": {
+      "checksum": "c8715037656f6595dbc3d9145fc7d8ac"
+    },
+    "presentation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js": {
+      "checksum": "f911441bee5a8cd7635fe683fec20cdd"
+    },
+    "presentation_files/libs/revealjs/plugin/search/plugin.js": {
+      "checksum": "032f7408cd38991c3bd861582dd6322d"
+    },
+    "presentation_files/libs/revealjs/plugin/search/search.esm.js": {
+      "checksum": "5a4865036188db6309eec77fb9b9fd41"
+    },
+    "presentation_files/libs/revealjs/plugin/search/search.js": {
+      "checksum": "1d91bc7e321fae581fb65f502ef4ecd0"
+    },
+    "presentation_files/libs/revealjs/plugin/zoom/plugin.js": {
+      "checksum": "75d50a8cac0d19f0824a1c5876d36673"
+    },
+    "presentation_files/libs/revealjs/plugin/zoom/zoom.esm.js": {
+      "checksum": "b425222ed9d03cad024acb201af632ec"
+    },
+    "presentation_files/libs/revealjs/plugin/zoom/zoom.js": {
+      "checksum": "dbab999c1a2fe1f31046733759dd1e2b"
+    },
+    "README.md": {
+      "checksum": "2d70aff6c073728ee3b6cc6bebfeb30a"
+    },
+    "renv.lock": {
+      "checksum": "7d8a51bb240ee9c898cb9af1938184b2"
+    }
+  },
+  "users": null
+}

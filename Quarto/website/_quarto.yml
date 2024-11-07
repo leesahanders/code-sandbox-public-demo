@@ -1,0 +1,29 @@
+project:
+  type: website
+
+website:
+  site-url: "https://questionable.quarto.pub/blog/"
+  title: "Lisa Anders - questionable.quarto"
+  description: "Quarto Website Demo - now with food!"
+  navbar:
+    title: "<span class='icon-upper'>LISA ANDERS</span><span class='icon-sep'></span><span class='icon-lower'>questionable.quarto</span>"
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "Recipes"
+        href: index.qmd
+
+    right:
+      - text: "About"
+        href: about.qmd
+      - text: "Site Map"
+        href: site_map.qmd
+      - icon: github
+        href: https://github.com/leesahanders/quarto-for-reproducible-reporting-demo
+format:
+  html:
+    theme: 
+      light: [litera, custom_theme.scss]
+      dark: [vapor, theme-dark.scss]
+    css: styles.css
+

@@ -1,0 +1,76 @@
+---
+title: "Parameterized Quarto (with Color)"
+author: Adapted by Lisa Anders
+date: today
+lightbox: true
+format:
+  html:
+    theme: sandstone
+    code-links:
+      - text: Source Code
+        icon: github
+        href: https://github.com/leesahanders/quarto-for-reproducible-reporting-demo/tree/main/content-examples/report-parameterized
+params:
+  color: 
+    value: "copper"
+editor: source
+---
+
+Use inline R code for markdown: `r params$color`
+
+Use paste() for plot and table titles and labels: 
+
+```r
+# ggplot code +
+labs(title = paste(params$color, "population"))
+```
+
+
+We can render this through quarto with: 
+
+```bash
+quarto render report-parameterized.qmd -P color:copper
+
+# Example with multiple params
+quarto render report-parameterized.qmd -P pet_type:'cats' -P fave_breed:'Snowshoe'
+
+# Or we could use a yaml file
+quarto render report-parameterized.qmd --execute-params params.yml
+```
+
+We could also render in R using the quarto package: 
+
+```r
+quarto::quarto_render(
+  input = here::here("ex-2-quarto-render.qmd"), # Input Quarto file
+  execute_params = list(                        # Named list of params
+    pet_type = "cats",
+    fave_breed = "Snowshoe"))
+```
+
+
+We could also iterate over a list of parameters to generate a set of reports: 
+
+```r
+df <- readr::read_csv("grades.csv")
+
+for (i in 1:nrow(df)) {
+    student <- df[i, ] # Each row is a unique student
+    quarto::quarto_render(
+        input = "template.qmd",
+        output_file = paste0("feedback-", student$name, ".pdf"),
+        execute_params = list(
+            name = student$name,
+            grade = student$grade
+        )
+    )
+}
+```
+
+Reference: 
+
+- <https://www.mm218.dev/posts/2022-08-04-how-to-use-quarto-for-parameterized-reporting/>
+- <https://www.jhelvy.com/blog/2023-02-28-parameterized-pdfs-with-quarto/index.html> 
+- <https://jadeyryan.quarto.pub/rladies-dc-quarto-params/slides/#/title-slide>
+- Example originally from: <https://rmarkdown.rstudio.com/lesson-6.html> 
+

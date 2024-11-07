@@ -1,0 +1,414 @@
+---
+knitr:
+  opts_chunk:
+    collapse: true
+execute:
+  echo: false
+css: styles.css
+---
+
+`r knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, cache = F)`
+
+<!-- ::: {layout="[ [1,5] ]"} -->
+
+<!-- <img src="img/quarto-logo.png" class="w-75" width="50"/> -->
+
+```{r}
+#| echo: false
+#| include: false
+
+colorize <- function(string, color) {
+  string_colorized <- paste("<span style=\"color: ", color,"\">", string,"</span>",sep = "")
+  string_colorized
+}
+```
+
+
+::: increased-font-size
+**[Quarto](https://quarto.org/)** is an exciting new content creation framework by Posit and open source developers to help you create *`r colorize("flexible", "teal")`*, *`r colorize("reproduceable", "teal")`*, and *`r colorize("beautiful", "teal")`* outputs ranging from web sites, to documents, blog posts, books, and more. Below is a collection of Quarto output examples that showcase different things, all hosted on Connect. Check them out and have fun!
+:::
+
+<!-- ::: -->
+
+<h1>Content Examples</h1>
+
+```{r}
+#| echo: false
+#| include: false
+
+library(connectapi)
+library(tidyverse)
+
+client <- connectapi::connect()
+
+# get all content
+all_content <- connectapi::get_content(client, limit = Inf) %>% 
+  filter(app_mode %in% "quarto-static") %>% 
+  mutate(row_key = row_number())
+
+languages <- c("R", "Python")
+sections <- c("Static Documents", "Interactive Applications", "API's", "Pins")
+text <- c("hello")
+
+# Columns that matter: app_mode, r_version, py_version, r_environment_management, py_environment_management, content_url, dashboard_url
+
+# Resources
+# adding output asis to inline code: https://github.com/quarto-dev/quarto-cli/discussions/4333
+# make asis work: https://github.com/yihui/knitr/issues/2332
+```
+
+## Dashboards 
+
+::: {.panel-tabset group="dashboards"}
+
+### Webinar Examples
+
+::: card-group
+::: card
+
+**`{r} all_content[all_content$name =="dashboard",]$title`**
+
+![](content-img/dashboard.png){fig-align="center" width=200}
+
+<a href="`r all_content[all_content$name =="dashboard",]$content_url`" class="stretched-link"></a>
+
+<!-- <a href="`r all_content[all_content$name =="dashboard",]$dashboard_url`" class="stretched-link"></a> -->
+
+
+:::
+
+::: card
+
+**`{r} all_content[all_content$name =="dashboard-spatial",]$title`**
+
+![](content-img/dashboard-spatial.png){fig-align="center" width=200}
+
+<a href="`r all_content[all_content$name =="dashboard-spatial",]$content_url`" class="stretched-link"></a>
+
+<!-- <a href="`r all_content[all_content$name =="dashboard-spatial",]$dashboard_url`" class="stretched-link"></a> -->
+
+:::
+:::
+
+### Community Examples
+
+[Jeremy Allen's Gray Whales Dashboard](https://colorado.posit.co/rsc/gray-whales/)
+
+[Quarto Dashboards Gallery](https://quarto.org/docs/dashboards/examples/) 
+
+- [Clickable Weather Map](https://cscheid.github.io/quarto-dashboard-ojs-examples/weather.html) 
+
+- [New Zealand Earthquakes](https://colorado.posit.co/rsc/nz-quakes/quakes.html) 
+
+- [Retirement Simulation](https://wch.github.io/retirement-simulation-dashboard/) 
+
+### Learn more
+
+[Quarto Documentation on Dashboards](https://quarto.org/docs/dashboards/)
+
+[Sharing data in Quarto dashboards by Mine](https://mine.quarto.pub/quarto-dashboards-pydata/#/title-slide)
+
+[Quarto Dashboards recording by Charles Teague](https://www.youtube.com/watch?v=_VGJIPRGTy4)
+
+:::
+
+## Presentations 
+
+::: {.panel-tabset group="presentations"}
+
+### Webinar Examples
+
+::: card-group
+::: card
+
+**`{r} all_content[all_content$name =="presentation",]$title`**
+
+![](content-img/presentation.png){fig-align="center" width=200}
+
+<a href="`r all_content[all_content$name =="presentation",]$content_url`" class="stretched-link"></a>
+
+<!-- <a href="`r all_content[all_content$name =="presentation",]$dashboard_url`" class="stretched-link"></a> -->
+
+:::
+
+::: card
+
+**`{r} all_content[all_content$name =="presentation-webinar",]$title`**
+
+![](content-img/presentation-webinar.png){fig-align="center" width=200}
+
+<a href="`r all_content[all_content$name =="presentation-webinar",]$content_url`" class="stretched-link"></a>
+
+<!-- <a href="`r all_content[all_content$name =="presentation-webinar",]$dashboard_url`" class="stretched-link"></a> -->
+
+:::
+:::
+
+### Community Examples
+
+[David Schoch - 2023-06-20 Let's make a presentation with Quarto](https://gesiscss.github.io/quarto-workshop/material/slides/05_presentations.html#/title-slide) 
+
+[Tom Mock - 2022-07-25 Posit Workshop - Making Slides with Code](https://rstudio-conf-2022.github.io/get-started-quarto/materials/05-presentations.html#/presentations) 
+
+[Reproduceable presentations in quarto](https://info5940.infosci.cornell.edu/slides/publishing-reproducible-documents/#/title-slide)
+
+[Some Quarto Tips for Academic Presentation](https://kazuyanagimoto.com/blog/2022/12/27/quarto_tips/)
+
+[Quarto Presentation on Sharing Data in Quarto dashboards by Mine](https://mine.quarto.pub/quarto-dashboards-pydata/#/title-slide)
+
+[Parameterized Reports with Quarto: R-Ladies DC Workshop](https://jadeyryan.com/talks/2024-01-18_rladies-dc_quarto-params/)
+
+### Learn more
+
+[Quarto Documentation on Presentations](https://quarto.org/docs/presentations/)
+
+[David Schoch - 2023-06-20 Let's make a presentation with Quarto](https://gesiscss.github.io/quarto-workshop/material/slides/05_presentations.html#/title-slide) 
+
+[Tom Mock - 2022-07-25 Posit Workshop - Making Slides with Code](https://rstudio-conf-2022.github.io/get-started-quarto/materials/05-presentations.html#/presentations) 
+
+[Reproduceable presentations in quarto](https://info5940.infosci.cornell.edu/slides/publishing-reproducible-documents/#/title-slide)
+
+[Some Quarto Tips for Academic Presentation](https://kazuyanagimoto.com/blog/2022/12/27/quarto_tips/)
+
+:::
+
+## Reports 
+
+::: {.panel-tabset group="reports"}
+
+### Webinar Examples
+
+::: card-group
+::: card
+
+**`{r} all_content[all_content$name =="report-basic",]$title`**
+
+![](content-img/report-basic.png){fig-align="center" width=200}
+
+<a href="`r all_content[all_content$name =="report-basic",]$content_url`" class="stretched-link"></a>
+
+<!-- <a href="`r all_content[all_content$name =="report-basic",]$dashboard_url`" class="stretched-link"></a> -->
+
+:::
+
+::: card
+
+**`{r} all_content[all_content$name =="report-branded",]$title`**
+
+![](content-img/report-branded.png){fig-align="center" width=200}
+
+<a href="`r all_content[all_content$name =="report-branded",]$content_url`" class="stretched-link"></a>
+
+<!-- <a href="`r all_content[all_content$name =="report-branded",]$dashboard_url`" class="stretched-link"></a> -->
+
+:::
+
+::: card
+
+**`{r} all_content[all_content$name =="report-commentable",]$title`**
+
+![](content-img/report-commentable.png){fig-align="center" width=200}
+
+<a href="`r all_content[all_content$name =="report-commentable",]$content_url`" class="stretched-link"></a>
+
+<!-- <a href="`r all_content[all_content$name =="report-commentable",]$dashboard_url`" class="stretched-link"></a> -->
+
+:::
+
+::: card
+
+**`{r} all_content[all_content$name =="report-lightbox",]$title`**
+
+![](content-img/report-lightbox.png){fig-align="center" width=200}
+
+<a href="`r all_content[all_content$name =="report-lightbox",]$content_url`" class="stretched-link"></a>
+
+<!-- <a href="`r all_content[all_content$name =="report-lightbox",]$dashboard_url`" class="stretched-link"></a> -->
+
+:::
+:::
+
+<br>
+
+::: card-group
+::: card
+
+**`{r} all_content[all_content$name =="report-mermaid-diagrams",]$title`**
+
+![](content-img/report-mermaid-diagrams.png){fig-align="center" width=200}
+
+<a href="`r all_content[all_content$name =="report-mermaid-diagrams",]$content_url`" class="stretched-link"></a>
+
+<!-- <a href="`r all_content[all_content$name =="report-mermaid-diagrams",]$dashboard_url`" class="stretched-link"></a> -->
+
+:::
+
+::: card
+
+**`{r} all_content[all_content$name =="report-dynamically-generated",]$title`**
+
+![](content-img/report-dynamically-generated.png){fig-align="center" width=200}
+
+<a href="`r all_content[all_content$name =="report-dynamically-generated",]$content_url`" class="stretched-link"></a>
+
+<!-- <a href="`r all_content[all_content$name =="report-dynamically-generated",]$dashboard_url`" class="stretched-link"></a> -->
+
+:::
+
+::: card
+
+**`{r} all_content[all_content$name =="report-parameterized",]$title`**
+
+![](content-img/report-parameterized.png){fig-align="center" width=200}
+
+<a href="`r all_content[all_content$name =="report-parameterized",]$content_url`" class="stretched-link"></a>
+
+<!-- <a href="`r all_content[all_content$name =="report-parameterized",]$dashboard_url`" class="stretched-link"></a> -->
+
+:::
+
+:::
+
+### Community Examples
+
+[R without statistics, reproduceable reporting with quarto](https://book.rwithoutstatistics.com/quarto-chapter)
+
+[Writeup on Singularity/Apptainer support in Posit Workbench by Michael Mayer](https://colorado.posit.co/rsc/singularity/Singularity.html) 
+
+[Quarto Gallery for Articles and Reports](https://quarto.org/docs/gallery/#articles-reports) 
+
+### Learn more
+
+[Quarto Documentation on Documents/Reports](https://quarto.org/docs/output-formats/all-formats.html)
+
+[R without statistics, reproduceable reporting with quarto](https://book.rwithoutstatistics.com/quarto-chapter)
+
+[Quarto job scheduling](https://github.com/ryjohnson09/quarto-job-scheduling?tab=readme-ov-file)
+
+[Posit blog, building a reporting infrastructure with quarto](https://posit.co/blog/building-a-reporting-infrastructure-with-quarto/)
+
+[Making pretty pdf's with quarto](https://nrennie.rbind.io/blog/making-pretty-pdf-quarto/) 
+
+[Thomas Mock's presentation on Quarto for Notebooks to Austin Python meetup in 2024](https://thomasmock.quarto.pub/python-austin/#/)
+
+[Parameterized Reports with Quarto: R-Ladies DC Workshop](https://jadeyryan.com/talks/2024-01-18_rladies-dc_quarto-params/)
+
+[2022 talk by Daniel Chen at pydata 2022]( https://github.com/chendaniely/pydata-nyc-2022-python_quarto) and [the recording](https://www.youtube.com/watch?v=AnrGW8zoLx8)
+
+:::
+
+## Emails 
+
+::: {.panel-tabset group="emails"}
+
+### Webinar Examples
+
+::: card-group
+::: card
+
+**`{r} all_content[all_content$name =="email-plots",]$title`**
+
+![](content-img/email-plots.png){fig-align="center" width=200}
+
+<a href="`r all_content[all_content$name =="email-plots",]$content_url`" class="stretched-link"></a>
+
+<!-- <a href="`r all_content[all_content$name =="email-plots",]$dashboard_url`" class="stretched-link"></a> -->
+
+:::
+
+::: card
+
+**`{r} all_content[all_content$name =="email-programmatic",]$title`**
+
+![](content-img/email-programmatic.png){fig-align="center" width=200}
+
+<a href="`r all_content[all_content$name =="email-programmatic",]$content_url`" class="stretched-link"></a>
+
+<!-- <a href="`r all_content[all_content$name =="email-programmatic",]$dashboard_url`" class="stretched-link"></a> -->
+
+:::
+
+::: card
+
+**`{r} all_content[all_content$name =="email-conditional",]$title`**
+
+![](content-img/email-conditional.png){fig-align="center" width=200}
+
+<a href="`r all_content[all_content$name =="email-conditional",]$content_url`" class="stretched-link"></a>
+
+<!-- <a href="`r all_content[all_content$name =="email-conditional",]$dashboard_url`" class="stretched-link"></a> -->
+
+:::
+:::
+
+### Community Examples
+
+[Examples from the Connect User Guide](https://docs.posit.co/connect/user/quarto/#complete-examples) 
+
+### Learn more
+
+[Official Documentation on Email Customization with Connect and Quarto](https://docs.posit.co/connect/user/quarto/#email-customization)
+
+:::
+
+## Websites
+
+::: {.panel-tabset group="websites"}
+
+### Webinar Examples
+
+::: card-group
+::: card
+
+**`{r} all_content[all_content$name =="landing-page",]$title`**
+
+![](content-img/landing-page.png){fig-align="center" width=200}
+
+<a href="`r all_content[all_content$name =="landing-page",]$content_url`" class="stretched-link"></a>
+
+<!-- <a href="`r all_content[all_content$name =="landing-page",]$dashboard_url`" class="stretched-link"></a> -->
+
+:::
+
+::: card
+
+**`{r} all_content[all_content$name =="website",]$title`**
+
+![](content-img/website.png){fig-align="center" width=200}
+
+<a href="`r all_content[all_content$name =="website",]$content_url`" class="stretched-link"></a>
+
+<!-- <a href="`r all_content[all_content$name =="website",]$dashboard_url`" class="stretched-link"></a> -->
+
+:::
+
+:::
+
+### Community Examples
+
+[Solutions Engineering at Posit Home Page](https://solutions.posit.co/) 
+
+[Quarto Tip a Day - for the month leading up to 2022 Posit Conf](https://mine-cetinkaya-rundel.github.io/quarto-tip-a-day/)
+
+[Notes from a Data Witch website by Danielle Navarro](https://djnavarro.net/)
+
+[The MockUp by Tom Mock](https://themockup.blog/)
+
+[Elle Kaye Personal Website](https://ellakaye.co.uk/) 
+
+[rmflight quarto blog](https://rmflight.github.io/)
+
+### Learn more
+
+[Quarto Documentation on Creating a Website](https://quarto.org/docs/websites/)
+
+[2022 topic building websites with quarto](https://rstudio-conf-2022.github.io/get-started-quarto/materials/06-websites.html#/websites) 
+
+[2022 talk by Daniel Chen at pydata 2022]( https://github.com/chendaniely/pydata-nyc-2022-python_quarto) and [the recording](https://www.youtube.com/watch?v=AnrGW8zoLx8)
+
+[How to add some personality to your Quarto Blog by Daniel Tan](https://www.ddanieltan.com/posts/blogtips/)
+
+:::
+
+
+

@@ -1,0 +1,141 @@
+---
+title: "Quarto Programmatically Customized Emails (with Connect)"
+author: "Lisa Anders"
+format: email
+---
+
+Make the magic happen: <https://docs.posit.co/connect/user/quarto/#email-customization> 
+
+> Email customization requires Quarto 1.4.
+
+## How to run this 
+
+1. First `re-render`refresh report` (this will update the variant). 
+
+2. Then `email report` (this will use the newly selected variant).
+
+3. Because the variant is randomly selected, the same variant might be used. I'm okay with repeat meals! 
+
+
+## Email notifications: Generate email contents
+
+Modify the yaml to change the output format (note that a specific quarto version or most recent is required): 
+
+```
+format: email
+```
+
+Add a section to define the email content. Files can be attached, calculation outputs can be included, and this can even be wrapped in a conditional statement to only send on certain conditions: 
+
+Randomly select a condition to demonstrate different conditions: 
+
+```{r}
+variant <- sample(1:3, 1)
+```
+
+Match the email to the variant selected: 
+
+```{r}
+#| output: asis
+cat(
+  "---",
+  paste0("is_email_variant_",variant,": true"),
+  "---",
+  sep = "\n"
+)
+```
+
+::: {.email}
+
+::: {.content-visible when-meta="is_email_variant_1"}
+
+<!-- email case 1 -->
+
+Remember to pick up groceries on your way home. Tonight is "breakfast for dinner" and we're having French Toast!
+
+* Bread
+* Eggs
+* Butter
+* Milk
+
+This email was sent from Quarto! With conditional output for condition `r variant`
+
+```{r}
+#| echo: false
+
+cat(paste0("Generated on: ", Sys.Date()))
+```
+
+::: {.subject}
+Dinner plans: "Breakfast for Dinner"
+:::
+
+:::
+
+::: {.content-visible when-meta="is_email_variant_2"}
+
+<!-- email case 2 -->
+
+Remember to pick up groceries on your way home. Tonight is "Tex-mex" and we're having tacos!
+
+* Onions
+* Bell peppers
+* Fajita
+* Tortillas
+* Lime
+* Avocado
+
+This email was sent from Quarto! With conditional output for condition `r variant`
+
+```{r}
+#| echo: false
+
+cat(paste0("Generated on: ", Sys.Date()))
+```
+
+::: {.subject}
+Dinner plans: Tex-mex
+:::
+
+:::
+
+::: {.content-visible when-meta="is_email_variant_3"}
+
+<!-- email case 3 -->
+
+Remember to pick up groceries on your way home. Tonight we're having stir fry!
+
+* Snap peas
+* Noodles
+* Tofu
+* Soy Sauce
+* Rice
+
+This email was sent from Quarto! With conditional output for randomly selected variable: `r variant`
+
+```{r}
+#| echo: false
+
+cat(paste0("Generated on: ", Sys.Date()))
+```
+
+::: {.subject}
+Dinner plans: Stir fry
+:::
+
+:::
+
+:::
+
+### Logging
+
+Case: `r variant`
+
+Report run: `r Sys.time()`
+
+## Send email
+
+::: {.email-scheduled}
+TRUE
+:::
+

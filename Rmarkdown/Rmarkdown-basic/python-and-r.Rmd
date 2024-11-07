@@ -1,0 +1,67 @@
+---
+title: "Python and R using reticulate in RMarkdown"
+output: html_document
+date: "2024-10-30"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+## Python content 
+
+```{r, echo=FALSE}
+library(reticulate)
+reticulate::virtualenv_list()
+```
+
+```bash
+pip install great_tables
+```
+
+
+```{python, echo=FALSE}
+from great_tables import GT
+from great_tables.data import sp500
+
+# Define the start and end dates for the data range
+start_date = "2010-06-07"
+end_date = "2010-06-14"
+
+# Filter sp500 using Pandas to dates between `start_date` and `end_date`
+sp500_mini = sp500[(sp500["date"] >= start_date) & (sp500["date"] <= end_date)]
+
+# Create a display table based on the `sp500_mini` table data
+(
+    GT(sp500_mini)
+    .tab_header(title="S&P 500", subtitle=f"{start_date} to {end_date}")
+    .fmt_currency(columns=["open", "high", "low", "close"])
+    .fmt_date(columns="date", date_style="wd_m_day_year")
+    .fmt_number(columns="volume", compact=True)
+    .cols_hide(columns="adj_close")
+)
+```
+
+reference: <https://solutions.posit.co/write-code/reticulate/index.html > 
+

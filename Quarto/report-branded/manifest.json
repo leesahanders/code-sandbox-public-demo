@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "locale": "en_US",
+  "platform": "4.3.1",
+  "metadata": {
+    "appmode": "quarto-static",
+    "primary_rmd": "install_guide.qmd",
+    "primary_html": null,
+    "content_category": null,
+    "has_parameters": false
+  },
+  "quarto": {
+    "version": "1.4.550",
+    "engines": ["markdown"]
+  },
+  "packages": null,
+  "files": {
+    "_quarto.yml": {
+      "checksum": "b77bfdef52769732ca30d978a0deb51c"
+    },
+    "img/posit-logo-fullcolor-TM.png": {
+      "checksum": "354cb3ef0fcdbc82bdbc1e42ffe92e90"
+    },
+    "install_guide.qmd": {
+      "checksum": "01877c412e3438f1c3719b0fb1049dc9"
+    },
+    "renv.lock": {
+      "checksum": "67dfec04e0c93c40b38aab961f95feb1"
+    },
+    "styles.css": {
+      "checksum": "5695af9544b8c07ce4e8ad7871c9910c"
+    },
+    "theme-dark.scss": {
+      "checksum": "77ee9406dbe5d5a535ceb38476803060"
+    },
+    "theme-light.scss": {
+      "checksum": "5c51ef54c1b13c58194d97c3e5bd0444"
+    }
+  },
+  "users": null
+}

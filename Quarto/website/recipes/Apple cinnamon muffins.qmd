@@ -1,0 +1,83 @@
+---
+title: "Apple Cinnamon Muffins"
+description: "Easy Apple Cinnamon Muffins"
+author: "Mindy"
+date: "2023-06-11"
+format: html
+editor: source
+categories:
+  - dessert
+  - breakfast
+  - good-cold
+  - vegetarian
+  - potluck
+  - Jesse
+image: "img/apple cinnamon muffins.png"
+filters:
+   - lightbox
+lightbox: auto
+about:
+  template: trestles
+  links:
+    - icon: bowl
+      text: Source
+      href: https://www.allrecipes.com/recipe/24352/easy-apple-cinnamon-muffins/
+---
+
+## At a Glance
+
+Prep Time: 20 mins
+Cook Time: 25 mins
+Total Time: 45 mins
+
+Yield: 6 large muffins (or a whole bunch of smaller ones)
+
+Nutrient info: 
+calories 589
+total fat 29g  saturated fat 12g  cholesterol 73mg  sodium 441mg  total carbohydrate 79g  dietary fiber 3g  total sugars 47g  protein 6g  vitamin c 2mg  calcium 110mg  iron 2mg  potassium 131mg
+
+## Ingredients
+
+### Muffins:
+
+1 ½ cups all-purpose flour
+
+¾ cup white sugar
+
+2 teaspoons baking powder
+
+1 teaspoon ground cinnamon
+
+½ teaspoon salt
+
+1 egg
+
+⅓ cup vegetable oil
+
+⅓ cup milk
+
+2 apples - peeled, cored and chopped
+
+### Topping:
+
+½ cup white sugar
+
+½ cup butter, cubed
+
+⅓ cup all-purpose flour
+
+1 ½ teaspoons ground cinnamon
+
+## Instructions
+
+Preheat the oven to 400 degrees F (200 degrees C). Grease 6 large muffin cups or line with paper muffin liners.
+
+Make muffins: Stir together flour, sugar, baking powder, cinnamon, and salt in a large bowl. Mix in egg, oil, and milk. Fold in chopped apples. Spoon batter into the prepared muffin cups, filling just below the rim.
+
+Make topping: Place sugar, butter, flour, and cinnamon into a small bowl; mash mixture with a fork and sprinkle over unbaked muffins.
+
+Bake in the preheated oven until a toothpick inserted into the center of a muffin comes out clean, 20 to 25 minutes.
+
+## Lisa's notes
+
+Super delicious! Add 1 tsp xanthum gum if using gluten free flour for better consistency. 

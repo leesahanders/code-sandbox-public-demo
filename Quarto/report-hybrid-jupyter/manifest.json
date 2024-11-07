@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "locale": "en_US",
+  "platform": "4.3.1",
+  "metadata": {
+    "appmode": "quarto-static",
+    "primary_rmd": "quarto-hybrid.qmd",
+    "primary_html": null,
+    "content_category": null,
+    "has_parameters": false
+  },
+  "quarto": {
+    "version": "1.4.550",
+    "engines": ["jupyter"]
+  },
+  "packages": null,
+  "files": {
+    "_quarto.yml": {
+      "checksum": "b3f34c4bcdf7bfa50270f515faa69173"
+    },
+    "quarto-hybrid.qmd": {
+      "checksum": "3279c831f4bb412ef02ea957563113f9"
+    },
+    "README.md": {
+      "checksum": "e283f9a38c08a7cd6990b3b282693f91"
+    },
+    "requirements.txt": {
+      "checksum": "12df27c22296307f5583d1172f864daf"
+    }
+  },
+  "users": null
+}

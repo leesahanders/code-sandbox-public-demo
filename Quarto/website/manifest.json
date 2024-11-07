@@ -1,0 +1,734 @@
+{
+  "version": 1,
+  "locale": "en_US",
+  "platform": "4.3.1",
+  "metadata": {
+    "appmode": "quarto-static",
+    "primary_rmd": "index.qmd",
+    "primary_html": null,
+    "content_category": null,
+    "has_parameters": false
+  },
+  "quarto": {
+    "version": "1.4.550",
+    "engines": ["markdown"]
+  },
+  "packages": null,
+  "files": {
+    "_extensions/quarto-ext/lightbox/_extension.yml": {
+      "checksum": "9d4227e9643702041f4905b21ab92edb"
+    },
+    "_extensions/quarto-ext/lightbox/lightbox.css": {
+      "checksum": "7509ce40cd18e55cd3e4ee2d0113887a"
+    },
+    "_extensions/quarto-ext/lightbox/lightbox.lua": {
+      "checksum": "0a10735cf5d7facd72e48547417081c3"
+    },
+    "_extensions/quarto-ext/lightbox/resources/css/glightbox.min.css": {
+      "checksum": "9b438b29cef1c212d1c65a877ffc7232"
+    },
+    "_extensions/quarto-ext/lightbox/resources/js/glightbox.min.js": {
+      "checksum": "2b4c8cbaade24ecb58bcb0d89694ccee"
+    },
+    "_publish.yml": {
+      "checksum": "a7cd93a934664db6b789c81e58855f88"
+    },
+    "_quarto.yml": {
+      "checksum": "751fa965dee41f162cf4b843bebe5290"
+    },
+    "_site/about.html": {
+      "checksum": "c67d888b27f9591366adbc10ccfeb528"
+    },
+    "_site/images/Rocinante.jpg": {
+      "checksum": "5d9043862f9f53b78d43820702784250"
+    },
+    "_site/index.html": {
+      "checksum": "e971d0c1a19604c256cdc01931a49114"
+    },
+    "_site/listings.json": {
+      "checksum": "bb0dc278112cdc36aa54ac22c98b759b"
+    },
+    "_site/recipes/0_template.html": {
+      "checksum": "56417362f5ab372e89d1a35cac6dff4b"
+    },
+    "_site/recipes/Apple cinnamon muffins.html": {
+      "checksum": "73197b6e37a4a5c174ebc54761eb68bb"
+    },
+    "_site/recipes/apple pie.html": {
+      "checksum": "9a48a6b9a7aced2db0f339130183ac20"
+    },
+    "_site/recipes/avocado mac n cheese.html": {
+      "checksum": "05714175a263263e819e99f37e347b81"
+    },
+    "_site/recipes/avocado pesto vegan sauce.html": {
+      "checksum": "d634470eaf6677842c2692352b6ccfd3"
+    },
+    "_site/recipes/baked beans.html": {
+      "checksum": "4ccf344813cf30961c49274172f5cdb2"
+    },
+    "_site/recipes/Black eyed peas bean cake.html": {
+      "checksum": "844b5f15c7b9dc6bec98f4754061c801"
+    },
+    "_site/recipes/Bratwurst Sandwiches.html": {
+      "checksum": "c49c19257a34577dc025c6881080d569"
+    },
+    "_site/recipes/broccoli soup.html": {
+      "checksum": "b6c32a079c9451293eee0ffd24a1cd19"
+    },
+    "_site/recipes/Brussels Sprouts with Balsamic and Cranberries.html": {
+      "checksum": "af9999ffd4129783faac0e6f7dc432aa"
+    },
+    "_site/recipes/Cajun red beans and rice.html": {
+      "checksum": "674ff58e6e7ce52f7cacbdf1e2b29f2c"
+    },
+    "_site/recipes/carrot fritters.html": {
+      "checksum": "0dca58647980d2508eefae8aab43cae8"
+    },
+    "_site/recipes/Chicken Biryani.html": {
+      "checksum": "55a335dd8bea2a5aaf622c7ec74d93e8"
+    },
+    "_site/recipes/Chicken or pork satay.html": {
+      "checksum": "65b7ec5f23ffb1d84fecb1b9836e10e3"
+    },
+    "_site/recipes/Chicken paillard salad.html": {
+      "checksum": "b667d2ea8de1ddd590e08bb85777d7db"
+    },
+    "_site/recipes/Chicken salad.html": {
+      "checksum": "f172b63ef75b1c8a150bc1f69a73e346"
+    },
+    "_site/recipes/Chicken Shawarma.html": {
+      "checksum": "8a0731ee50f514ae521b604d81a269ab"
+    },
+    "_site/recipes/chickpea salad.html": {
+      "checksum": "aa0dfcad2ac635570b591314abb70acf"
+    },
+    "_site/recipes/chili verde colorado.html": {
+      "checksum": "15a46c3b9a54c05785de8824d97a228d"
+    },
+    "_site/recipes/chili verde.html": {
+      "checksum": "fe159f0dd6c3d2173c522aeab719ce3e"
+    },
+    "_site/recipes/Chorizo Cabbage.html": {
+      "checksum": "717125fce83cdc98657e3f88fcd9979e"
+    },
+    "_site/recipes/coconut milk french toast.html": {
+      "checksum": "8afdaa55a8ba3bbdca5e2395042c6e2c"
+    },
+    "_site/recipes/coffee cake.html": {
+      "checksum": "b639c130bb41d379dd01d03d831d3525"
+    },
+    "_site/recipes/cold chicken and noodle salad.html": {
+      "checksum": "2dd7d7a489ac213863f6b49605556a17"
+    },
+    "_site/recipes/corn chowder.html": {
+      "checksum": "b1278e73d9de772c870886e60ea6e699"
+    },
+    "_site/recipes/cornbread.html": {
+      "checksum": "7e62d08d926c81e8ea4ed5a833592233"
+    },
+    "_site/recipes/Cranberry Sauce.html": {
+      "checksum": "c6bfb33afda4ac249cab9921d068b139"
+    },
+    "_site/recipes/cream cheese pancakes.html": {
+      "checksum": "044448f7eaaf0501bdbb67a8c23ea88e"
+    },
+    "_site/recipes/Cuban Beans and Rice.html": {
+      "checksum": "a3f0139b0d5a20fcba81478a12145202"
+    },
+    "_site/recipes/Dad's salmon.html": {
+      "checksum": "55158767c2c4b424b3789f467decf724"
+    },
+    "_site/recipes/Drunken noodle.html": {
+      "checksum": "b79b3af41fe186ca4286c0ef0745c8da"
+    },
+    "_site/recipes/egg baskets.html": {
+      "checksum": "408146fc37390972460ca2bee8744f88"
+    },
+    "_site/recipes/eggplant lasagna.html": {
+      "checksum": "609d52c557ab7822bbf825eb545145f8"
+    },
+    "_site/recipes/Fajitas.html": {
+      "checksum": "5f475fc5c3b0d1cbeb0510d97156b3e5"
+    },
+    "_site/recipes/flank.html": {
+      "checksum": "04f75669834e576bb38a4c6eee4f64d7"
+    },
+    "_site/recipes/flourless chocolate cayenne cake.html": {
+      "checksum": "55c878f1129d38faf492084f91285fdc"
+    },
+    "_site/recipes/frito pie.html": {
+      "checksum": "6ccb41115ac49df565eceade19840294"
+    },
+    "_site/recipes/gingersnap stew.html": {
+      "checksum": "ecae121192a788c3194c739eae61f74d"
+    },
+    "_site/recipes/gumbo.html": {
+      "checksum": "5cbac217d050f34ba113a82b50f882f5"
+    },
+    "_site/recipes/hiking trash pad thai.html": {
+      "checksum": "fc7ab3a521fc352c1d111a0d61e72262"
+    },
+    "_site/recipes/hot and sour soup.html": {
+      "checksum": "eb22226dd805e7ceb6438dcf034ed6d2"
+    },
+    "_site/recipes/img/apple cinnamon muffins.png": {
+      "checksum": "117485cc40811c22004a22e5bcde6574"
+    },
+    "_site/recipes/img/apple pie 2.jpg": {
+      "checksum": "f7d8f3816518fd09dfa0f4f213fe1d36"
+    },
+    "_site/recipes/img/apple pie recipe 2.jpg": {
+      "checksum": "e2ee6bc9d52ef12efe740772db6bf01c"
+    },
+    "_site/recipes/img/apple pie recipe.jpg": {
+      "checksum": "353b04127cf4345aa0ae08568e1f3d4c"
+    },
+    "_site/recipes/img/apple pie.jpg": {
+      "checksum": "1861795f4b2da0b3b04d75c20dabbb91"
+    },
+    "_site/recipes/img/avocado mac n cheese.jpg": {
+      "checksum": "05feca1e836db91fc172036bb147e23c"
+    },
+    "_site/recipes/img/avocado pesto.jpg": {
+      "checksum": "cc630046a3dcf2a900c7b9d0436832d8"
+    },
+    "_site/recipes/img/baked-beans.jpg": {
+      "checksum": "6c2084f2f8572e83cbefa52ca88790bd"
+    },
+    "_site/recipes/img/bean cake.jpg": {
+      "checksum": "92606dff06698eba3733ae69b0ef5d5a"
+    },
+    "_site/recipes/img/biryani-chicken-recipe2.jpg": {
+      "checksum": "4fbf4d889b30ad3835ae58c026d5fe59"
+    },
+    "_site/recipes/img/biryani-chicken.jpg": {
+      "checksum": "88e41d1f9e71bdb78664d8bbdde95147"
+    },
+    "_site/recipes/img/Bratwurst Sandwiches 2.jpg": {
+      "checksum": "c8132da203d4188cd3fbad7b30cd9d78"
+    },
+    "_site/recipes/img/Bratwurst Sandwiches.jpg": {
+      "checksum": "cb5a480a06ca55486b2be46fcbfc048a"
+    },
+    "_site/recipes/img/broccoli soup.jpg": {
+      "checksum": "bc03bc616bb362a16d3a4c56f6130628"
+    },
+    "_site/recipes/img/Brussels Sprouts with Balsamic and Cranberries.jpg": {
+      "checksum": "52e75965d4cdb375876d3127133b5af7"
+    },
+    "_site/recipes/img/cajun red beans and rice.png": {
+      "checksum": "8b97c18b94161cf7b06b70571109a5db"
+    },
+    "_site/recipes/img/carrot fritters 2.jpg": {
+      "checksum": "2c98fdef4a134bcac99712c5e47cc598"
+    },
+    "_site/recipes/img/carrot fritters.jpg": {
+      "checksum": "238c6d3bb38c64b45fd28c17f9e9d1ef"
+    },
+    "_site/recipes/img/Chicken paillard salad.png": {
+      "checksum": "dfec103fe7ec31c00a1fde8def51a962"
+    },
+    "_site/recipes/img/chicken salad.jpg": {
+      "checksum": "323104651dd34aa4dfbc2e5abf92018c"
+    },
+    "_site/recipes/img/chicken shawarma.jpg": {
+      "checksum": "18f3f80d167faaf1489ab953759d3cb4"
+    },
+    "_site/recipes/img/chickpea salad.jpg": {
+      "checksum": "282c60bfebfe50b72fb5ec63cbc13e29"
+    },
+    "_site/recipes/img/chili verde.png": {
+      "checksum": "2713d8ff32cba702c3ff080ce8839640"
+    },
+    "_site/recipes/img/chorizo cabbage.jpg": {
+      "checksum": "dd1e91e2c68448f1bb4cc54977e62d4d"
+    },
+    "_site/recipes/img/coffee cake 1.jpg": {
+      "checksum": "d19dd4a3d89499e84a79199d6a169d62"
+    },
+    "_site/recipes/img/coffee cake 2.jpg": {
+      "checksum": "9c75e62d88e1c3e69aba833b79c3484a"
+    },
+    "_site/recipes/img/cold chicken and noodle salad 2.jpg": {
+      "checksum": "fa4e2a044f875f4abd0a2b3ed6bac403"
+    },
+    "_site/recipes/img/cold chicken and noodle salad.jpg": {
+      "checksum": "df413c3ae16f8a8d09a5197fde541226"
+    },
+    "_site/recipes/img/colorado chili 2.jpg": {
+      "checksum": "f462af35181ad98efed1982b4e7996ea"
+    },
+    "_site/recipes/img/colorado green chili.jpg": {
+      "checksum": "a1029815ca5ba2a8cdc284f295065386"
+    },
+    "_site/recipes/img/corn-chowder-bacon.jpg": {
+      "checksum": "424f0007c7dc0d432f5cd5ee312c5acf"
+    },
+    "_site/recipes/img/cranberry-sauce.jpg": {
+      "checksum": "52fae3f98eb4af18358e8e2bb600adef"
+    },
+    "_site/recipes/img/cream cheese pancakes.jpg": {
+      "checksum": "44b8382a241ecdddc6fed369dee53e48"
+    },
+    "_site/recipes/img/cuban-beans.jpg": {
+      "checksum": "dda5d354642ab70f0965a7b49a2cc662"
+    },
+    "_site/recipes/img/donuts.jpg": {
+      "checksum": "0c9fa27da543a492877ee50c27bf8ff9"
+    },
+    "_site/recipes/img/drunken noodle pic.jpg": {
+      "checksum": "aacfd355c3d3bf1581d255a2c28b561a"
+    },
+    "_site/recipes/img/Drunken noodle.jpg": {
+      "checksum": "9a1ff1c04a60057ef90285193130c313"
+    },
+    "_site/recipes/img/egg basket.jpg": {
+      "checksum": "63869c04a2d1d68bbcf71d1eb61d3d5b"
+    },
+    "_site/recipes/img/Eggplant lasagna 2.jpg": {
+      "checksum": "21cda7c0ee100f58ad4ef214ace702b0"
+    },
+    "_site/recipes/img/Eggplant lasagna.jpg": {
+      "checksum": "c1fda0105d88cc983bec1d284bf60277"
+    },
+    "_site/recipes/img/eggplant soba noodle.jpg": {
+      "checksum": "a02cdb715ed15637e48412a0c16bb5d4"
+    },
+    "_site/recipes/img/fajitas 2.jpg": {
+      "checksum": "fd494c9401df9de85d50dad8e7545e01"
+    },
+    "_site/recipes/img/fajitas.jpg": {
+      "checksum": "3df1e8f136f42ff1cd71801b04715e6a"
+    },
+    "_site/recipes/img/flank.jpg": {
+      "checksum": "3f203c4c03ffc7e27a5b33556399191e"
+    },
+    "_site/recipes/img/flank_salsa.jpg": {
+      "checksum": "06fd7d84835ad253f8ecba4f3b7ac268"
+    },
+    "_site/recipes/img/flourless chocolate cayenne cake.jpg": {
+      "checksum": "2748379c635771ef6bf5e4d60b6f3fbd"
+    },
+    "_site/recipes/img/french_toast 03-12-2023.png": {
+      "checksum": "6992fa53be9bf3840535cbeb8dff5816"
+    },
+    "_site/recipes/img/frito pie.jpg": {
+      "checksum": "3042179f312550b4760827cfc6d5c741"
+    },
+    "_site/recipes/img/gingersnap stew.jpg": {
+      "checksum": "390fe82d665b06afb48f9856c3c11413"
+    },
+    "_site/recipes/img/gumbo.jpg": {
+      "checksum": "62312a5313ec53de56ace3faa290459a"
+    },
+    "_site/recipes/img/hot and sour soup.jpg": {
+      "checksum": "7e34da38c526c30a0eeee4e6cd2af985"
+    },
+    "_site/recipes/img/indian curry.jpg": {
+      "checksum": "5e9bd66cf7557039e9b869111568d3af"
+    },
+    "_site/recipes/img/jalapeno poppers.jpg": {
+      "checksum": "b86303706ea2978a9111d557b5c44236"
+    },
+    "_site/recipes/img/leek-chicken-beans.jpg": {
+      "checksum": "372f2b29e47ce8907deaeab441eb6794"
+    },
+    "_site/recipes/img/lemon-rhubarb-cake.jpg": {
+      "checksum": "fbd197560809454b7c69639808ca0d2e"
+    },
+    "_site/recipes/img/lemon bars.png": {
+      "checksum": "4d87450509ee78b18ad6b8081a76c71d"
+    },
+    "_site/recipes/img/maple walnut pie from common ground cookbook desserts.png": {
+      "checksum": "771a795efdc67962b7567d3ac2b07dc9"
+    },
+    "_site/recipes/img/maple walnut pie.jpg": {
+      "checksum": "0a8aa0345872b351a30956ea4fe2dcef"
+    },
+    "_site/recipes/img/Mediterranean cod with lemon and garlic recipe 1.jpg": {
+      "checksum": "b15207c7353af1e382c557f42740a708"
+    },
+    "_site/recipes/img/Mediterranean cod with lemon and garlic recipe 2.jpg": {
+      "checksum": "83d277f4362b15832de3a6355879246a"
+    },
+    "_site/recipes/img/Mediterranean cod with lemon and garlic.jpg": {
+      "checksum": "b176b51d10029179700b8d806335af75"
+    },
+    "_site/recipes/img/oatmeal balls.jpg": {
+      "checksum": "12797c8a444f4bf963ef5af7f4ae3634"
+    },
+    "_site/recipes/img/oatmeal chocolate chunk ice cream sandwhiches 2.jpg": {
+      "checksum": "336f6fbb7350c89aa1ca8b412478edc9"
+    },
+    "_site/recipes/img/oatmeal chocolate chunk ice cream sandwhiches.jpg": {
+      "checksum": "30546c92766458b701006fef3af48866"
+    },
+    "_site/recipes/img/pad thai.jpg": {
+      "checksum": "12c1f3c48de2125a327bd58cb4e0880e"
+    },
+    "_site/recipes/img/pear and ginger crisp.jpg": {
+      "checksum": "3bceb6855e61197e5d49068528135a2c"
+    },
+    "_site/recipes/img/picadillo.jpg": {
+      "checksum": "d89db035223e5665267bd4f3d3508583"
+    },
+    "_site/recipes/img/pozole_hominy.jpg": {
+      "checksum": "966fbe1a2b20d63e2fff7e7accc7c1de"
+    },
+    "_site/recipes/img/raclette.jpg": {
+      "checksum": "4e6945addc783beb619931529e7bb51a"
+    },
+    "_site/recipes/img/Roasted carrots with sage butter.PNG": {
+      "checksum": "d5ba2aee3c4c05c25f799093cf0d55cd"
+    },
+    "_site/recipes/img/saffron rice with meat almond and raison toppings 2.jpg": {
+      "checksum": "3db735d2886f1e597a629720eafcf12a"
+    },
+    "_site/recipes/img/saffron rice with meat almond and raison toppings.jpg": {
+      "checksum": "e405e80d5b02163e2aa1243ec303f174"
+    },
+    "_site/recipes/img/satay.jpg": {
+      "checksum": "7ac7d77e0209bc938172ecdf071d9a87"
+    },
+    "_site/recipes/img/senate_beans.jpg": {
+      "checksum": "80c60cfebe3ef9e40c7be87587bf3c19"
+    },
+    "_site/recipes/img/seseme noodles 2.jpg": {
+      "checksum": "45d409254d5c4c90ddf1713a3c1790eb"
+    },
+    "_site/recipes/img/shepherds pie 1.jpg": {
+      "checksum": "d79b2aadff2aaca561112c0b90ec9c46"
+    },
+    "_site/recipes/img/shepherds pie 2.jpg": {
+      "checksum": "c76ca21c96fd627c4b61fa37c65e2388"
+    },
+    "_site/recipes/img/shepherds pie 4.jpg": {
+      "checksum": "d7b8175ae9df4c6186bb7dda3fbab5a5"
+    },
+    "_site/recipes/img/snow cream.PNG": {
+      "checksum": "a4606977130c30e6ca88dfcf366197ea"
+    },
+    "_site/recipes/img/Socca with swiss chard pistachios and apricots.PNG": {
+      "checksum": "5b13f1765a3e9dffb3848bbe78b70f86"
+    },
+    "_site/recipes/img/strawberry_crumble.jpg": {
+      "checksum": "17051c641cfb8c89fa699260ca9a2544"
+    },
+    "_site/recipes/img/tamale pie 2.jpg": {
+      "checksum": "da269f3860be8a1dfd95d94003921ad6"
+    },
+    "_site/recipes/img/tamale pie.jpg": {
+      "checksum": "a9e5fe866af9ba42cec3f6210df585ba"
+    },
+    "_site/recipes/img/tortilla soup.jpg": {
+      "checksum": "918870ab23271e7c090dba366c15ce93"
+    },
+    "_site/recipes/img/triple ginger cookies.jpg": {
+      "checksum": "a04078c91cc431478befbe20bb79113d"
+    },
+    "_site/recipes/img/triple ginger cookies.png": {
+      "checksum": "49dd2774906aa3809f62217aca6a4a4b"
+    },
+    "_site/recipes/img/Very Good Cornbread.jpg": {
+      "checksum": "a85e330f32db299184e3827ad232f829"
+    },
+    "_site/recipes/img/waffles chocolate.jpg": {
+      "checksum": "5a7ec4b013ae1fbbd296b983cd806c7f"
+    },
+    "_site/recipes/img/waffles chocolate.png": {
+      "checksum": "1b2d0bc3f1581d9359d8a196ad10af2b"
+    },
+    "_site/recipes/img/waffles cornmeal bacon pic.png": {
+      "checksum": "6c8922be919ce31fb3f120827009ec51"
+    },
+    "_site/recipes/img/waffles cornmeal bacon.png": {
+      "checksum": "6631e6092e3216ceefc6dc2145fc825e"
+    },
+    "_site/recipes/Indian curry.html": {
+      "checksum": "cdd3d6d3ebee8918e9e08143ac3d2ea0"
+    },
+    "_site/recipes/Instant Pot Pork Stew with Hominy.html": {
+      "checksum": "f6c7a385dc43f38847db5f53f1f4eaa1"
+    },
+    "_site/recipes/jalapeno poppers.html": {
+      "checksum": "bcea2d7fe5dcf231bff2f9a029316963"
+    },
+    "_site/recipes/lemon bars.html": {
+      "checksum": "659f85024a464e365badad672020e56c"
+    },
+    "_site/recipes/lemon rhubarb cake.html": {
+      "checksum": "14f4fd3d38ee252c983d9dacb6f9029d"
+    },
+    "_site/recipes/maple walnut pie.html": {
+      "checksum": "82f1e22816ac6c5930144a5b04b6b49b"
+    },
+    "_site/recipes/Mediterranean cod with lemon and garlic.html": {
+      "checksum": "98c5654efa85a813c9266985ad48c451"
+    },
+    "_site/recipes/Mochi Donuts.html": {
+      "checksum": "14588f0647f431535df4a125e5fa9fd0"
+    },
+    "_site/recipes/oatmeal balls.html": {
+      "checksum": "6df3a00bb73a587b9b8a5ac677af3adb"
+    },
+    "_site/recipes/oatmeal chocolate chunk ice cream sandwhiches.html": {
+      "checksum": "3f17a7a18047aa2c9f224ae9bc011428"
+    },
+    "_site/recipes/pad thai.html": {
+      "checksum": "0b09123258c9e143592316f00e514f25"
+    },
+    "_site/recipes/Pear and ginger crisp.html": {
+      "checksum": "111f9b356040c71447e301d26efecb3f"
+    },
+    "_site/recipes/Picadillo.html": {
+      "checksum": "1360ba5d271db69065b2728e62e15e3f"
+    },
+    "_site/recipes/raclette.html": {
+      "checksum": "1f5cd6e5bf43c2e3acb7e0192dd4a3c8"
+    },
+    "_site/recipes/Roasted carrots with sage butter.html": {
+      "checksum": "cac42db9f39bb049b04a0abb01a02476"
+    },
+    "_site/recipes/Rosemary Chicken with Leeks and Beans.html": {
+      "checksum": "2c7d92d233e512f37640fb69cea58e4e"
+    },
+    "_site/recipes/saffron rice with meat almond and raison toppings.html": {
+      "checksum": "74be00a1f67a39dec313c29e1ea9dbc3"
+    },
+    "_site/recipes/savory oats.html": {
+      "checksum": "81bfc38414b73fae47a555333e10db6b"
+    },
+    "_site/recipes/senate beans.html": {
+      "checksum": "30ad49384ad0b3286020f80af3cc6269"
+    },
+    "_site/recipes/seseme noodle.html": {
+      "checksum": "8f13f85d49a4ea3336912d94812090c4"
+    },
+    "_site/recipes/shepherds pie.html": {
+      "checksum": "075a178952212ed0325452b99a849f8f"
+    },
+    "_site/recipes/snow cream.html": {
+      "checksum": "08af3be79067283a366ad9738e8f8a3b"
+    },
+    "_site/recipes/Socca with swiss chard pistachios and apricots.html": {
+      "checksum": "6c75c44303cc5cfd062d3aceaa7205e1"
+    },
+    "_site/recipes/strawberry_crumble.html": {
+      "checksum": "56ca2c748877090765e455b08931a6b4"
+    },
+    "_site/recipes/Swiss cheese and mushroom quiche.html": {
+      "checksum": "646492cdee14c2c859bed10cc7b1732a"
+    },
+    "_site/recipes/tamale-pie.html": {
+      "checksum": "3adcee51088b049b6278449d2ccd769b"
+    },
+    "_site/recipes/template.html": {
+      "checksum": "1480f69dc98443776daea531ec0288b5"
+    },
+    "_site/recipes/Tortilla soup.html": {
+      "checksum": "c594c55b8391d726f8f22bc6395fae97"
+    },
+    "_site/recipes/Triple ginger cookies.html": {
+      "checksum": "fc2649ed875334d1c2486cfe4747c1df"
+    },
+    "_site/recipes/Waffles Chocolate.html": {
+      "checksum": "5c6168e39bf060c885c81a3ae1337451"
+    },
+    "_site/recipes/Waffles Cornmeal Bacon.html": {
+      "checksum": "7dccba04bd6b562406f45b3455a77d61"
+    },
+    "_site/robots.txt": {
+      "checksum": "b874b56a09ee155a3133b508684cbb51"
+    },
+    "_site/search.json": {
+      "checksum": "5eb0d719312e8861da85455cc6733cb5"
+    },
+    "_site/site_libs/bootstrap/bootstrap-dark.min.css": {
+      "checksum": "bdba929dd8697fe6a38a930fce2e92b3"
+    },
+    "_site/site_libs/bootstrap/bootstrap-icons.css": {
+      "checksum": "2318f137d201fbf51601fa0faba6bef7"
+    },
+    "_site/site_libs/bootstrap/bootstrap-icons.woff": {
+      "checksum": "1a51dfbe5467607389d603c02a77cd10"
+    },
+    "_site/site_libs/bootstrap/bootstrap.min.css": {
+      "checksum": "90c1e1a3d7de09dd9ce491fc50eed9e3"
+    },
+    "_site/site_libs/bootstrap/bootstrap.min.js": {
+      "checksum": "e2b09c06f0e714b6144a6788a28e3950"
+    },
+    "_site/site_libs/clipboard/clipboard.min.js": {
+      "checksum": "15f52a1ee547f2bdd46e56747332ca2d"
+    },
+    "_site/site_libs/quarto-contrib/glightbox/glightbox.min.css": {
+      "checksum": "9b438b29cef1c212d1c65a877ffc7232"
+    },
+    "_site/site_libs/quarto-contrib/glightbox/glightbox.min.js": {
+      "checksum": "2b4c8cbaade24ecb58bcb0d89694ccee"
+    },
+    "_site/site_libs/quarto-contrib/glightbox/lightbox.css": {
+      "checksum": "2857705abe7b271745f7d60903d2eedd"
+    },
+    "_site/site_libs/quarto-html/anchor.min.js": {
+      "checksum": "91bcf6cd1fd88fec3f109811e5fc3546"
+    },
+    "_site/site_libs/quarto-html/popper.min.js": {
+      "checksum": "3a4a291ccf3f1ea0f82b641542fd3827"
+    },
+    "_site/site_libs/quarto-html/quarto-syntax-highlighting-dark.css": {
+      "checksum": "4dca331c0806f351d3f630ba7f039574"
+    },
+    "_site/site_libs/quarto-html/quarto-syntax-highlighting.css": {
+      "checksum": "49bff82b9355f257417faaaa77dd1607"
+    },
+    "_site/site_libs/quarto-html/quarto.js": {
+      "checksum": "2ca82ae8ee1e5762d249c6b6c0802e30"
+    },
+    "_site/site_libs/quarto-html/tippy.css": {
+      "checksum": "ebd6f8ce46a677e1a4f5f8a8317109a9"
+    },
+    "_site/site_libs/quarto-html/tippy.umd.min.js": {
+      "checksum": "d828775275749701b48bd9d958814111"
+    },
+    "_site/site_libs/quarto-listing/list.min.js": {
+      "checksum": "d1cdff6a106c934639d63f03f0e781ef"
+    },
+    "_site/site_libs/quarto-listing/quarto-listing.js": {
+      "checksum": "77cf2d966f525295f151063bfdc627a7"
+    },
+    "_site/site_libs/quarto-nav/headroom.min.js": {
+      "checksum": "ace0360e576db9b6e7df48ac68ddbbf4"
+    },
+    "_site/site_libs/quarto-nav/quarto-nav.js": {
+      "checksum": "724bf5148c96bf8aec0d1b259345bfa5"
+    },
+    "_site/site_libs/quarto-search/autocomplete.umd.js": {
+      "checksum": "c64544db941e048f2652217cb9a7f29c"
+    },
+    "_site/site_libs/quarto-search/fuse.min.js": {
+      "checksum": "de7d60e4a6881074275feca14b84a49d"
+    },
+    "_site/site_libs/quarto-search/quarto-search.js": {
+      "checksum": "b7c6b7b5b20051c7e6db312a2588cbf7"
+    },
+    "_site/site_map.html": {
+      "checksum": "03abdefd65a1a9119641b11b53d3bd70"
+    },
+    "_site/site_map.xml": {
+      "checksum": "439e8d6252282427d74161a39108ef1e"
+    },
+    "_site/sitemap.xml": {
+      "checksum": "797799c386eeb2bd95a91baf74e47cff"
+    },
+    "_site/styles.css": {
+      "checksum": "3e0a5886ee37eb39ae077807262d47e4"
+    },
+    "about.qmd": {
+      "checksum": "6f9d34324a2566310096c17490a8c53b"
+    },
+    "custom_theme.scss": {
+      "checksum": "191e2c529a6a9eabf833ef05cbd93513"
+    },
+    "images/Rocinante.jpg": {
+      "checksum": "5d9043862f9f53b78d43820702784250"
+    },
+    "images/self_portrait.png": {
+      "checksum": "2aa3a3d5e0dd681d0a07133fa7195906"
+    },
+    "index.qmd": {
+      "checksum": "2de50cf13f45aa1da072002815c7ea37"
+    },
+    "recipes/0_template.qmd": {
+      "checksum": "d018fe4351e2ad6e1387847121c92ac7"
+    },
+    "recipes/Apple cinnamon muffins.qmd": {
+      "checksum": "840620f78dea1881723ef5b1d10a1a3a"
+    },
+    "recipes/apple pie.qmd": {
+      "checksum": "850cf3a460d6f9b90eb8bd7c86a7d9c1"
+    },
+    "recipes/flourless chocolate cayenne cake.qmd": {
+      "checksum": "6d48bfe7839495521e291e1bc4bceef3"
+    },
+    "recipes/img/apple cinnamon muffins.png": {
+      "checksum": "117485cc40811c22004a22e5bcde6574"
+    },
+    "recipes/img/apple pie 2.jpg": {
+      "checksum": "f7d8f3816518fd09dfa0f4f213fe1d36"
+    },
+    "recipes/img/apple pie recipe 2.jpg": {
+      "checksum": "e2ee6bc9d52ef12efe740772db6bf01c"
+    },
+    "recipes/img/apple pie recipe.jpg": {
+      "checksum": "353b04127cf4345aa0ae08568e1f3d4c"
+    },
+    "recipes/img/apple pie.jpg": {
+      "checksum": "1861795f4b2da0b3b04d75c20dabbb91"
+    },
+    "recipes/img/coffee cake 1.jpg": {
+      "checksum": "d19dd4a3d89499e84a79199d6a169d62"
+    },
+    "recipes/img/coffee cake 2.jpg": {
+      "checksum": "9c75e62d88e1c3e69aba833b79c3484a"
+    },
+    "recipes/img/donuts.jpg": {
+      "checksum": "0c9fa27da543a492877ee50c27bf8ff9"
+    },
+    "recipes/img/flourless chocolate cayenne cake.jpg": {
+      "checksum": "2748379c635771ef6bf5e4d60b6f3fbd"
+    },
+    "recipes/img/lemon-rhubarb-cake.jpg": {
+      "checksum": "fbd197560809454b7c69639808ca0d2e"
+    },
+    "recipes/img/lemon bars.png": {
+      "checksum": "4d87450509ee78b18ad6b8081a76c71d"
+    },
+    "recipes/img/maple walnut pie from common ground cookbook desserts.png": {
+      "checksum": "771a795efdc67962b7567d3ac2b07dc9"
+    },
+    "recipes/img/maple walnut pie.jpg": {
+      "checksum": "0a8aa0345872b351a30956ea4fe2dcef"
+    },
+    "recipes/img/pear and ginger crisp.jpg": {
+      "checksum": "3bceb6855e61197e5d49068528135a2c"
+    },
+    "recipes/img/strawberry_crumble.jpg": {
+      "checksum": "17051c641cfb8c89fa699260ca9a2544"
+    },
+    "recipes/img/triple ginger cookies.jpg": {
+      "checksum": "a04078c91cc431478befbe20bb79113d"
+    },
+    "recipes/lemon bars.qmd": {
+      "checksum": "a0d7334b2b47a7e48dc52134babfa832"
+    },
+    "recipes/lemon rhubarb cake.qmd": {
+      "checksum": "8fd812e6e19b70865ccfd1f319f09328"
+    },
+    "recipes/Mochi Donuts.qmd": {
+      "checksum": "8e7072669b001e039a3f11a3b6cd220d"
+    },
+    "recipes/strawberry_crumble.qmd": {
+      "checksum": "523ed06bc6ba83df1dfe833b55655d09"
+    },
+    "recipes/Triple ginger cookies.qmd": {
+      "checksum": "534c31d6d1059f2046b9e619aa75dbbd"
+    },
+    "renv.lock": {
+      "checksum": "67dfec04e0c93c40b38aab961f95feb1"
+    },
+    "site_map.qmd": {
+      "checksum": "d237d4c2465e0a9a4b2e24218a591e23"
+    },
+    "styles.css": {
+      "checksum": "3e0a5886ee37eb39ae077807262d47e4"
+    },
+    "theme-dark.scss": {
+      "checksum": "77ee9406dbe5d5a535ceb38476803060"
+    },
+    "theme-light.scss": {
+      "checksum": "5c51ef54c1b13c58194d97c3e5bd0444"
+    }
+  },
+  "users": null
+}

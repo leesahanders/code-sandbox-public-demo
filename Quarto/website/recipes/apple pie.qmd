@@ -1,0 +1,34 @@
+---
+title: "Caramel Apple Pie"
+description: "Classic and delicious apple pie"
+author: ""
+date: "2023-10-04"
+format: html
+editor: source
+categories:
+  - dessert
+  - vegetarian
+  - good-cold
+  - Jesse
+image: "img/apple pie.jpg"
+filters:
+   - lightbox
+lightbox: auto
+about:
+  template: trestles
+  links:
+    - icon: bowl
+      text: Source
+      href: https://www.amazon.com.au/Baked-Perfection-Delicious-gluten-free-recipes/dp/1526613484
+---
+
+![Apple pie recipe](img/apple pie recipe.jpg)
+
+![Apple pie recipe](img/apple pie recipe 2.jpg)
+
+![Apple Pie Assembly](img/apple pie 2.jpg) 
+
+## Lisa's notes
+
+A lot of work, but so good! Pairs well with "Ski Queen" cheese or any ice cream. 
+

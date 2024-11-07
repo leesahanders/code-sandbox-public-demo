@@ -1,0 +1,48 @@
+---
+title: ""
+description: ""
+author: ""
+date: "2024-05-01"
+format: html
+editor: source
+categories:
+  - light-meal
+  - hearty-meal
+  - side-dish
+  - good-cold
+  - dessert
+  - breakfast
+  - vegetarian
+  - vegan
+  - keto
+  - potluck
+  - backpacking
+  - camping
+  - crock / instant pot
+  - Laurie
+  - Jesse
+image: "img/"
+draft: true
+filters:
+   - lightbox
+lightbox: auto
+about:
+  template: trestles
+  links:
+    - icon: bowl
+      text: Source
+      href: https://www.google.com/
+---
+
+![cold chicken and noodle salad recipe](img/cold chicken and noodle salad.jpg)
+
+## At a Glance
+
+
+## Ingredients
+
+
+## Instructions
+
+
+## Lisa's notes

@@ -1,0 +1,63 @@
+---
+title: "Python and R using reticulate in Quarto"
+format:
+  html:
+    code-fold: true
+editor: source
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+## Python
+
+
+```{r}
+library(reticulate)
+reticulate::virtualenv_list()
+```
+
+```bash
+pip install great_tables
+```
+
+```{python}
+from great_tables import GT
+from great_tables.data import sp500
+
+# Define the start and end dates for the data range
+start_date = "2010-06-07"
+end_date = "2010-06-14"
+
+# Filter sp500 using Pandas to dates between `start_date` and `end_date`
+sp500_mini = sp500[(sp500["date"] >= start_date) & (sp500["date"] <= end_date)]
+
+# Create a display table based on the `sp500_mini` table data
+(
+    GT(sp500_mini)
+    .tab_header(title="S&P 500", subtitle=f"{start_date} to {end_date}")
+    .fmt_currency(columns=["open", "high", "low", "close"])
+    .fmt_date(columns="date", date_style="wd_m_day_year")
+    .fmt_number(columns="volume", compact=True)
+    .cols_hide(columns="adj_close")
+)
+```
+

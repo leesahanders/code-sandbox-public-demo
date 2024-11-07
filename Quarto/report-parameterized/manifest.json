@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "locale": "en_US",
+  "platform": "4.3.1",
+  "metadata": {
+    "appmode": "quarto-static",
+    "primary_rmd": ".Rprofile",
+    "primary_html": null,
+    "content_category": null,
+    "has_parameters": false
+  },
+  "quarto": {
+    "version": "1.4.550",
+    "engines": ["markdown"]
+  },
+  "packages": null,
+  "files": {
+    ".Rprofile": {
+      "checksum": "8be313df4f9a80be0d37da82edf6e916"
+    },
+    "_quarto.yml": {
+      "checksum": "b77bfdef52769732ca30d978a0deb51c"
+    },
+    "README.md": {
+      "checksum": "305ac7965743b956829dba507bfd724d"
+    },
+    "renv.lock": {
+      "checksum": "8e0b0a4872928a8a2ce78664e65423e1"
+    },
+    "report-parameterized.html": {
+      "checksum": "fe6d4d996100745b487127fd6589c6e0"
+    },
+    "report-parameterized.qmd": {
+      "checksum": "18029ca2bf1c4875c022fc49b7e88233"
+    },
+    "report-parameterized_files/libs/bootstrap/bootstrap-icons.css": {
+      "checksum": "2318f137d201fbf51601fa0faba6bef7"
+    },
+    "report-parameterized_files/libs/bootstrap/bootstrap-icons.woff": {
+      "checksum": "1a51dfbe5467607389d603c02a77cd10"
+    },
+    "report-parameterized_files/libs/bootstrap/bootstrap.min.css": {
+      "checksum": "8cf12dcfbbe646700b514928efe35a7f"
+    },
+    "report-parameterized_files/libs/bootstrap/bootstrap.min.js": {
+      "checksum": "e2b09c06f0e714b6144a6788a28e3950"
+    },
+    "report-parameterized_files/libs/clipboard/clipboard.min.js": {
+      "checksum": "15f52a1ee547f2bdd46e56747332ca2d"
+    },
+    "report-parameterized_files/libs/quarto-html/anchor.min.js": {
+      "checksum": "91bcf6cd1fd88fec3f109811e5fc3546"
+    },
+    "report-parameterized_files/libs/quarto-html/popper.min.js": {
+      "checksum": "3a4a291ccf3f1ea0f82b641542fd3827"
+    },
+    "report-parameterized_files/libs/quarto-html/quarto-syntax-highlighting.css": {
+      "checksum": "49bff82b9355f257417faaaa77dd1607"
+    },
+    "report-parameterized_files/libs/quarto-html/quarto.js": {
+      "checksum": "2ca82ae8ee1e5762d249c6b6c0802e30"
+    },
+    "report-parameterized_files/libs/quarto-html/tippy.css": {
+      "checksum": "ebd6f8ce46a677e1a4f5f8a8317109a9"
+    },
+    "report-parameterized_files/libs/quarto-html/tippy.umd.min.js": {
+      "checksum": "d828775275749701b48bd9d958814111"
+    }
+  },
+  "users": null
+}

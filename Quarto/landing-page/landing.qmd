@@ -1,0 +1,105 @@
+---
+knitr:
+  opts_chunk: 
+    collapse: true
+execute: 
+  echo: false
+page-layout: full
+css: styles.css
+comments:
+  utterances:
+    repo: leesahanders/quarto_with_comments
+---
+
+<h1>Slides</h1>
+
+```{r}
+#| echo: false
+#| include: false
+
+library(connectapi)
+library(tidyverse)
+
+client <- connectapi::connect()
+
+# get all content
+all_content <- connectapi::get_content(client, limit = Inf) %>% 
+  filter(app_mode %in% "quarto-static") %>% 
+  mutate(row_key = row_number())
+
+# Columns that matter: app_mode, r_version, py_version, r_environment_management, py_environment_management, content_url, dashboard_url
+```
+
+<!-- <p align="center"> -->
+<!-- <iframe src="../../quarto-for-reproducible-reporting-demo.html" width="80%" height = "400px"></iframe> -->
+<!-- </p> -->
+
+<!-- <p align="center"> -->
+<!-- <iframe src="/slides/quarto-for-reproducible-reporting-demo.html" width="80%" height = "520px"></iframe> -->
+<!-- </p> -->
+
+<p align="center">
+<iframe src="/slides/presentation.html" width="80%" height = "800px"></iframe>
+</p>
+
+<!-- <p align="center"> -->
+<!-- <iframe src="`r all_content[all_content$name =="presentation-webinar",]$dashboard_url`" width="80%" height = "520px"></iframe> -->
+<!-- </p> -->
+
+::: increased-font-size
+
+:::
+
+<h1>Resources</h1>
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+**Quarto** 
+
+- **[Documentation](https://quarto.org/)**
+- **[Cheat sheet](https://rstudio.github.io/cheatsheets/quarto.pdf)**
+- **[Reproduceable presentations in quarto](https://info5940.infosci.cornell.edu/slides/publishing-reproducible-documents/#/title-slide)**
+- **[Quarto awesome list](https://github.com/mcanouil/awesome-quarto)**
+- **[Quarto the definitive guide](https://quarto-tdg.org/presentations)**
+- **[R without statistics, reproduceable reporting with quarto](https://book.rwithoutstatistics.com/quarto-chapter)**
+- **[Quarto tip a day](https://mine-cetinkaya-rundel.github.io/quarto-tip-a-day/posts/17-dark-mode/)**
+- **[Quarto callouts](https://www.andreashandel.com/posts/2023-06-13-custom-callouts-quarto/)**
+- **[Thomas Mock's presentation to Austin Python meetup in 2024](https://thomasmock.quarto.pub/python-austin/#/)**
+- **[Parameterized Reports with Quarto: R-Ladies DC Workshop](https://jadeyryan.com/talks/2024-01-18_rladies-dc_quarto-params/)**
+- **[Extending quarto](https://www.youtube.com/watch?v=EihuM4oyOvs)**
+
+:::
+
+::: {.column width="50%"}
+
+**Workshops and talks from posit:::conf(2023):**
+
+- [Introduction to Quarto with R & RStudio](https://posit-conf-2023.github.io/quarto-r/)
+- [Advanced Quarto with R & RStudio](https://posit-conf-2023.github.io/quarto-r/)
+- [Enhancing Communication and Collaboration with Jupyter Notebooks & Quarto](https://github.com/posit-conf-2023/quarto-python/) 
+- ["Reproducible Manuscripts with Quarto" talk at posit::conf(2023)](https://github.com/mine-cetinkaya-rundel/quarto-manuscripts)
+
+**Upcoming Workshops for posit:::conf(2024)**
+
+- Introduction to Quarto
+- Build-a-Dashboard (with Quarto, R and/or Python)
+- Quarto Websites
+
+:::
+
+::::
+
+<center>
+
+**Interested in Posit Enterprise Products? Click [here](https://www.rstudio.com/products/team/)**
+
+</center>
+
+<br>
+
+
+
+

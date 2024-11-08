@@ -47,7 +47,9 @@ path = paste0(getwd(),"/",folder)
 
 print(paste0("Starting on ", folder))
 
-openProject(path)
+system(paste0("R -e 'renv::record(",'"',"renv@1.0.11",'"); renv::restore(packages = "renv"); renv::install(); renv::snapshot(); rsconnect::writeManifest()'), wait = TRUE, timeout = 0)
+
+#R -e 'renv::record("renv@1.0.11"); renv::restore(packages = "renv"); renv::install(); renv::snapshot(); rsconnect::writeManifest()'
 
   
 ## Update one project from terminal 
@@ -57,9 +59,13 @@ openProject(path)
 #- Use `renv::record("renv@1.0.7")` to record renv 1.0.7 in the lockfile.
 #- Use `renv::restore(packages = "renv")` to install renv 1.0.11 into the project library.
 
+
+# This will use the default R version, which on 11/8/2024 was 4.4.1
+
 #R -e 'renv::record("renv@1.0.11"); renv::restore(packages = "renv"); renv::install(); renv::snapshot(); rsconnect::writeManifest()'
 
 # https://stackoverflow.com/questions/37724057/open-r-project-in-rstudio-programmatically
 #openProject() in package rstudioapi
 # https://pkgs.rstudio.com/rstudioapi/articles/projects.html
-
+#openProject(path)
+# This doesn't work - since it interrupts the code from running

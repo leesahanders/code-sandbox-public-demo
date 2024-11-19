@@ -8,6 +8,12 @@ editor: source
 
 This example works in the demo environment after selecting a session with the credentials enabled. 
 
+# Credentials
+
+Show the credentials with: 
+
+`env | grep SNOWFLAKE`
+
 # Connections 
 
 ## Load Packages and Connect to Databricks

@@ -16,6 +16,12 @@ In advance I'll need to spin up a cluster, or get access to someone's cluster if
 - [RStudio Pro section on Databricks](https://docs.posit.co/ide/server-pro/user/rstudio-pro/guide/databricks.html)
 - [Azure guide on databricks connect](https://learn.microsoft.com/en-us/azure/databricks/dev-tools/databricks-connect/r/) 
 
+# Credentials
+
+Show the credentials with:
+
+`env | grep DATABRICKS`
+
 # Connections
 
 ## Load Packages and Connect to Databricks

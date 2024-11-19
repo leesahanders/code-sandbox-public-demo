@@ -1,0 +1,507 @@
+---
+title: "Environment management with Python"
+format: html
+editor: visual
+jupyter: python3
+---
+
+# Getting started 
+
+New and improved project setup flow:
+
+```bash
+uv init --app --python 3.12.6
+# delete the created hello.py file
+uv add numpy matplotlib jupyter
+uv export -o requirements.txt --no-hashes
+uv run rsconnect write-manifest shiny --overwrite .
+```
+
+To restore all we need to do is run the file, or any command from the appropriate directory: 
+```bash
+uv run ipython kernel install --user --name=project
+```
+
+In the future when we need to update: 
+```bash
+uv sync --upgrade
+# upgrade just one package 
+uv lock --upgrade numpy
+```
+
+# dash
+
+This example is from Plotly's [Dash tutorial](https://dash.plot.ly/getting-started-part-2).
+
+![example app image](app.png)
+
+## Usage
+
+### The uv way
+
+Use [uv](https://github.com/astral-sh/uv). It will detect that this is a project and create the venv for us when we go to run the application. 
+
+Run the application:
+
+```bash
+uv run app.py
+```
+
+### The pip way
+
+Setup the `venv` environment:
+
+```bash
+python -m venv .venv
+. .venv/bin/activate
+pip install -r requirements.txt
+```
+
+Run the application:
+
+```bash
+python app.py
+```
+
+## Deploy
+
+### rsconnect-python CLI
+
+```bash
+# With uv
+uv run rsconnect deploy dash .
+# Without uv
+rsconnect deploy dash .
+```
+
+### Git-backed
+
+Update the code, and then run:
+
+```bash
+# With uv
+uv export -o requirements.txt --no-hashes
+uv run rsconnect write-manifest dash --overwrite .
+# Without uv
+pip freeze > requirements.txt 
+rsconnect write-manifest dash --overwrite .
+```
+
+Commit the new `manifest.json` file to the git repo along with the code.
+
+## Resources
+
+[Posit Connect User Guide: Dash](https://docs.posit.co/connect/user/dash/)
+
+# fastapi
+
+## Usage
+
+### The uv way
+
+Use [uv](https://github.com/astral-sh/uv). It will detect that this is a project and create the venv for us when we go to run the application. 
+
+Run the application:
+
+```bash
+uv run uvicorn main:app --reload
+```
+
+### The pip way
+
+Setup the `venv` environment:
+
+```bash
+python -m venv .venv
+. .venv/bin/activate
+pip install -r requirements.txt
+```
+
+Run the API (to see the OpenAPI Documentation go to the proxied servers tab and add `/docs` to the URL):
+
+```bash
+uvicorn main:app --reload
+```
+
+## Deploy
+
+### rsconnect-python CLI
+
+```bash
+# With uv
+uv run rsconnect deploy fastapi .
+# Without uv
+rsconnect deploy fastapi .
+```
+
+### Git-backed
+
+Update the code, and then run:
+
+```bash
+# With uv
+uv export -o requirements.txt --no-hashes
+uv run rsconnect write-manifest fastapi --overwrite .
+# Without uv
+pip freeze > requirements.txt 
+rsconnect write-manifest fastapi --overwrite .
+```
+
+Commit the new `manifest.json` file to the git repo along with the code.
+
+## Training
+
+This example has a pre-created `model` directory. If you wish to re-run the training then run the `train.ipynb` notebook.
+
+## Resources
+
+[FastAPI Docs](https://fastapi.tiangolo.com/)
+[Posit Connect User Guide: FastAPI](https://docs.posit.co/connect/user/fastapi/)
+
+# flask
+
+This application structure and set-up follows the steps outlined in the links below.
+
+Two routes are defined:
+
+- `/` renders an HTML template
+- `/api/hello` returns a JSON object
+
+![screenshot of flask app](getting-started-flask.png)
+
+## Usage
+
+### The uv way
+
+Use [uv](https://github.com/astral-sh/uv). It will detect that this is a project and create the venv for us when we go to run the application. 
+
+Run the application:
+
+```bash
+uv run flask --app app run
+```
+
+### The pip way
+
+Setup the `venv` environment:
+
+```bash
+python -m venv .venv
+. .venv/bin/activate
+pip install -r requirements.txt
+```
+
+Run the API:
+
+```bash
+flask --app app run
+```
+
+## Deploy
+
+### rsconnect-python CLI
+
+```bash
+# With uv
+uv run rsconnect deploy api .
+# Without uv
+rsconnect deploy api .
+```
+
+### Git-backed
+
+Update the code, and then run:
+
+```bash
+# With uv
+uv export -o requirements.txt --no-hashes
+uv run rsconnect write-manifest api --overwrite .
+# Without uv
+pip freeze > requirements.txt 
+rsconnect write-manifest api --overwrite .
+```
+
+Commit the new `manifest.json` file to the git repo along with the code.
+
+#### Resources
+
+- [Posit Connect User Guide: Flask](https://docs.posit.co/connect/user/flask/)
+- [Getting Started with Flask and Posit Connect](https://support.rstudio.com/hc/en-us/articles/360044700234)
+- [Deploying Flask Applications to Posit Connect with Git and rsconnect-python](https://support.rstudio.com/hc/en-us/articles/360045224233)
+- [Using Templates and Static Assets with Flask Applications on Posit Connect](https://support.rstudio.com/hc/en-us/articles/360045279313)
+
+# jupyter
+
+Voilà allows you to convert a Jupyter Notebook into an interactive dashboard.
+
+![example screenshot of voila](voila.png)
+
+## Notebooks Included
+
+- Example visualizations using [bqplot](./bqplot.ipynb) and [ipyvolume](./ipyvolume.ipynb)
+- A brief introduction to [secure hashes](./hash.ipynb)
+
+## Usage
+
+### The uv way 
+
+Use [uv](https://github.com/astral-sh/uv). It will detect that this is a project and create the venv for us when we go to run the application. 
+
+```bash
+cd Python/jupyter-voila
+
+# Create the kernel
+uv run ipython kernel install --user --name=project
+```
+
+- Open the `bqplot.ipynb`, `ipyvolume.ipynb`, or `hash.ipynb` file for interactive use.
+- Chose the just created kernel (you may need to refresh).
+- Click "Run All"
+
+### The pip way
+
+Setup the `venv` environment:
+
+```bash
+python -m venv .venv
+. .venv/bin/activate
+pip install -r requirements.txt
+```
+
+- Open the `bqplot.ipynb`, `ipyvolume.ipynb`, or `hash.ipynb` file for interactive use.
+- Chose the just created `.venv` as the selected kernel.
+- Click "Run All"
+
+## Deploy
+
+### rsconnect-python CLI
+
+```bash
+# With uv
+uv run rsconnect deploy voila . --multi-notebook
+# Without uv
+rsconnect deploy voila . --multi-notebook
+```
+
+### Git-backed
+
+Update the code, and then run:
+
+```bash
+# With uv
+uv export -o requirements.txt --no-hashes
+uv run rsconnect write-manifest voila --overwrite . --multi-notebook
+# Without uv
+pip freeze > requirements.txt 
+rsconnect write-manifest voila --overwrite . --multi-notebook
+```
+
+Commit the new `manifest.json` file to the git repo along with the code.
+
+## Resources
+
+- [Posit Connect User Guide - Voilà](https://docs.posit.co/connect/user/publishing-cli-notebook/#interactive-voila-deployment)
+
+# quarto 
+
+## Usage
+
+### The uv way
+
+Use [uv](https://github.com/astral-sh/uv). It will detect that this is a project and create the venv for us when we go to run the application. 
+
+```bash
+cd Python/quarto-python-lightbox
+
+# Create the kernel
+uv run ipython kernel install --user --name=project
+
+# Optionally, render the document
+uv run quarto preview quarto-python-lightbox.qmd --no-browser --no-watch-inputs
+```
+
+- Open the `.qmd` file for interactive use.
+- Chose the just created kernel (you may need to refresh).
+- Click "Run All". 
+
+
+### The pip way
+
+Setup the `venv` environment:
+
+```bash
+python -m venv .venv
+. .venv/bin/activate
+pip install -r requirements.txt
+```
+
+- Open the `quarto-python-lightbox.qmd` file for interactive use.
+- Chose the just created `.venv` as the selected kernel.
+- Click "Preview"
+
+## Deploy
+
+### rsconnect-python CLI
+
+```bash
+# With uv
+uv run rsconnect deploy quarto .
+# Without uv
+rsconnect deploy quarto .
+```
+
+### Git-backed
+
+Update the code, and then run:
+
+```bash
+# With uv
+uv export -o requirements.txt --no-hashes
+uv run rsconnect write-manifest quarto --overwrite .
+# Without uv
+pip freeze > requirements.txt 
+rsconnect write-manifest quarto --overwrite .
+```
+
+Commit the new `manifest.json` file to the git repo along with the code.
+
+## Resources
+
+- [Posit Connect User Guide: Quarto (Python)](https://docs.posit.co/connect/user/publishing-cli-quarto/)
+- [quarto cli](https://quarto.org/docs/publishing/rstudio-connect.html)
+- [rsconnect](https://github.com/rstudio/rsconnect)
+- [rsconnect-python](https://github.com/rstudio/rsconnect-python)
+- [quarto projects](https://quarto.org/docs/projects/quarto-projects.html)
+- [Posit Connect User Guide - Git Backed Publishing ](https://docs.posit.co/connect/user/git-backed/)
+- [Quarto Version Manager](https://github.com/dpastoor/qvm)
+- [Lightbox Quarto Extension](https://github.com/quarto-ext/lightbox)
+
+# shiny 
+
+## Usage
+
+### The uv way
+
+Use [uv](https://github.com/astral-sh/uv). It will detect that this is a project and create the venv for us when we go to run the application. 
+
+Run the application:
+
+```bash
+uv run app.py
+uv run shiny run --reload app.py
+```
+
+### The pip way
+
+Setup the `venv` environment:
+
+```bash
+python -m venv .venv
+. .venv/bin/activate
+pip install -r requirements.txt
+```
+
+Run the application:
+
+```bash
+shiny run --reload app.py
+```
+
+## Deploy
+
+### rsconnect-python CLI
+
+```bash
+# With uv
+uv run rsconnect deploy shiny .
+# Without uv
+rsconnect deploy shiny .
+```
+
+### Git-backed
+
+Update the code, and then run:
+
+```bash
+# With uv
+uv export -o requirements.txt --no-hashes
+uv run rsconnect write-manifest shiny --overwrite .
+# Without uv
+pip freeze > requirements.txt 
+rsconnect write-manifest shiny --overwrite .
+```
+
+Commit the new `manifest.json` file to the git repo along with the code.
+
+## Resources
+
+[Posit Connect User Guide: Shiny for Python](https://docs.posit.co/connect/user/shiny-python/)
+
+
+# streamlit 
+
+## Usage
+
+### The uv way
+
+Use [uv](https://github.com/astral-sh/uv). It will detect that this is a project and create the venv for us when we go to run the application. 
+
+Run the application:
+
+```bash
+uv run streamlit run app.py
+```
+
+### The pip way
+
+Setup the `venv` environment:
+
+```bash
+# Create virtual environment
+python -m venv .venv
+
+# Activate virtual environment
+. .venv/bin/activate
+
+# Install all of the requirements
+pip install -r requirements.txt
+```
+
+Run the application:
+
+```bash
+streamlit run app.py
+```
+
+## Deploy
+
+### rsconnect-python CLI
+
+```bash
+# With uv
+uv run rsconnect deploy streamlit .
+# Without uv
+rsconnect deploy streamlit .
+```
+
+### Git-backed
+
+Update the code, and then run:
+
+```bash
+# With uv
+uv export -o requirements.txt --no-hashes
+uv run rsconnect write-manifest streamlit --overwrite .
+# Without uv
+pip freeze > requirements.txt 
+rsconnect write-manifest streamlit --overwrite .
+```
+
+Commit the new `manifest.json` file to the git repo along with the code.
+
+## Resources
+
+[Posit Connect User Guide: Streamlit](https://docs.posit.co/connect/user/streamlit/)
+
+
+

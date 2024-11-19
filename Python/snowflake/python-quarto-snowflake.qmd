@@ -1,0 +1,223 @@
+---
+title: "Snowflake Integration on Workbench"
+author: "Lisa Anders" 
+format:
+  html: 
+    theme: 
+      light: flatly
+      dark: darkly
+editor: source
+jupyter: python3
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Environments 
+
+The trick with venv's and quarto is one of naming: <https://quarto.org/docs/projects/virtual-environments.html#vs-code> 
+
+> If you create a virtual environment with venv in the env/ directory as described above, Visual Studio Code should automatically discover that environment when you load a workspace from the environment’s parent directory.
+
+Source: <https://quarto.org/docs/projects/virtual-environments.html#vs-code>
+
+```python
+#Create environment: 
+python3 -m venv env
+
+#Load environment: 
+source env/bin/activate
+
+#Install packages 
+source env/bin/activate
+pip install --upgrade pip
+python -m pip install --upgrade pip wheel setuptools
+pip install -r requirements.txt
+
+#Save the environment 
+python3 -m pip freeze > requirements.txt
+
+#View environment with: 
+pip list
+
+#Exit the venv with: 
+deactivate
+
+#Check available python versions: 
+ls -1d /opt/python/*
+```
+
+
+I'll plug SamE's articles here for some more Python wisdom:
+
+- https://samedwardes.com/blog/2024-01-09-requirements-txt-workflow-for-new-project/
+- https://samedwardes.com/blog/2024-04-21-python-uv-workflow/
+
+## Using Python
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{python}
+#| label: fig-polar
+#| fig-cap: "A line plot on a polar axis"
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+r = np.arange(0, 2, 0.01)
+theta = 2 * np.pi * r
+fig, ax = plt.subplots(
+  subplot_kw = {'projection': 'polar'} 
+)
+ax.plot(theta, r)
+ax.set_rticks([0.5, 1, 1.5, 2])
+ax.grid(True)
+plt.show()
+```
+
+Reference: <https://quarto.org/docs/computations/python.html>
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+```{python}
+#| label: fig-polar
+#| fig-cap: "A line plot on a polar axis"
+#| echo: false
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+r = np.arange(0, 2, 0.01)
+theta = 2 * np.pi * r
+fig, ax = plt.subplots(
+  subplot_kw = {'projection': 'polar'} 
+)
+ax.plot(theta, r)
+ax.set_rticks([0.5, 1, 1.5, 2])
+ax.grid(True)
+plt.show()
+```
+
+## Opening data from excel
+
+Create a workbook
+
+```{python}
+from openpyxl import Workbook
+
+workbook = Workbook()
+sheet = workbook.active
+
+sheet["A1"] = "hello"
+sheet["B1"] = "world!"
+
+workbook.save(filename="hello_world.xlsx")
+```
+
+Load a Workbook
+
+```{python}
+from openpyxl import load_workbook
+workbook = load_workbook(filename="hello_world.xlsx")
+```
+
+Reference: <https://realpython.com/openpyxl-excel-spreadsheets-python/>
+
+
+## Great tables!
+
+```{python}
+#| warning: false
+
+import numpy 
+import pandas
+import great_tables as gt
+from great_tables.data import sp500
+
+# Define the start and end dates for the data range
+start_date = "2010-06-07"
+end_date = "2010-06-14"
+
+# Filter sp500 using Pandas to dates between `start_date` and `end_date`
+sp500_mini = sp500[(sp500["date"] >= start_date) & (sp500["date"] <= end_date)]
+
+# Create a display table based on the `sp500_mini` table data
+(
+    gt.GT(data=sp500_mini)
+    .tab_header(title="S&P 500", subtitle=f"{start_date} to {end_date}")
+    .fmt_currency(columns=["open", "high", "low", "close"])
+    .fmt_date(columns="date", date_style="wd_m_day_year")
+    .fmt_number(columns="volume", compact=True)
+    .cols_hide(columns="adj_close")
+)
+
+```
+
+# Connections 
+
+Show the credentials with: 
+
+`env | grep SNOWFLAKE`
+
+
+## Connect to Snowflake
+
+```{python}
+import snowflake.connector
+import pandas as pd
+import plotly.express as px
+import nbformat
+
+con = snowflake.connector.connect(
+    connection_name="workbench",
+    warehouse="DEFAULT_WH"
+)
+```
+
+
+## Grab Some Data
+
+```{python}
+df = pd.read_sql_query(
+    """
+    SELECT 
+        ticker,
+        DATE_TRUNC('month', date) AS month,
+        SUM(value) AS monthly_volume
+    FROM 
+        FINANCIAL__ECONOMIC_ESSENTIALS.CYBERSYN.STOCK_PRICE_TIMESERIES
+    WHERE 
+        ticker IN ('AAPL', 'GOOG', 'NFLX', 'SNOW', 'META')
+        AND
+        date >= '2023-01-01'::DATE
+        AND
+        date < '2024-05-01'::DATE
+    GROUP BY 
+        1,2;
+    """,
+    con
+)
+```
+
+## Plot It Out!
+
+```{python}
+fig = px.bar(
+    data_frame=df,
+    x='MONTH',
+    y='MONTHLY_VOLUME',
+    color='TICKER',
+    barmode='group',
+    labels={
+        "MONTH": "",
+        "MONTHLY_VOLUME": "Monthly Trades",
+        "TICKER": "",
+    },
+)
+fig.show()
+```
+
+
+
+

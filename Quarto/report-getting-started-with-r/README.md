@@ -5,7 +5,7 @@
 
 **Access the deployed content at: <https://pub.demo.posit.team/public/getting-started-quarto-shiny-r/>**
 
-![screenshot of Quarto report](/img/getting-started-R.png)
+![screenshot of Quarto report](img/getting-started-R.png)
 
 ## Usage
 

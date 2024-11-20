@@ -17,7 +17,7 @@ format:
 editor: visual
 ---
 
-## Why code based analytics? 
+## Why code based analytics?
 
 Code based analytics makes your life so much easier as a developer.
 
@@ -31,13 +31,25 @@ Analytics as code lets you:
 
 <center>
 
-![](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/c7e0e26c-5ca7-49f1-ba8d-093b1f8e541d.png?h=a790567e29efb477a6b7fd4197c514d7){width="80%"}
+![](/img/allisonhorst-cetinkaya-rundel-lowndes-quarto-keynote.png){width="70%"}
+
+<!-- ![](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/c7e0e26c-5ca7-49f1-ba8d-093b1f8e541d.png?h=a790567e29efb477a6b7fd4197c514d7){width="80%"} -->
 
 ::: {.citation style="font-size: 16px"}
 "Artwork from "Hello, Quarto" keynote by Julia Lowndes and Mine Çetinkaya-Rundel, presented at RStudio Conference 2022. Illustrated by [Allison Horst](https://allisonhorst.com/cetinkaya-rundel-lowndes-quarto-keynote)
 :::
 
 </center>
+
+## Getting started with R
+
+There are so many resources out there, here are some of our favorites: 
+
+- Our [online learning](https://education.rstudio.com/learn/) page links to a number of courses and resources for learning R
+- [R for Data Science](http://r4ds.had.co.nz/) is a free book that teaches how to how to do data science with R, from getting your data into R and transforming it to visualizing and modeling it.
+- The RStudio [cheatsheets](https://posit.co/resources/cheatsheets/) give a good overview on using the IDE and popular R packages
+- Our [webinars](https://posit.co/resources/videos/) contain a lot of useful information - check out the RStudio Essentials section for some helpful R material
+- The [R Style Guide](http://adv-r.had.co.nz/Style.html) provides some guidelines for writing readable and maintainable R code.
 
 ## Getting started with Quarto
 

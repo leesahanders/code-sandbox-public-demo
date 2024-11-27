@@ -37,6 +37,13 @@ Analytics as code lets you:
 
 </center>
 
+## Session Details 
+
+```{python}
+import session_info
+session_info.show()
+```
+
 ## Getting started with Python
 
 The [Python Software Foundation](https://www.python.org/) has developed many good resources for starting with learning Python:
@@ -59,7 +66,7 @@ Initialize the project:
 # delete the old venv
 uv init --app --python 3.12.6
 # delete the created hello.py file
-uv add quarto numpy matplotlib openpyxl pandas great_tables pins plotly ipyleaflet pygwalker # Add the relevant packages
+uv add quarto numpy matplotlib openpyxl pandas great_tables pins plotly ipyleaflet pygwalker statsmodels session_info # Add the relevant packages
 uv export -o requirements.txt --no-hashes
 # In 6 months run this to upgrade packages 
 uv sync --upgrade
@@ -307,7 +314,7 @@ gwalker = pyg.walk(sza)
 
 Pin your dataset to the Connect server:
 
-```{python}
+```python
 import pins
 from pins.data import mtcars
 
@@ -426,9 +433,19 @@ Image from [vetiver package](https://rstudio.github.io/vetiver-python/)
 
 Make interactive applications that will give each visitor a personalized experience using [shiny](https://shiny.posit.co/r/getstarted/shiny-basics/lesson1/index.html).
 
-Low code option: [shinyuieditor](shinyuieditor)
 
-Examples in the Shiny Gallery: <https://shiny.posit.co/python/gallery/>
+### Low code
+
+There are some tools out there to help you quickly mock up a template for a shiny app: 
+
+- [shiny express](https://shiny.posit.co/blog/posts/shiny-express/)
+- [shiny assistant](https://shiny.posit.co/blog/posts/shiny-assistant/)
+
+### Get inspired
+
+- Examples in the Shiny Gallery: <https://shiny.posit.co/python/gallery/>
+- Shiny live also has an amazing example set: <https://shinylive.io/py/examples/> 
+- Annual shiny app building contest: <https://posit.co/blog/winners-of-the-2024-shiny-contest/> 
 
 ## End-to-end example: Ferryland
 

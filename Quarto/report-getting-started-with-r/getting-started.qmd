@@ -39,6 +39,22 @@ Analytics as code lets you:
 
 </center>
 
+## Session Details 
+
+```{r}
+sessionInfo()
+```
+
+## Getting started with R
+
+There are so many resources out there, here are some of our favorites:
+
+-   Our [online learning](https://education.rstudio.com/learn/) page links to a number of courses and resources for learning R
+-   [R for Data Science](http://r4ds.had.co.nz/) is a free book that teaches how to how to do data science with R, from getting your data into R and transforming it to visualizing and modeling it.
+-   The RStudio [cheatsheets](https://posit.co/resources/cheatsheets/) give a good overview on using the IDE and popular R packages
+-   Our [webinars](https://posit.co/resources/videos/) contain a lot of useful information - check out the RStudio Essentials section for some helpful R material
+-   The [R Style Guide](http://adv-r.had.co.nz/Style.html) provides some guidelines for writing readable and maintainable R code.
+
 ## Getting started with Quarto
 
 <!-- ![](https://raw.githubusercontent.com/rstudio/hex-stickers/ce526bb5880f348c6970f44f9d8001eb504c4cf6/SVG/quarto.svg){width="25%"} -->
@@ -311,13 +327,21 @@ Image from [vetiver package](https://rstudio.github.io/vetiver-r/)
 
 Make interactive applications that will give each visitor a personalized experience using [shiny](https://shiny.posit.co/r/getstarted/shiny-basics/lesson1/index.html).
 
-Low code option: [shinyuieditor](shinyuieditor)
+### Low code
 
-Examples in the Shiny Gallery: <https://shiny.posit.co/r/gallery/>
+There are some tools out there to help you quickly mock up a template for a shiny app: 
+
+- [shinyuieditor](shinyuieditor)
+- [shiny assistant](https://shiny.posit.co/blog/posts/shiny-assistant/)
+
+### Get inspired
+
+- Examples in the Shiny Gallery: <https://shiny.posit.co/r/gallery/>
+- Annual shiny app building contest: <https://posit.co/blog/winners-of-the-2024-shiny-contest/> 
 
 ### Re-use branding / theme-ing
 
-Shinythemes: <https://rstudio.github.io/shinythemes/>
+- shinyswatch: <https://posit-dev.github.io/py-shinyswatch/> 
 
 ## End-to-end example: Ferryland
 

@@ -1,0 +1,383 @@
+---
+title: "Contiguous United States Daily UV Forecast"
+date: "last-modified"
+date-format: "YYYY-MM-DD HH:mm"
+format:
+  dashboard:
+    theme: 
+      - vapor
+      - custom.scss
+    nav-buttons:
+    - icon: github
+      href: "https://github.com/leesahanders/quarto-for-reproducible-reporting-demo/tree/main/content-examples/dashboard-spatial"
+    logo: images/sun_nasa3.png
+lightbox: true
+editor: source
+expandable: true
+resource_files:
+- custom.scss
+- images/sun_nasa3.png
+---
+
+
+
+<!-- Other good themes: morph, pulse, sandstone, spacelab, solar, slate, vapor, lux  -->
+<!-- Add a logo with:     logo: images/Leafey.PNG -->
+
+# DATE `r Sys.Date()`
+
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+# Pull data for UV 
+
+library(httr) # Commenting out until curl dependency is added to palm
+library(httr2) # Commenting out until curl dependency is added to palm
+
+library(png)
+library(xml2)
+library(rvest)
+library(tibble)
+library(knitr)
+library(kableExtra)
+library(dplyr)
+library(tidyverse)
+library(sf)
+library(leaflet)
+library(gt)
+library(jsonlite)
+library(data.table)
+#library(basemaps)
+library(DT)
+library(pak)
+
+samplesize = 20
+
+us_cities <- read.csv("data/us_cities.csv")
+
+us_cities_manual <- us_cities %>%
+  filter(CITY == "Boulder" & STATE_NAME == "Colorado")
+
+# Randomly sample cities within each state, make sure 80304 is always included
+us_cities_sample <- us_cities %>% 
+  filter(!STATE_NAME %in% c("Hawaii", "Alaska")) %>%
+  group_by(STATE_NAME) %>%
+  slice_sample(n = samplesize) %>% 
+  rbind(us_cities_manual)
+
+# Try to load the cached data while developing to make things faster
+flagcached = 0
+
+if(flagcached == 1){
+  if(file.exists(paste0(getwd(),"/tmp/data.RData"))){
+    load(file="tmp/data.RData")
+  }
+}
+
+if(!exists("uv_df")){
+
+uv_df <- data.frame()
+uv_hourly <- data.frame()
+
+# Todo: Parallelize
+for(i in 1:nrow(us_cities_sample)){
+  print(paste0(i, "/", nrow(us_cities_sample), ": ", us_cities_sample[i,4], ", ", us_cities_sample[i,3]))
+  
+  # Get daily UV forecast (as xml)
+  url <- paste0("https://data.epa.gov/efservice/getEnvirofactsUVDAILY/CITY/",us_cities_sample[i,4],"/STATE/",us_cities_sample[i,3])
+  
+  # Replace blanks with %20 
+  url <- gsub(" ", "%20", url)
+  
+  # Get hourly UV forecast (as json)
+  url_hourly <- paste0("https://data.epa.gov/efservice/getEnvirofactsUVHOURLY/CITY/",us_cities_sample[i,4],"/STATE/",us_cities_sample[i,3],"/JSON")    
+  
+  # Replace blanks with %20 
+  url_hourly <- gsub(" ", "%20", url_hourly)
+
+  #ERROR HANDLING
+  possibleError <- tryCatch(
+      uv <- request(url) |> req_perform(),
+      error=function(e) e
+  )
+  
+  #REAL WORK
+  if(!inherits(possibleError, "error")){
+    
+    # Daily UV
+    uv <- uv |>
+      resp_body_xml()
+  
+    state <- xml_text(xml_find_all(uv, xpath = "//STATE"))
+    uv_index <- xml_text(xml_find_all(uv, xpath = "//UV_INDEX"))
+    uv_alert <- xml_text(xml_find_all(uv, xpath = "//UV_ALERT"))
+    date <- xml_text(xml_find_all(uv, xpath = "//DATE"))
+    id <- us_cities_sample[i,1]
+    state_code <- us_cities_sample[i,2]
+    state_orig <- us_cities_sample[i,3] 
+    city <- us_cities_sample[i,4]
+    county <- us_cities_sample[i,5]
+    lat <- us_cities_sample[i,6]
+    lng <- us_cities_sample[i,7]
+    
+    uv_df_tmp <- data.frame(state = state, uv_index = uv_index, uv_alert = uv_alert, date = date, id = id, state_code = state_code, state_orig = state_orig, city = city, county = county, lat = lat, lng = lng)
+  
+    uv_df <- rbind(uv_df, uv_df_tmp)    
+    
+    # Hourly UV
+    uv_hourly_raw <- request(url_hourly) |> 
+      req_perform() |>
+      resp_body_json()     
+    
+    uv_hourly_tmp <- data.frame(rbindlist(uv_hourly_raw, fill=TRUE), uv_index = uv_index, uv_alert = uv_alert, date = date, id = id, state_code = state_code, state_orig = state_orig, county = county, lat = lat, lng = lng)
+    
+    uv_hourly <- rbind(uv_hourly, uv_hourly_tmp)   
+    
+  } 
+}
+
+uv_df_daily <- uv_df %>%
+  # Add color
+  mutate(uv_index = as.numeric(uv_index)) %>%
+  mutate(color = case_when(
+    uv_index <= 2 ~ "#6B990F",
+    3 < uv_index &  uv_index <= 5 ~ "#FFFF32",
+    5 < uv_index &  uv_index <= 7 ~ "#FF7F00",
+    7 < uv_index &  uv_index <= 10 ~ "#E51932",
+    uv_index >= 11 ~ "#6551CC",
+    .default = "#E5E5E5"
+  )) %>%
+  mutate(color_name = case_when(
+    uv_index <= 2 ~ "green",
+    3 < uv_index &  uv_index <= 5 ~ "yellow",
+    5 < uv_index &  uv_index <= 7 ~ "orange",
+    7 < uv_index &  uv_index <= 10 ~ "red",
+    uv_index >= 11 ~ "purple",
+    .default = "white"
+  )) %>%
+  # Add pop-up text
+  mutate(popup = paste0("Selected point","<hr>","UV index: ", uv_index, "<br>", "City: ", city, "<br>", "State: ", state))
+
+uv_hourly <- uv_hourly %>%
+  # Add color
+  mutate(uv_index = as.numeric(uv_index)) %>%
+  mutate(color = case_when(
+    uv_index <= 2 ~ "#6B990F",
+    3 < uv_index &  uv_index <= 5 ~ "#FFFF32",
+    5 < uv_index &  uv_index <= 7 ~ "#FF7F00",
+    7 < uv_index &  uv_index <= 10 ~ "#E51932",
+    uv_index >= 11 ~ "#6551CC",
+    .default = "#E5E5E5"
+  )) %>%
+  mutate(color_name = case_when(
+    uv_index <= 2 ~ "green",
+    3 < uv_index &  uv_index <= 5 ~ "yellow",
+    5 < uv_index &  uv_index <= 7 ~ "orange",
+    7 < uv_index &  uv_index <= 10 ~ "red",
+    uv_index >= 11 ~ "purple",
+    .default = "white"
+  )) %>%
+  # Add pop-up text
+  mutate(popup = paste0("Selected point","<hr>","UV index: ", uv_index, "<br>", "City: ", city, "<br>", "State: ", state))
+
+  # For testing cache the data if it hasn't been already
+  if(flagcached == 1){
+    save.image(file="tmp/data.RData")
+  }
+}
+
+# Resources: 
+# https://www.reddit.com/r/scacjdiscussion/comments/12qpj80/how_do_you_find_an_accurate_uv_index_forecast/
+# https://pyowm.readthedocs.io/en/latest/v3/uv-api-usage-examples.html (deprecated 2021) 
+# https://openweathermap.org/api/uvi (deprecated 2021)
+# https://openweathermap.org/api/one-call-3 (requires pricing)
+# https://www.epa.gov/enviro/web-services#uvindex
+# https://github.com/r-lib/httr2/issues/344
+# https://stackoverflow.com/questions/73555055/converting-a-xml-page-to-a-data-frame/73556402#73556402
+# https://stackoverflow.com/questions/69940271/embed-xml-from-file-into-rmd
+# https://www.robwiederstein.org/2021/03/05/xml-to-dataframe/
+# https://www.epa.gov/enviro/envirofacts-data-service-api
+# Search zipcodes: https://www.unitedstateszipcodes.org/
+# Uv index reference: https://19january2017snapshot.epa.gov/sunsafety/uv-index-scale-1_.html
+# Color pallettes: https://r-charts.com/color-palettes/ 
+# More recent zipcode block relationship files from 2020 census: https://www.census.gov/geographies/reference-files/time-series/geo/relationship-files.2020.html 
+# Census geocoding service: https://www.census.gov/data/developers/data-sets/Geocoding-services.html 
+# https://opendata.stackexchange.com/questions/13715/search-population-zipcode-by-city-from-us-census-api
+# Zipcode map of Dallas: https://stackoverflow.com/questions/59539423/creating-a-zipcode-map-in-r 
+# ARCgis api: https://developers.arcgis.com/rest/geocode/api-reference/overview-world-geocoding-service.htm 
+# USA zipcode boundaries: https://hub.arcgis.com/datasets/esri::usa-zip-code-boundaries/about 
+# Open and plot shapefiles: https://r-graph-gallery.com/168-load-a-shape-file-into-r.html 
+# Get all us cities: https://opendata.stackexchange.com/questions/18473/seeking-list-of-all-us-cities-and-their-latitude-and-longitude
+# https://stackoverflow.com/questions/8093914/use-trycatch-skip-to-next-value-of-loop-upon-error/
+# https://www.geeksforgeeks.org/convert-json-data-to-dataframe-in-r/
+
+## Parallelization
+# https://berkeley-scf.github.io/tutorial-parallelization/parallel-R.html
+# https://www.r-bloggers.com/2024/01/r-doparallel-a-brain-friendly-introduction-to-parallelism-in-r/
+# https://www.davidzeleny.net/wiki/doku.php/recol:parallel
+# https://dept.stat.lsa.umich.edu/~jerrick/courses/stat701/notes/parallel.html
+# https://rstudioide.zendesk.com/agent/tickets/104212
+```
+
+
+
+## Row {.tabset height=100%}
+
+### Daily Interactive UV Map 
+
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| label: plot-map-providers
+#| tbl-cap: "UV Map"
+#| padding: 0px
+
+# Find the grid forecast endpoint with this url: https://api.weather.gov/points/{latitude},{longitude}
+# https://api.weather.gov/points/40.04,-105.23
+
+leaflet(data = uv_df_daily) %>%
+  addTiles() %>%
+  addProviderTiles("OpenTopoMap") %>% 
+  # addProviderTiles("CartoDB.DarkMatter") %>% 
+  #addProviderTiles(providers$Stadia.AlidadeSmoothDark) %>% 
+  # addTiles(providers$Stadia.StamenToner, group = "Toner") %>%
+  #addProviderTiles(providers$Thunderforest_TransportDark) %>%
+  # addProviderTiles("Thunderforest_TransportDark") %>%
+  setView(lng = -105.23, lat = 40.04, zoom = 7) %>%
+  # Add UV data
+  addCircleMarkers(lng = ~LONGITUDE,
+                   lat = ~LATITUDE,
+                   color = ~color,
+                   stroke = FALSE, fillOpacity = 0.5, 
+                   radius = ~ifelse(uv_alert == "0", 6, 10),
+                   popup = ~popup) %>%
+  #addMarkers(lng=~LONGITUDE, lat=~LATITUDE, popup=~popup) %>%
+  # # Add legend
+  # addLegend(data = uv_df_zip,
+  #           position = "bottomright",
+  #           colors = arrange(unique(uv_df_zip %>% select(color, uv_index))$color),
+  #           labels = arrange(unique(uv_df_zip %>% select(color, uv_index))$uv_index),
+  #           title = "Legend",
+  #           opacity = 1) %>%
+  # Add measurement tool - for fun
+  addMeasure(
+    position = "bottomleft",
+    primaryLengthUnit = "meters",
+    primaryAreaUnit = "sqmeters",
+    activeColor = "#3D535D",
+    completedColor = "#7D4479") %>%
+  # Add daylight layer
+  addTerminator() %>%
+  # Add minimap
+  addMiniMap(width = 150, height = 150)
+
+# References 
+# https://r-charts.com/spatial/interactive-maps-leaflet/
+# https://warin.ca/posts/rcourse-datavisualizationwithr-interactivemaps/
+# https://www.library.virginia.edu/data/articles/data-scientist-as-cartographer-an-introduction-to-making-interactive-maps-in-r-with-leaflet
+# https://r-graph-gallery.com/180-change-background-in-leaflet-map.html
+# https://jakob.schwalb-willmann.de/basemaps/
+
+# TODO: UV Choropleth Map
+# https://lucaliehner.com/blog/mapping-zip-codes-to-shapefiles-in-r-with-ggplot-g/ 
+# https://rstudio.github.io/leaflet/articles/choropleths.html
+# https://www.r-bloggers.com/2021/01/visualizing-geospatial-data-in-r-part-3-making-interactive-maps-with-leaflet/
+``` 
+
+
+
+
+### Data
+
+<!-- UV Map Raw Data -->
+
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| label: tbl-map
+#| tbl-cap: "UV Map Raw Data"
+
+uv_df_daily %>%
+  select(date, STATE_CODE, STATE_NAME, CITY, COUNTY, LATITUDE, LONGITUDE, uv_index) %>% 
+  datatable(extensions = 'Buttons',
+            options = list(dom = 'Blfrtip',
+                           buttons = c('copy', 'csv'),
+                           lengthMenu = list(c(10,25,-1),
+                                             c(10,25))))
+
+
+# uv_df_zip %>%
+#   kbl(booktabs = T, align = "lc") %>% #, caption = "UV Data Table") %>%
+#   kable_styling() %>%
+#   kable_paper(full_width = T) %>%
+#   kable_material_dark()
+
+# Create Awesome HTML Table with knitr::kable and kableExtra: https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html 
+# Downloadable tables in RMarkdown with the DT package: https://martinctc.github.io/blog/vignette-downloadable-tables-in-rmarkdown-with-the-dt-package/
+```
+
+
+
+
+### Base Map Samples
+
+<!-- See the full list [here](https://leaflet-extras.github.io/leaflet-providers/preview/) -->
+
+::: {layout-ncol=5}
+
+![CartoDB.DarkMatter](images/CartoDB.DarkMatter.png)
+
+![providers$Stadia.AlidadeSmoothDark](images/Stadia.AlidadeSmoothDark.png)
+
+![NASAGIBS.ViirsEarthAtNight2012](images/NASAGIBS.ViirsEarthAtNight2012.png)
+
+
+
+![OpenTopoMap](images/OpenTopoMap.png)
+
+![GeoportailFrance.orthos](images/GeoportailFrance.orthos.png)
+
+![providers$Esri.NatGeoWorldMap](images/Esri.NatGeoWorldMap.png)
+
+![Esri.WorldTopoMap](images/Esri.WorldTopoMap.png)
+
+![Esri.WorldTerrain](images/Esri.WorldTerrain.png)
+
+![providers$CartoDB.Positron](images/CartoDB.Positron.png)
+
+![providers$Stadia.StamenToner](images/Stadia.StamenToner.png)
+
+
+![providers$Stadia.StamenTonerLabels](images/Stadia.StamenTonerLabels.png)
+
+![providers$Stadia.StamenTonerLines](images/Stadia.StamenTonerLines.png)
+
+![USGS.USTopo](images/USGS.USTopo.png)
+
+
+![Esri.WorldGrayCanvas](images/Esri.WorldGrayCanvas.png)
+
+![Default](images/default.png)
+
+:::
+
+
+## Row {height=15%}
+
+<center>
+
+[![](images/uv_index_scale_epa.png){width=20% fig-align="c"}](https://19january2017snapshot.epa.gov/sunsafety/uv-index-scale-1_.html)
+
+</center>
+
+

@@ -15,4 +15,6 @@ dependencies = [
     "plotly>=5.24.1",
     "pygwalker>=0.4.8.9",
     "quarto>=0.1.0",
+    "session-info>=1.0.0",
+    "statsmodels>=0.14.4",
 ]

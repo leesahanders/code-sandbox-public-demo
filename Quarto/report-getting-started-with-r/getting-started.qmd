@@ -17,7 +17,7 @@ format:
 editor: visual
 ---
 
-## Why code based analytics? Because it's awesome!
+## Why code based analytics? 
 
 Code based analytics makes your life so much easier as a developer.
 

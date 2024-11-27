@@ -59,7 +59,7 @@ Initialize the project:
 # delete the old venv
 uv init --app --python 3.12.6
 # delete the created hello.py file
-uv add quarto # Add the relevant packages
+uv add quarto numpy matplotlib openpyxl pandas great_tables pins plotly ipyleaflet pygwalker # Add the relevant packages
 uv export -o requirements.txt --no-hashes
 # In 6 months run this to upgrade packages 
 uv sync --upgrade

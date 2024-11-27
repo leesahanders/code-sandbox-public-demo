@@ -31,7 +31,9 @@ Analytics as code lets you:
 
 <center>
 
-![](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/c7e0e26c-5ca7-49f1-ba8d-093b1f8e541d.png?h=a790567e29efb477a6b7fd4197c514d7){width="80%"}
+![](/img/allisonhorst-cetinkaya-rundel-lowndes-quarto-keynote.png){width="70%"}
+
+<!-- ![](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/c7e0e26c-5ca7-49f1-ba8d-093b1f8e541d.png?h=a790567e29efb477a6b7fd4197c514d7){width="80%"} -->
 
 ::: {.citation style="font-size: 16px"}
 "Artwork from "Hello, Quarto" keynote by Julia Lowndes and Mine Çetinkaya-Rundel, presented at RStudio Conference 2022. Illustrated by [Allison Horst](https://allisonhorst.com/cetinkaya-rundel-lowndes-quarto-keynote)

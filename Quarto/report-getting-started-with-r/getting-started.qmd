@@ -17,7 +17,7 @@ format:
 editor: visual
 ---
 
-## Why code based analytics? 
+## Why code based analytics?
 
 Code based analytics makes your life so much easier as a developer.
 
@@ -39,7 +39,7 @@ Analytics as code lets you:
 
 </center>
 
-## Session Details 
+## Session Details
 
 ```{r}
 sessionInfo()
@@ -329,19 +329,19 @@ Make interactive applications that will give each visitor a personalized experie
 
 ### Low code
 
-There are some tools out there to help you quickly mock up a template for a shiny app: 
+There are some tools out there to help you quickly mock up a template for a shiny app:
 
-- [shinyuieditor](shinyuieditor)
-- [shiny assistant](https://shiny.posit.co/blog/posts/shiny-assistant/)
+-   [shinyuieditor](shinyuieditor)
+-   [shiny assistant](https://shiny.posit.co/blog/posts/shiny-assistant/)
 
 ### Get inspired
 
-- Examples in the Shiny Gallery: <https://shiny.posit.co/r/gallery/>
-- Annual shiny app building contest: <https://posit.co/blog/winners-of-the-2024-shiny-contest/> 
+-   Examples in the Shiny Gallery: <https://shiny.posit.co/r/gallery/>
+-   Annual shiny app building contest: <https://posit.co/blog/winners-of-the-2024-shiny-contest/>
 
 ### Re-use branding / theme-ing
 
-- shinyswatch: <https://posit-dev.github.io/py-shinyswatch/> 
+-   shinythemes: <https://rstudio.github.io/shinythemes/>
 
 ## End-to-end example: Ferryland
 

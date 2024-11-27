@@ -447,6 +447,10 @@ There are some tools out there to help you quickly mock up a template for a shin
 - Shiny live also has an amazing example set: <https://shinylive.io/py/examples/> 
 - Annual shiny app building contest: <https://posit.co/blog/winners-of-the-2024-shiny-contest/> 
 
+### Re-use branding / theme-ing
+
+-   shinyswatch: <https://posit-dev.github.io/py-shinyswatch/>
+
 ## End-to-end example: Ferryland
 
 Ferryland git repo with workshop materials: <https://github.com/posit-conf-2024/ds-workflows-python>

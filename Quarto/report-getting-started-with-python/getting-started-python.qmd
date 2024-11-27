@@ -89,8 +89,12 @@ uv run quarto preview getting-started-python.qmd --no-browser --no-watch-inputs
 ##### rsconnect-python CLI
 
 ``` bash
-# With uv
+#In order to deploy it needs to be a project (default is fine):
+quarto create project 
+
+# With uv - either of these
 uv run rsconnect deploy quarto .
+uv run quarto publish 
 # Without uv
 rsconnect deploy quarto .
 ```

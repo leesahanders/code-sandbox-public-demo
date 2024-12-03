@@ -72,7 +72,7 @@ Initialize the project:
 uv init --app --python 3.12.6
 # delete the created hello.py file
 # Add the relevant packages
-uv add quarto numpy matplotlib openpyxl pandas great_tables pins plotly ipyleaflet pygwalker statsmodels session_info pyyaml 
+uv add quarto numpy matplotlib openpyxl pandas great_tables pins plotly ipyleaflet pygwalker statsmodels session_info pyyaml polars
 #Create the requirements.txt file
 uv export -o requirements.txt --no-hashes
 # In 6 months run this to upgrade packages 

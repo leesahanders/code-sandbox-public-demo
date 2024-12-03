@@ -13,6 +13,11 @@ format:
       dark: darkly
     toc: true
 editor: source
+jupyter: 
+  kernelspec:
+    name: "project"
+    language: "python"
+    display_name: "project"
 ---
 
 ## Why code based analytics? 
@@ -39,9 +44,14 @@ Analytics as code lets you:
 
 ## Session Details 
 
-```{python}
+```{python .cell-code}
 import session_info
-session_info.show()
+print(session_info.show())
+```
+
+```{python .cell-code}
+import sys
+print(sys.executable)
 ```
 
 ## Getting started with Python
@@ -66,10 +76,14 @@ Initialize the project:
 # delete the old venv
 uv init --app --python 3.12.6
 # delete the created hello.py file
-uv add quarto numpy matplotlib openpyxl pandas great_tables pins plotly ipyleaflet pygwalker statsmodels session_info # Add the relevant packages
+# Add the relevant packages
+uv add quarto numpy matplotlib openpyxl pandas great_tables pins plotly ipyleaflet pygwalker statsmodels session_info pyyaml 
+#Create the requirements.txt file
 uv export -o requirements.txt --no-hashes
 # In 6 months run this to upgrade packages 
 uv sync --upgrade
+#Run it with 
+uv run ipython kernel install --user --name=project
 uv run quarto render getting-started-python.qmd
 ```
 
@@ -78,10 +92,13 @@ uv run quarto render getting-started-python.qmd
 It will detect that this is a project and create the venv for us when we go to run the application.
 
 ``` bash
-cd Quarto/report-getting-started-python
+cd Python/report-getting-started-python
 
 # Create the kernel
 uv run ipython kernel install --user --name=project
+
+# List the available kernels - this may need to be added to the top of the quarto document so it knows what kernel to use
+jupyter kernelspec list --json
 
 # Optionally, render the document
 uv run quarto preview getting-started-python.qmd --no-browser --no-watch-inputs
@@ -90,6 +107,14 @@ uv run quarto preview getting-started-python.qmd --no-browser --no-watch-inputs
 -   Open the `.qmd` file for interactive use.
 -   Choose the just created kernel (you may need to refresh).
 -   Click "Run All".
+
+##### Environment naming
+
+The trick with venv's and quarto is one of naming: <https://quarto.org/docs/projects/virtual-environments.html#vs-code>
+
+> If you create a virtual environment with venv in the env/ directory as described above, Visual Studio Code should automatically discover that environment when you load a workspace from the environment’s parent directory.
+
+Source: <https://quarto.org/docs/projects/virtual-environments.html#vs-code>
 
 #### Deploy
 
@@ -153,14 +178,6 @@ The `echo: false` option disables the printing of code (only output is displayed
 ### Re-use branding / theme-ing
 
 Quarto templates: <https://quarto.org/docs/extensions/starter-templates.html>
-
-## Environment naming
-
-The trick with venv's and quarto is one of naming: <https://quarto.org/docs/projects/virtual-environments.html#vs-code>
-
-> If you create a virtual environment with venv in the env/ directory as described above, Visual Studio Code should automatically discover that environment when you load a workspace from the environment’s parent directory.
-
-Source: <https://quarto.org/docs/projects/virtual-environments.html#vs-code>
 
 ## Loading packages
 
@@ -456,4 +473,3 @@ There are some tools out there to help you quickly mock up a template for a shin
 Ferryland git repo with workshop materials: <https://github.com/posit-conf-2024/ds-workflows-python>
 
 Ferryland [deployed materials](https://pub.current.posit.team/ferries-overview/) and [deployed materials publisher's page](https://pub.current.posit.team/connect/#/apps/f6b2cd8d-5bd7-42ba-82cb-c25078918043/access/57) (currently only available to Posit employees).
-

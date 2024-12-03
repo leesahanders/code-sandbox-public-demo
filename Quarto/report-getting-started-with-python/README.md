@@ -7,13 +7,13 @@
 Use [uv](https://github.com/astral-sh/uv). It will detect that this is a project and create the venv for us when we go to run the application. 
 
 ```bash
-cd Python/quarto-python-lightbox
+cd Python/quarto-getting-started-with-python
 
 # Create the kernel
 uv run ipython kernel install --user --name=project
 
 # Optionally, render the document
-uv run quarto preview quarto-python-lightbox.qmd --no-browser --no-watch-inputs
+uv run quarto preview getting-started-python.qmd --no-browser --no-watch-inputs
 ```
 
 - Open the `.qmd` file for interactive use.
@@ -31,7 +31,7 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-- Open the `quarto-python-lightbox.qmd` file for interactive use.
+- Open the `getting-started-python.qmd` file for interactive use.
 - Chose the just created `.venv` as the selected kernel.
 - Click "Preview"
 
@@ -70,4 +70,3 @@ Commit the new `manifest.json` file to the git repo along with the code.
 - [quarto projects](https://quarto.org/docs/projects/quarto-projects.html)
 - [Posit Connect User Guide - Git Backed Publishing ](https://docs.posit.co/connect/user/git-backed/)
 - [Quarto Version Manager](https://github.com/dpastoor/qvm)
-- [Lightbox Quarto Extension](https://github.com/quarto-ext/lightbox)
